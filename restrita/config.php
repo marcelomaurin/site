@@ -6,11 +6,45 @@ const DB_NAME = 'maurinsoft';
 const DB_USER = 'maurinsoft';
 const DB_PASS = 'ALTERE_AQUI';
 
+/*
+ * OAuth Google
+ * Configure no servidor:
+ *   GOOGLE_CLIENT_ID
+ *   GOOGLE_CLIENT_SECRET
+ *   GOOGLE_REDIRECT_URI
+ */
+function envValue(string $name, string $default = ''): string
+{
+    $v = getenv($name);
+    return $v === false ? $default : trim((string)$v);
+}
+
+function googleClientId(): string
+{
+    return envValue('GOOGLE_CLIENT_ID');
+}
+
+function googleClientSecret(): string
+{
+    return envValue('GOOGLE_CLIENT_SECRET');
+}
+
+function googleRedirectUri(): string
+{
+    return envValue('GOOGLE_REDIRECT_URI', 'https://maurinsoft.com.br/restrita/google-callback.php');
+}
+
+function googleOAuthConfigurado(): bool
+{
+    return googleClientId() !== '' && googleClientSecret() !== '' && googleRedirectUri() !== '';
+}
+
 if (session_status() !== PHP_SESSION_ACTIVE) {
     session_name('MAURINSOFTSESSID');
     session_start([
         'cookie_httponly' => true,
         'cookie_samesite' => 'Lax',
+        'cookie_secure' => (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off'),
         'use_strict_mode' => true,
     ]);
 }
