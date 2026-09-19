@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 76" width="340" height="76" fill="none">
+  <defs>
+    <!-- Cyan to Blue High-Tech Gradient -->
+    <linearGradient id="neonGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00f2fe" />
+      <stop offset="50%" stop-color="#00d2ff" />
+      <stop offset="100%" stop-color="#3a7bd5" />
+    </linearGradient>
+
+    <!-- Subtle Glow Filter -->
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="1.5" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- ICON: The Circuit Board "M" -->
+  <g transform="translate(6, 6)">
+    <!-- Circuit Base M Shape Structure -->
+    <!-- Left Pillar Tracks -->
+    <path d="M 6 58 L 6 8 L 18 8 L 18 58" stroke="url(#neonGradient)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M 12 52 L 12 16" stroke="url(#neonGradient)" stroke-width="1.8" stroke-linecap="round" />
+
+    <!-- Center Diagonal V Tracks -->
+    <path d="M 18 8 L 32 36 L 46 8" stroke="url(#neonGradient)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M 23 18 L 32 36 L 41 18" stroke="url(#neonGradient)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+    <line x1="32" y1="36" x2="32" y2="58" stroke="url(#neonGradient)" stroke-width="2.2" stroke-linecap="round" />
+
+    <!-- Right Pillar Tracks -->
+    <path d="M 46 8 L 58 8 L 58 58 L 46 58" stroke="url(#neonGradient)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M 52 16 L 52 52" stroke="url(#neonGradient)" stroke-width="1.8" stroke-linecap="round" />
+
+    <!-- Horizontal Interconnecting Circuit Bus Traces -->
+    <path d="M 6 24 L 0 24 L 0 40 L 6 40" stroke="url(#neonGradient)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M 58 24 L 64 24 L 64 40 L 58 40" stroke="url(#neonGradient)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+
+    <!-- Internal PCB Branch Lines -->
+    <line x1="12" y1="28" x2="18" y2="28" stroke="url(#neonGradient)" stroke-width="1.5" />
+    <line x1="46" y1="28" x2="52" y2="28" stroke="url(#neonGradient)" stroke-width="1.5" />
+    <line x1="12" y1="44" x2="18" y2="44" stroke="url(#neonGradient)" stroke-width="1.5" />
+    <line x1="46" y1="44" x2="52" y2="44" stroke="url(#neonGradient)" stroke-width="1.5" />
+
+    <!-- Solder Pads / Via Nodes (Glowing Circles) -->
+    <!-- Tops -->
+    <circle cx="6" cy="8" r="3.2" fill="#00f2fe" filter="url(#glow)" />
+    <circle cx="18" cy="8" r="2.8" fill="#00d2ff" />
+    <circle cx="46" cy="8" r="2.8" fill="#00d2ff" />
+    <circle cx="58" cy="8" r="3.2" fill="#00f2fe" filter="url(#glow)" />
+
+    <!-- Bottoms -->
+    <circle cx="6" cy="58" r="3.2" fill="#3a7bd5" />
+    <circle cx="18" cy="58" r="2.8" fill="#3a7bd5" />
+    <circle cx="32" cy="58" r="3" fill="#00d2ff" filter="url(#glow)" />
+    <circle cx="46" cy="58" r="2.8" fill="#3a7bd5" />
+    <circle cx="58" cy="58" r="3.2" fill="#3a7bd5" />
+
+    <!-- Intermediate Nodes -->
+    <circle cx="12" cy="16" r="2" fill="#ffffff" />
+    <circle cx="52" cy="16" r="2" fill="#ffffff" />
+    <circle cx="12" cy="52" r="2" fill="#00d2ff" />
+    <circle cx="52" cy="52" r="2" fill="#00d2ff" />
+    <circle cx="32" cy="36" r="3" fill="#ffffff" filter="url(#glow)" />
+
+    <circle cx="0" cy="32" r="2" fill="#00f2fe" />
+    <circle cx="64" cy="32" r="2" fill="#00f2fe" />
+  </g>
+
+  <!-- TYPOGRAPHY: MAURINSOFT -->
+  <text x="88" y="42" font-family="'Outfit', 'Plus Jakarta Sans', 'Segoe UI', Roboto, sans-serif" font-size="28" font-weight="800" letter-spacing="1.5" fill="#ffffff">
+    MAURIN<tspan fill="url(#neonGradient)">SOFT</tspan>
+  </text>
+
+  <!-- SUBTITLE: TECNOLOGIA ACESSÍVEL -->
+  <text x="90" y="58" font-family="'Plus Jakarta Sans', 'Segoe UI', Roboto, sans-serif" font-size="9" font-weight="700" letter-spacing="3.2" fill="#00d2ff" opacity="0.9">
+    TECNOLOGIA ACESSÍVEL
+  </text>
+</svg>

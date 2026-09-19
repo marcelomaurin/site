@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chatbot Inteligente & Atendimento IA | Maurinsoft</title>
+  <meta name="description" content="Atendente virtual com Inteligência Artificial para WhatsApp e Web. Automatize a triagem, tire dúvidas técnicas e aumente as conversões do seu negócio 24 horas por dia.">
+  <link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="../index.html" class="brand-logo" aria-label="Maurinsoft Início">
+        <img src="../assets/img/logo-maurinsoft.svg" alt="Maurinsoft" class="site-logo-img">
+      </a>
+
+      <nav class="nav-menu">
+        <a href="../index.html" class="nav-link">Home</a>
+        
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-btn" aria-haspopup="true">
+            Produtos
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+          <div class="dropdown-menu">
+            <a href="gestao-filas.html" class="dropdown-item">
+              <div class="dropdown-item-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+              </div>
+              <div>
+                <strong>Gestão de Filas</strong>
+                <div style="font-size: 0.75rem; color: var(--text-dim);">Controle de senhas e guichês</div>
+              </div>
+            </a>
+            <a href="etiquetas-varejo.html" class="dropdown-item">
+              <div class="dropdown-item-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 7h10"/><path d="M7 12h10"/><path d="M7 17h6"/></svg>
+              </div>
+              <div>
+                <strong>Etiquetas & Varejo</strong>
+                <div style="font-size: 0.75rem; color: var(--text-dim);">Gôndolas e código de barras</div>
+              </div>
+            </a>
+            <a href="video-chamada.html" class="dropdown-item">
+              <div class="dropdown-item-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
+              </div>
+              <div>
+                <strong>Vídeo Chamada</strong>
+                <div style="font-size: 0.75rem; color: var(--text-dim);">Teleatendimento e teleconsulta</div>
+              </div>
+            </a>
+            <a href="chatbot.html" class="dropdown-item">
+              <div class="dropdown-item-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+              </div>
+              <div>
+                <strong>Chatbot & IA</strong>
+                <div style="font-size: 0.75rem; color: var(--text-dim);">Atendimento 24/7 Web e WhatsApp</div>
+              </div>
+            </a>
+            <a href="gestao-a-vista.html" class="dropdown-item">
+              <div class="dropdown-item-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                          <a href="contagem-hemacias.html" class="dropdown-item">
+              <div class="dropdown-item-icon" style="color: var(--accent-amber);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="4"></circle><line x1="4.93" y1="4.93" x2="9.17" y2="9.17"></line><line x1="14.83" y1="14.83" x2="19.07" y2="19.07"></line><line x1="14.83" y1="9.17" x2="19.07" y2="4.93"></line><line x1="4.93" y1="19.07" x2="9.17" y2="14.83"></line></svg>
+              </div>
+              <div>
+                <strong>Contador de Hemácias <span style="font-size: 0.68rem; color: var(--accent-amber); font-weight: 700; border: 1px solid rgba(245, 158, 11, 0.4); padding: 1px 4px; border-radius: 4px; margin-left: 2px;">PROTÓTIPO</span></strong>
+                <div style="font-size: 0.75rem; color: var(--text-dim);">Microscopia óptica & visão computacional</div>
+              </div>
+            </a>
+          </div>
+              <div>
+                <strong>Gestão à Vista</strong>
+                <div style="font-size: 0.75rem; color: var(--text-dim);">Dashboards e indicadores            <a href="contagem-hemacias.html" class="dropdown-item">
+              <div class="dropdown-item-icon" style="color: var(--accent-amber);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="4"></circle><line x1="4.93" y1="4.93" x2="9.17" y2="9.17"></line><line x1="14.83" y1="14.83" x2="19.07" y2="19.07"></line><line x1="14.83" y1="9.17" x2="19.07" y2="4.93"></line><line x1="4.93" y1="19.07" x2="9.17" y2="14.83"></line></svg>
+              </div>
+              <div>
+                <strong>Contador de Hemácias <span style="font-size: 0.68rem; color: var(--accent-amber); font-weight: 700; border: 1px solid rgba(245, 158, 11, 0.4); padding: 1px 4px; border-radius: 4px; margin-left: 2px;">PROTÓTIPO</span></strong>
+                <div style="font-size: 0.75rem; color: var(--text-dim);">Microscopia óptica & visão computacional</div>
+              </div>
+            </a>
+          </div>
+                          <a href="contagem-hemacias.html" class="dropdown-item">
+              <div class="dropdown-item-icon" style="color: var(--accent-amber);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="4"></circle><line x1="4.93" y1="4.93" x2="9.17" y2="9.17"></line><line x1="14.83" y1="14.83" x2="19.07" y2="19.07"></line><line x1="14.83" y1="9.17" x2="19.07" y2="4.93"></line><line x1="4.93" y1="19.07" x2="9.17" y2="14.83"></line></svg>
+              </div>
+              <div>
+                <strong>Contador de Hemácias <span style="font-size: 0.68rem; color: var(--accent-amber); font-weight: 700; border: 1px solid rgba(245, 158, 11, 0.4); padding: 1px 4px; border-radius: 4px; margin-left: 2px;">PROTÓTIPO</span></strong>
+                <div style="font-size: 0.75rem; color: var(--text-dim);">Microscopia óptica & visão computacional</div>
+              </div>
+            </a>
+          </div>
+            </a>
+                      <a href="contagem-hemacias.html" class="dropdown-item">
+              <div class="dropdown-item-icon" style="color: var(--accent-amber);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="4"></circle><line x1="4.93" y1="4.93" x2="9.17" y2="9.17"></line><line x1="14.83" y1="14.83" x2="19.07" y2="19.07"></line><line x1="14.83" y1="9.17" x2="19.07" y2="4.93"></line><line x1="4.93" y1="19.07" x2="9.17" y2="14.83"></line></svg>
+              </div>
+              <div>
+                <strong>Contador de Hemácias <span style="font-size: 0.68rem; color: var(--accent-amber); font-weight: 700; border: 1px solid rgba(245, 158, 11, 0.4); padding: 1px 4px; border-radius: 4px; margin-left: 2px;">PROTÓTIPO</span></strong>
+                <div style="font-size: 0.75rem; color: var(--text-dim);">Microscopia óptica & visão computacional</div>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <a href="../servicos.html" class="nav-link">Serviços & Prototipagem</a>
+        <a href="../sobre.html" class="nav-link">Sobre</a>
+        <a href="../contato.html" class="nav-link">Contato</a>
+        <a href="../restrita/login.html" class="nav-link" style="color: var(--primary); display: inline-flex; align-items: center; gap: 6px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+          Área Restrita
+        </a>
+      </nav>
+
+      <div class="nav-cta">
+        <a href="../restrita/login.html" class="btn btn-secondary btn-sm" style="display: inline-flex; align-items: center; gap: 6px;">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+          Área Restrita
+        </a>
+        <a href="../contato.html" class="btn btn-primary btn-sm">Solicitar Orçamento</a>
+        <button class="hamburger" aria-label="Abrir menu mobile">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Product Hero -->
+  <section class="product-hero">
+    <div class="container">
+      <div class="breadcrumbs">
+        <a href="../index.html">Home</a>
+        <span>/</span>
+        <a href="../index.html#produtos">Produtos</a>
+        <span>/</span>
+        <span style="color: var(--primary);">Chatbot Inteligente & IA</span>
+      </div>
+
+      <div class="product-hero-grid">
+        <div class="product-info">
+          <div class="hero-badge">
+            <span class="hero-badge-pulse"></span>
+            Inteligência Artificial & Atendimento Multicanal
+          </div>
+          <h1 class="hero-title" style="font-size: 2.8rem;">Chatbot Inteligente & IA Maurinsoft</h1>
+          <p class="hero-lead">
+            Automatize o atendimento da sua empresa com inteligência artificial conversacional. Responda clientes instantaneamente no WhatsApp e no seu site, tire dúvidas complexas sobre produtos e serviços e filtre leads qualificados 24 horas por dia.
+          </p>
+
+          <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem;">
+            <a href="#beneficios" class="btn btn-primary">Conhecer os Recursos</a>
+            <a href="https://wa.me/5516981434112?text=Ol%C3%A1,%20gostaria%20de%20testar%20uma%20demonstra%C3%A7%C3%A3o%20do%20Chatbot%20com%20IA%20da%20Maurinsoft." target="_blank" class="btn btn-secondary">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+              Testar Demonstração no WhatsApp
+            </a>
+          </div>
+
+          <div class="pillar-tags">
+            <span class="tag-pill">WhatsApp API Oficial</span>
+            <span class="tag-pill">Widget Web Integrável</span>
+            <span class="tag-pill">Treinado com Sua Base de Dados</span>
+            <span class="tag-pill">Transbordo para Atendente Humano</span>
+            <span class="tag-pill">Disponibilidade 24/7/365</span>
+          </div>
+        </div>
+
+        <div class="product-gallery">
+          <div class="product-gallery-main">
+            <img src="../assets/img/chatbot-ai.jpg" alt="Chatbot Inteligente e Assistente Virtual Maurinsoft">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Key Features -->
+  <section class="section" id="beneficios">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Eficiência e Escalabilidade</span>
+        <h2 class="section-title">Muito além de respostas automáticas simples</h2>
+        <p class="section-desc">
+          Nosso chatbot compreende o contexto das perguntas e consulta suas regras de negócio antes de responder.
+        </p>
+      </div>
+
+      <div class="pillars-grid">
+        <div class="pillar-card">
+          <div class="pillar-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+          </div>
+          <h3 class="pillar-title">Atendimento Humanizado no WhatsApp</h3>
+          <p class="pillar-desc">
+            Interaja com o público no canal mais utilizado do Brasil. Envie imagens, arquivos em PDF, localizações e áudios de forma dinâmica e natural.
+          </p>
+        </div>
+
+        <div class="pillar-card">
+          <div class="pillar-icon" style="background: rgba(0, 242, 254, 0.1); color: var(--accent-bio); border-color: rgba(0, 242, 254, 0.3);">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+          </div>
+          <h3 class="pillar-title">Base de Conhecimento Customizada</h3>
+          <p class="pillar-desc">
+            Alimente o robô com seus manuais de produtos, políticas comerciais e tabelas. Ele responde com exatidão técnica, sem inventar respostas (zero alucinação).
+          </p>
+        </div>
+
+        <div class="pillar-card">
+          <div class="pillar-icon" style="background: rgba(16, 185, 129, 0.1); color: var(--accent-green); border-color: rgba(16, 185, 129, 0.3);">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+          </div>
+          <h3 class="pillar-title">Transbordo Inteligente para Humanos</h3>
+          <p class="pillar-desc">
+            Quando a solicitação do cliente exige atenção personalizada ou negociação comercial, o robô encaminha o histórico completo para a tela do atendente responsável.
+          </p>
+        </div>
+
+        <div class="pillar-card">
+          <div class="pillar-icon" style="background: rgba(138, 43, 226, 0.1); color: #c084fc; border-color: rgba(138, 43, 226, 0.3);">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+          </div>
+          <h3 class="pillar-title">Integração com ERP & Banco de Dados</h3>
+          <p class="pillar-desc">
+            Permita que o cliente consulte o status de seu pedido, confira a disponibilidade de estoque ou receba a 2ª via de boleto digitando apenas o CPF ou CNPJ.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Technical Specs Table -->
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Ficha Técnica</span>
+        <h2 class="section-title">Arquitetura e Recursos de Integração</h2>
+      </div>
+
+      <div class="specs-card" style="max-width: 900px; margin: 0 auto;">
+        <table class="specs-table">
+          <tbody>
+            <tr>
+              <th>Canais Suportados</th>
+              <td>WhatsApp Cloud API (Meta Oficial), Widget Web (HTML/JS leve para inserção em qualquer site) e Webhooks REST.</td>
+            </tr>
+            <tr>
+              <th>Processamento de Linguagem</th>
+              <td>Modelos avançados de PLN e embeddings vetoriais com busca semântica em base de dados RAG proprietária.</td>
+            </tr>
+            <tr>
+              <th>Armazenamento e Histórico</th>
+              <td>Gravação criptografada de todas as conversas e métricas de satisfação (CSAT / NPS).</td>
+            </tr>
+            <tr>
+              <th>Formatos de Mensagem</th>
+              <td>Texto, imagens, catálogo de produtos, botões de ação rápida, links de pagamento e documentos em anexo (PDF).</td>
+            </tr>
+            <tr>
+              <th>Privacidade & Segurança</th>
+              <td>Isolamento completo de dados por cliente e estrita conformidade com a LGPD.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to action -->
+  <section class="section">
+    <div class="container">
+      <div class="cta-box">
+        <h2 class="cta-title">Quer ver o chatbot funcionando na prática?</h2>
+        <p class="cta-desc">
+          Criamos um protótipo com os dados da sua empresa para você testar a qualidade das respostas antes de contratar.
+        </p>
+        <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+          <a href="../contato.html" class="btn btn-primary btn-lg">Solicitar Protótipo para Meu Negócio</a>
+          <a href="https://wa.me/5516981434112?text=Ol%C3%A1,%20quero%20conhecer%20o%20Chatbot%20com%20IA%20da%20Maurinsoft." target="_blank" class="btn btn-secondary btn-lg">
+            Conversar no WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index.html" class="brand-logo" style="margin-bottom: 1.25rem;" aria-label="Maurinsoft Início">
+            <img src="../assets/img/logo-maurinsoft.svg" alt="Maurinsoft" class="site-logo-img" style="height: 40px;">
+          </a>
+          <p>
+            Inteligência artificial, software sob medida e equipamentos que impulsionam o crescimento e a eficiência do seu negócio.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Produtos</h4>
+          <div class="footer-links">
+            <a href="gestao-filas.html">Sistema de Gestão de Fila</a>
+            <a href="etiquetas-varejo.html">Etiquetas de Gôndola & Varejo</a>
+            <a href="video-chamada.html">Sistema de Vídeo Chamada</a>
+            <a href="chatbot.html">Chatbot Inteligente & IA</a>
+            <a href="gestao-a-vista.html">Gestão à Vista & Dashboards</a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Especialidades</h4>
+          <div class="footer-links">
+            <a href="../servicos.html#software">Engenharia de Software</a>
+            <a href="../servicos.html#comercio">Equipamentos para Comércio</a>
+            <a href="../servicos.html#biomedicos">Sistemas Biomédicos</a>
+            <a href="../restrita/login.html" style="color: var(--primary); font-weight: 600;">Área Restrita (Serviços) &rarr;</a>
+            <a href="../sobre.html">Sobre a Empresa</a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Contato Direto</h4>
+          <div class="footer-links">
+            <a href="https://wa.me/5516981434112" target="_blank" style="color: var(--primary);">
+              WhatsApp: (16) 98143-4112
+            </a>
+            <a href="mailto:marcelomaurinmartins@gmail.com">marcelomaurinmartins@gmail.com</a>
+            <a href="../contato.html">Formulário de Contato</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 Maurinsoft - Todos os direitos reservados.</div>
+        <div>Tecnologia Nacional Acessível e Inovadora</div>
+      </div>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/5516981434112?text=Ol%C3%A1,%20gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20o%20Chatbot%20com%20IA." 
+     class="whatsapp-float" 
+     target="_blank" 
+     aria-label="Fale conosco via WhatsApp">
+    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+    </svg>
+  </a>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

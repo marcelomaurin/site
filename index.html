@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maurinsoft | Desenvolvimento de Softwares, Prototipagem de Equipamentos & Sistemas</title>
+  <meta name="description" content="A Maurinsoft desenvolve equipamentos sob medida, prototipagem física e softwares integrados, especializada em Sistemas Biomédicos e Automação para Comércio e Varejo.">
+  <link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+
+  <!-- Header / Navigation -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="index.html" class="brand-logo" aria-label="Maurinsoft Início">
+        <img src="assets/img/logo-maurinsoft.svg" alt="Maurinsoft" class="site-logo-img">
+      </a>
+
+      <nav class="nav-menu">
+        <a href="index.html" class="nav-link active">Home</a>
+        
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-btn" aria-haspopup="true">
+            Produtos
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+          <div class="dropdown-menu">
+            <a href="produtos/gestao-filas.html" class="dropdown-item">
+              <div class="dropdown-item-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+              </div>
+              <div>
+                <strong>Gestão de Filas</strong>
+                <div style="font-size: 0.75rem; color: var(--text-dim);">Controle de senhas, guichês e painel</div>
+              </div>
+            </a>
+            <a href="produtos/etiquetas-varejo.html" class="dropdown-item">
+              <div class="dropdown-item-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 7h10"/><path d="M7 12h10"/><path d="M7 17h6"/></svg>
+              </div>
+              <div>
+                <strong>Etiquetas & Varejo</strong>
+                <div style="font-size: 0.75rem; color: var(--text-dim);">Gôndolas, preços e código de barras</div>
+              </div>
+            </a>
+            <a href="produtos/video-chamada.html" class="dropdown-item">
+              <div class="dropdown-item-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
+              </div>
+              <div>
+                <strong>Vídeo Chamada</strong>
+                <div style="font-size: 0.75rem; color: var(--text-dim);">Teleatendimento e teleconsulta segura</div>
+              </div>
+            </a>
+            <a href="produtos/chatbot.html" class="dropdown-item">
+              <div class="dropdown-item-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+              </div>
+              <div>
+                <strong>Chatbot & IA</strong>
+                <div style="font-size: 0.75rem; color: var(--text-dim);">Atendimento 24/7 Web e WhatsApp</div>
+              </div>
+            </a>
+            <a href="produtos/gestao-a-vista.html" class="dropdown-item">
+              <div class="dropdown-item-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+              </div>
+              <div>
+                <strong>Gestão à Vista</strong>
+                <div style="font-size: 0.75rem; color: var(--text-dim);">Dashboards, Andon e indicadores</div>
+              </div>
+            </a>
+            <a href="produtos/contagem-hemacias.html" class="dropdown-item">
+              <div class="dropdown-item-icon" style="color: var(--accent-amber);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="4"></circle><line x1="4.93" y1="4.93" x2="9.17" y2="9.17"></line><line x1="14.83" y1="14.83" x2="19.07" y2="19.07"></line><line x1="14.83" y1="9.17" x2="19.07" y2="4.93"></line><line x1="4.93" y1="19.07" x2="9.17" y2="14.83"></line></svg>
+              </div>
+              <div>
+                <strong>Contador de Hemácias <span style="font-size: 0.68rem; color: var(--accent-amber); font-weight: 700; border: 1px solid rgba(245, 158, 11, 0.4); padding: 1px 4px; border-radius: 4px; margin-left: 2px;">PROTÓTIPO</span></strong>
+                <div style="font-size: 0.75rem; color: var(--text-dim);">Microscopia óptica & visão computacional</div>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <a href="servicos.html" class="nav-link">Serviços & Prototipagem</a>
+        <a href="sobre.html" class="nav-link">Sobre</a>
+        <a href="contato.html" class="nav-link">Contato</a>
+        <a href="restrita/login.html" class="nav-link" style="color: var(--primary); display: inline-flex; align-items: center; gap: 6px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+          Área Restrita
+        </a>
+      </nav>
+
+      <div class="nav-cta">
+        <a href="restrita/login.html" class="btn btn-secondary btn-sm" style="display: inline-flex; align-items: center; gap: 6px;">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+          Área Restrita
+        </a>
+        <a href="contato.html" class="btn btn-primary btn-sm">Solicitar Orçamento</a>
+        <button class="hamburger" aria-label="Abrir menu mobile">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-content">
+          <div class="hero-badge">
+            <span class="hero-badge-pulse"></span>
+            Engenharia de Software & Prototipagem Física
+          </div>
+          <h1 class="hero-title">
+            Criamos equipamentos e sistemas que <span class="gradient-text">conectam o mundo real ao digital.</span>
+          </h1>
+          <p class="hero-lead">
+            A <strong>Maurinsoft</strong> desenvolve soluções completas de ponta a ponta: do circuito eletrônico e microcontrolador ao software de gestão, com especialização avançada em <strong>Sistemas Biomédicos</strong> e <strong>Equipamentos para Comércio & Varejo</strong>.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#produtos" class="btn btn-primary btn-lg">Explorar Nossos Produtos</a>
+            <a href="servicos.html" class="btn btn-secondary btn-lg">Serviços de Prototipagem</a>
+          </div>
+
+          <div class="hero-highlights">
+            <div class="highlight-item">
+              <span class="highlight-number">+20 Anos</span>
+              <span class="highlight-label">Engenharia e Inovação</span>
+            </div>
+            <div class="highlight-item">
+              <span class="highlight-number">Hardware + Soft</span>
+              <span class="highlight-label">Integração Total</span>
+            </div>
+            <div class="highlight-item">
+              <span class="highlight-number">Sob Medida</span>
+              <span class="highlight-label">Para Sua Empresa</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="hero-visual-card">
+            <img src="assets/img/hero-tech.jpg" alt="Laboratório de Prototipagem e Desenvolvimento Maurinsoft">
+            <div class="hero-floating-badge">
+              <div class="badge-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                </svg>
+              </div>
+              <div>
+                <strong style="color: #fff; font-size: 0.95rem; display: block;">Prototipagem & Software Sob Medida</strong>
+                <span style="color: var(--primary); font-size: 0.8rem;">ESP32 • Raspberry Pi • Sensores • Lazarus • Web • IoT</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Core Pillars of Expertise -->
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Nossas Especialidades</span>
+        <h2 class="section-title">Soluções integradas do chip à nuvem</h2>
+        <p class="section-desc">
+          Unimos eletrônica embarcada, comunicação industrial, softwares de alta performance e interfaces comerciais inteligentes.
+        </p>
+      </div>
+
+      <div class="pillars-grid">
+        <!-- Pillar 1 -->
+        <div class="pillar-card">
+          <div class="pillar-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
+              <rect x="9" y="9" width="6" height="6"></rect>
+              <line x1="9" y1="1" x2="9" y2="4"></line>
+              <line x1="15" y1="1" x2="15" y2="4"></line>
+              <line x1="9" y1="20" x2="9" y2="23"></line>
+              <line x1="15" y1="20" x2="15" y2="23"></line>
+              <line x1="20" y1="9" x2="23" y2="9"></line>
+              <line x1="20" y1="14" x2="23" y2="14"></line>
+              <line x1="1" y1="9" x2="4" y2="9"></line>
+              <line x1="1" y1="14" x2="4" y2="14"></line>
+            </svg>
+          </div>
+          <h3 class="pillar-title">Prototipagem de Equipamentos</h3>
+          <p class="pillar-desc">
+            Criação de novos dispositivos físicos, circuitos eletrônicos, firmware e cases sob demanda usando microcontroladores como ESP32, STM32, Arduino e Raspberry Pi.
+          </p>
+          <div class="pillar-tags">
+            <span class="tag-pill">IoT & Sensores</span>
+            <span class="tag-pill">Hardware Sob Medida</span>
+            <span class="tag-pill">Firmware C/C++</span>
+          </div>
+        </div>
+
+        <!-- Pillar 2 -->
+        <div class="pillar-card">
+          <div class="pillar-icon" style="background: rgba(0, 242, 254, 0.1); color: var(--accent-bio); border-color: rgba(0, 242, 254, 0.3);">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+            </svg>
+          </div>
+          <h3 class="pillar-title">Sistemas Biomédicos</h3>
+          <p class="pillar-desc">
+            Equipamentos e softwares dedicados à área de saúde, integração com instrumentos laboratoriais via protocolos seriais/I2C, telemedicina e emissão de laudos automatizados.
+          </p>
+          <div class="pillar-tags">
+            <span class="tag-pill">Automação Clínica</span>
+            <span class="tag-pill">Telemedicina</span>
+            <span class="tag-pill">Doctor & BioLaudo</span>
+            <span class="tag-pill" style="color: var(--accent-amber); border-color: rgba(245, 158, 11, 0.4);">Contador de Hemácias</span>
+          </div>
+        </div>
+
+        <!-- Pillar 3 -->
+        <div class="pillar-card">
+          <div class="pillar-icon" style="background: rgba(16, 185, 129, 0.1); color: var(--accent-green); border-color: rgba(16, 185, 129, 0.3);">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="9" cy="21" r="1"></circle>
+              <circle cx="20" cy="21" r="1"></circle>
+              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+            </svg>
+          </div>
+          <h3 class="pillar-title">Equipamentos para Comércio</h3>
+          <p class="pillar-desc">
+            Totens interativos, emissão e gestão de filas, etiquetagem inteligente de gôndola, integração com balanças industriais, leitores de código de barras e PDVs.
+          </p>
+          <div class="pillar-tags">
+            <span class="tag-pill">Gestão de Filas</span>
+            <span class="tag-pill">Etiquetas de Preço</span>
+            <span class="tag-pill">Impressoras Térmicas</span>
+          </div>
+        </div>
+
+        <!-- Pillar 4 -->
+        <div class="pillar-card">
+          <div class="pillar-icon" style="background: rgba(138, 43, 226, 0.1); color: #c084fc; border-color: rgba(138, 43, 226, 0.3);">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="16 18 22 12 16 6"></polyline>
+              <polyline points="8 6 2 12 8 18"></polyline>
+            </svg>
+          </div>
+          <h3 class="pillar-title">Desenvolvimento de Software</h3>
+          <p class="pillar-desc">
+            Sistemas desktop nativos de alto desempenho (Lazarus/Pascal, C++, Python), portais web modernos, APIs REST robustas e bancos de dados relacionais e em tempo real.
+          </p>
+          <div class="pillar-tags">
+            <span class="tag-pill">Desktop Nativo</span>
+            <span class="tag-pill">Web & Nuvem</span>
+            <span class="tag-pill">Rede TCP/IP</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Products Showcase -->
+  <section class="section" id="produtos">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Catálogo de Produtos</span>
+        <h2 class="section-title">Soluções prontas para implementar</h2>
+        <p class="section-desc">
+          Conheça nossas plataformas proprietárias desenvolvidas com foco em produtividade, automação e alto retorno sobre investimento.
+        </p>
+      </div>
+
+      <div class="products-grid">
+        <!-- Product 1: Gestão de Filas -->
+        <article class="product-card">
+          <div class="product-media">
+            <span class="product-category-badge">Automação Comercial & Saúde</span>
+            <img src="assets/img/SMS_PAINEL.jpeg" alt="Sistema de Gestão de Filas">
+          </div>
+          <div class="product-body">
+            <h3 class="product-title">Sistema de Gestão de Filas</h3>
+            <p class="product-summary">
+              Solução completa para organização de atendimento ao público com emissão de senhas em totens/impressoras térmicas, módulo do atendente (Guichê), painel dinâmico em TV com sintetizador de voz e relatórios estatísticos.
+            </p>
+            <div class="product-features-list">
+              <div class="product-feature-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                Controle de até 5 filas simultâneas e senhas preferenciais
+              </div>
+              <div class="product-feature-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                PainelDesk multimídia com alerta sonoro e chamada por voz
+              </div>
+              <div class="product-feature-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                Comunicação distribuída via rede local TCP/IP
+              </div>
+            </div>
+            <div class="product-footer">
+              <span style="font-size: 0.85rem; color: var(--primary); font-weight: 600;">Módulos: Fila + Guichê + Painel</span>
+              <a href="produtos/gestao-filas.html" class="btn btn-primary btn-sm">Ver Detalhes &rarr;</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Product 2: Etiquetas de Gôndola e Varejo -->
+        <article class="product-card">
+          <div class="product-media">
+            <span class="product-category-badge">Comércio & Varejo</span>
+            <img src="assets/img/etiquetas-varejo.jpg" alt="Sistema de Impressão de Etiquetas de Gôndola">
+          </div>
+          <div class="product-body">
+            <h3 class="product-title">Etiquetas de Gôndola & Varejo</h3>
+            <p class="product-summary">
+              Sistema ágil para geração e impressão em massa de etiquetas de preço de gôndola, cartazes promocionais e códigos de barras (EAN-13, CODE128, QR Code). Suporta impressoras térmicas (Zebra, Argox, Elgin) e impressoras laser/jato de tinta.
+            </p>
+            <div class="product-features-list">
+              <div class="product-feature-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                Importação direta de dados de ERPs e planilhas
+              </div>
+              <div class="product-feature-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                Modelos de etiqueta: normal, atacado, oferta e parcelamento
+              </div>
+              <div class="product-feature-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                Redução drástica de divergência de preço no PDV
+              </div>
+            </div>
+            <div class="product-footer">
+              <span style="font-size: 0.85rem; color: var(--primary); font-weight: 600;">Térmica & Laser A4</span>
+              <a href="produtos/etiquetas-varejo.html" class="btn btn-primary btn-sm">Ver Detalhes &rarr;</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Product 3: Sistema de Vídeo Chamada -->
+        <article class="product-card">
+          <div class="product-media">
+            <span class="product-category-badge">Biomédico & Corporativo</span>
+            <img src="assets/img/video-chamada.jpg" alt="Sistema de Vídeo Chamada e Teleatendimento">
+          </div>
+          <div class="product-body">
+            <h3 class="product-title">Sistema de Vídeo Chamada</h3>
+            <p class="product-summary">
+              Plataforma para consultas médicas remotas, reuniões clínicas e teleatendimento corporativo de alta definição com transmissão WebRTC criptografada ponta a ponta. Sem necessidade de instalação para o usuário final.
+            </p>
+            <div class="product-features-list">
+              <div class="product-feature-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                Transmissão WebRTC sem downloads nem plugins
+              </div>
+              <div class="product-feature-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                Sala de espera virtual e compartilhamento de laudos
+              </div>
+              <div class="product-feature-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                Customização com a identidade visual da sua clínica/empresa
+              </div>
+            </div>
+            <div class="product-footer">
+              <span style="font-size: 0.85rem; color: var(--primary); font-weight: 600;">WebRTC Criptografado</span>
+              <a href="produtos/video-chamada.html" class="btn btn-primary btn-sm">Ver Detalhes &rarr;</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Product 4: Chatbot Inteligente & IA -->
+        <article class="product-card">
+          <div class="product-media">
+            <span class="product-category-badge">Atendimento & Automação</span>
+            <img src="assets/img/chatbot-ai.jpg" alt="Chatbot e Atendimento Inteligente com IA">
+          </div>
+          <div class="product-body">
+            <h3 class="product-title">Chatbot Inteligente & IA</h3>
+            <p class="product-summary">
+              Atendente virtual automatizado e inteligente para atendimento no site e via WhatsApp API oficial. Responde dúvidas com inteligência artificial, realiza triagem de clientes, consulta status de pedidos e encaminha para operadores humanos.
+            </p>
+            <div class="product-features-list">
+              <div class="product-feature-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                Integração nativa com WhatsApp e Widget Web
+              </div>
+              <div class="product-feature-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                Triagem inteligente de chamados 24 horas por dia
+              </div>
+              <div class="product-feature-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                Histórico unificado e painel de supervisão
+              </div>
+            </div>
+            <div class="product-footer">
+              <span style="font-size: 0.85rem; color: var(--primary); font-weight: 600;">WhatsApp & Web 24/7</span>
+              <a href="produtos/chatbot.html" class="btn btn-primary btn-sm">Ver Detalhes &rarr;</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Product 5: Gestão à Vista & Dashboards -->
+        <article class="product-card">
+          <div class="product-media">
+            <span class="product-category-badge">Operações & Indicadores</span>
+            <img src="assets/img/gestao-a-vista.jpg" alt="Sistema de Gestão à Vista e Dashboards">
+          </div>
+          <div class="product-body">
+            <h3 class="product-title">Gestão à Vista & Dashboards</h3>
+            <p class="product-summary">
+              Sistema de monitoramento e TV corporativa com indicadores em tempo real (Andon, metas diárias, produtividade, tempo médio de espera e status operacional). Projetado para TVs de chão de fábrica, salas de controle e operações comerciais.
+            </p>
+            <div class="product-features-list">
+              <div class="product-feature-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                Gráficos e medidores visuais de alta legibilidade
+              </div>
+              <div class="product-feature-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                Alertas automáticos para gargalos e metas críticas
+              </div>
+              <div class="product-feature-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                Conexão em tempo real com bancos de dados e APIs
+              </div>
+            </div>
+            <div class="product-footer">
+              <span style="font-size: 0.85rem; color: var(--primary); font-weight: 600;">Painéis Andon & KPIs</span>
+              <a href="produtos/gestao-a-vista.html" class="btn btn-primary btn-sm">Ver Detalhes &rarr;</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Product 6: Contador de Hemácias (Protótipo) -->
+        <article class="product-card" style="border-color: rgba(245, 158, 11, 0.35);">
+          <div class="product-media">
+            <span class="product-category-badge" style="background: rgba(245, 158, 11, 0.2); color: #fbbf24; border-color: rgba(245, 158, 11, 0.4);">
+              PROTÓTIPO EM DESENVOLVIMENTO
+            </span>
+            <img src="assets/img/hemacias-microscopia.jpg" alt="Contador de Hemácias por Visão Computacional">
+          </div>
+          <div class="product-body">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+              <h3 class="product-title" style="margin-bottom: 0;">Contador de Hemácias</h3>
+              <span style="font-size: 0.72rem; color: #fbbf24; background: rgba(245, 158, 11, 0.15); padding: 2px 6px; border-radius: 4px; font-weight: 700;">P&D BIOMÉDICO</span>
+            </div>
+            <p class="product-summary">
+              Projeto experimental de visão computacional em Python e OpenCV para detecção e contagem automatizada de eritrócitos sob microscopia óptica com algoritmo <strong>Watershed</strong> e sincronismo via API REST.
+            </p>
+            <div class="product-features-list">
+              <div class="product-feature-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                Segmentação Watershed e Hough para células agrupadas
+              </div>
+              <div class="product-feature-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                Avaliação de foco Laplaciano e filtro temporal multiframe
+              </div>
+              <div class="product-feature-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                Gerenciador web PHP/MySQL de amostras e prontuários
+              </div>
+            </div>
+            <div class="product-footer">
+              <span style="font-size: 0.85rem; color: var(--accent-amber); font-weight: 600;">Open Source • GitHub</span>
+              <a href="produtos/contagem-hemacias.html" class="btn btn-primary btn-sm">Ver Protótipo &rarr;</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Product 7: Soluções Laboratoriais & Utilitários -->
+        <article class="product-card">
+          <div class="product-media" style="background: #0b1324; display: flex; align-items: center; justify-content: center;">
+            <span class="product-category-badge">P&D Maurinsoft</span>
+            <div style="display: flex; gap: 20px; align-items: center;">
+              <img src="assets/img/doctor.png" alt="Doctor" style="width: 80px; height: 80px; object-fit: contain;">
+              <img src="assets/img/mnote2.png" alt="MNote2" style="width: 80px; height: 80px; object-fit: contain;">
+            </div>
+          </div>
+          <div class="product-body">
+            <h3 class="product-title">Doctor & MNote2 Suite</h3>
+            <p class="product-summary">
+              Produtos consolidados da Maurinsoft: <strong>Doctor</strong> para automação biomédica e integração com equipamentos clínicos, e <strong>MNote2</strong>, editor multiplataforma robusto para anotações técnicas e gestão de dados.
+            </p>
+            <div class="product-features-list">
+              <div class="product-feature-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                Doctor: Controle serial/I2C e laudos automatizados
+              </div>
+              <div class="product-feature-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                MNote2: Editor de texto e notas em Lazarus/Free Pascal
+              </div>
+              <div class="product-feature-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                Compatibilidade nativa com Linux, Windows e ARM
+              </div>
+            </div>
+            <div class="product-footer">
+              <span style="font-size: 0.85rem; color: var(--primary); font-weight: 600;">Multiplataforma</span>
+              <a href="servicos.html" class="btn btn-outline btn-sm">Saiba Mais &rarr;</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Spotlight 1: Prototipagem de Equipamentos -->
+  <section class="section section-alt">
+    <div class="container">
+      <div class="spotlight">
+        <div class="spotlight-media">
+          <img src="assets/img/hero-tech.jpg" alt="Desenvolvimento de Equipamentos e Prototipagem">
+        </div>
+        <div class="spotlight-content">
+          <span class="spotlight-tag">Engenharia Sob Medida</span>
+          <h2 class="spotlight-title">Criamos o equipamento físico que o seu negócio precisa</h2>
+          <p class="spotlight-desc">
+            Diferente de empresas que desenvolvem apenas telas de computador, a <strong>Maurinsoft</strong> projeta o hardware completo: desenhamos o circuito eletrônico, escolhemos os sensores ideais, programamos o microcontrolador (firmware) e construímos a caixa protetora (case).
+          </p>
+          <ul style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 2rem;">
+            <li style="display: flex; align-items: flex-start; gap: 10px; color: var(--text-muted); font-size: 0.95rem;">
+              <span style="color: var(--primary); font-weight: bold;">✔</span>
+              <span><strong>Integração de Múltiplos Equipamentos:</strong> Conectamos totens, impressoras térmicas, balanças e leitores de código em um ecossistema sincronizado.</span>
+            </li>
+            <li style="display: flex; align-items: flex-start; gap: 10px; color: var(--text-muted); font-size: 0.95rem;">
+              <span style="color: var(--primary); font-weight: bold;">✔</span>
+              <span><strong>Automação Biomédica Confiável:</strong> Experiência no desenvolvimento de equipamentos laboratoriais e protocolos de comunicação hospitalar.</span>
+            </li>
+            <li style="display: flex; align-items: flex-start; gap: 10px; color: var(--text-muted); font-size: 0.95rem;">
+              <span style="color: var(--primary); font-weight: bold;">✔</span>
+              <span><strong>Do Protótipo à Homologação:</strong> Testes de bancada rigorosos garantindo durabilidade e funcionamento 24/7.</span>
+            </li>
+          </ul>
+          <div>
+            <a href="servicos.html" class="btn btn-primary">Conhecer o Processo de Prototipagem</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Metrics Banner -->
+  <section class="section">
+    <div class="container">
+      <div class="stats-banner">
+        <div class="stat-box">
+          <span class="stat-number">+20</span>
+          <span class="stat-title">Anos de Mercado</span>
+          <span class="stat-sub">Sólida experiência em engenharia</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-number">100%</span>
+          <span class="stat-title">Nacional & Seguro</span>
+          <span class="stat-sub">Sem dependências externas obscuras</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-number">TCP/IP</span>
+          <span class="stat-title">Rede Distribuída</span>
+          <span class="stat-sub">Alta velocidade e baixa latência</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-number">24/7</span>
+          <span class="stat-title">Operação Contínua</span>
+          <span class="stat-sub">Robustez industrial e comercial</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action Banner -->
+  <section class="section">
+    <div class="container">
+      <div class="cta-box">
+        <h2 class="cta-title">Tem um projeto de equipamento ou software inovador?</h2>
+        <p class="cta-desc">
+          Converse diretamente com o engenheiro responsável. Analisamos sua necessidade técnica, desenhamos a arquitetura do hardware e desenvolvemos o software sob medida.
+        </p>
+        <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+          <a href="contato.html" class="btn btn-primary btn-lg">Solicitar Cotação de Projeto</a>
+          <a href="https://wa.me/5516981434112" target="_blank" class="btn btn-secondary btn-lg">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+            Chamar no WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="brand-logo" style="margin-bottom: 1.25rem;" aria-label="Maurinsoft Início">
+            <img src="assets/img/logo-maurinsoft.svg" alt="Maurinsoft" class="site-logo-img" style="height: 40px;">
+          </a>
+          <p>
+            Desenvolvimento de software de alta performance, automação comercial, equipamentos sob medida e soluções em prototipagem eletrônica e sistemas biomédicos.
+          </p>
+          <div style="margin-top: 1rem; font-size: 0.85rem; color: var(--text-dim);">
+            Jardinópolis - SP • Atendimento em todo o Brasil
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Produtos</h4>
+          <div class="footer-links">
+            <a href="produtos/gestao-filas.html">Sistema de Gestão de Fila</a>
+            <a href="produtos/etiquetas-varejo.html">Etiquetas de Gôndola & Varejo</a>
+            <a href="produtos/video-chamada.html">Sistema de Vídeo Chamada</a>
+            <a href="produtos/chatbot.html">Chatbot Inteligente & IA</a>
+            <a href="produtos/gestao-a-vista.html">Gestão à Vista & Dashboards</a>
+            <a href="produtos/contagem-hemacias.html" style="color: var(--accent-amber);">Contador de Hemácias (Protótipo)</a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Especialidades</h4>
+          <div class="footer-links">
+            <a href="servicos.html#prototipagem">Prototipagem de Hardware</a>
+            <a href="servicos.html#biomedicos">Sistemas Biomédicos</a>
+            <a href="servicos.html#comercio">Equipamentos para Comércio</a>
+            <a href="servicos.html#software">Engenharia de Software</a>
+            <a href="restrita/login.html" style="color: var(--primary); font-weight: 600;">Área Restrita (Serviços) &rarr;</a>
+            <a href="sobre.html">Sobre a Empresa</a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Contato Direto</h4>
+          <div class="footer-links">
+            <a href="https://wa.me/5516981434112" target="_blank" style="color: var(--primary);">
+              WhatsApp: (16) 98143-4112
+            </a>
+            <a href="mailto:marcelomaurinmartins@gmail.com">marcelomaurinmartins@gmail.com</a>
+            <a href="https://github.com/marcelomaurin" target="_blank">github.com/marcelomaurin</a>
+            <a href="https://maurinsoft.com.br" target="_blank">maurinsoft.com.br</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          &copy; 2026 Maurinsoft - Todos os direitos reservados. Fundador: Marcelo Maurin Martins.
+        </div>
+        <div>
+          Tecnologia Nacional Acessível e Inovadora
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating WhatsApp Action -->
+  <a href="https://wa.me/5516981434112?text=Ol%C3%A1,%20gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20as%20solu%C3%A7%C3%B5es%20da%20Maurinsoft." 
+     class="whatsapp-float" 
+     target="_blank" 
+     aria-label="Fale conosco via WhatsApp"
+     title="Fale com a Maurinsoft no WhatsApp">
+    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+    </svg>
+  </a>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

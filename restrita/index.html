@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portal Restrito de Prestação de Serviços | Maurinsoft</title>
+  <meta name="description" content="Espaço restrito para gestão de ordens de serviço, manutenção de equipamentos, suporte e downloads técnicos da Maurinsoft.">
+  <link rel="stylesheet" href="../assets/css/main.css">
+  <style>
+    .restricted-header {
+      background: rgba(13, 20, 36, 0.95);
+      border-bottom: 1px solid var(--border-accent);
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(16px);
+    }
+
+    .restricted-topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .user-badge {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-glass);
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      font-size: 0.85rem;
+    }
+
+    .status-indicator {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent-green);
+      box-shadow: 0 0 8px var(--accent-green);
+    }
+
+    .os-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: var(--radius-full);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .os-status-andamento {
+      background: rgba(0, 210, 255, 0.15);
+      color: var(--primary);
+      border: 1px solid rgba(0, 210, 255, 0.3);
+    }
+
+    .os-status-concluido {
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--accent-green);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .os-status-diagnostico {
+      background: rgba(245, 158, 11, 0.15);
+      color: var(--accent-amber);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+      font-size: 0.92rem;
+    }
+
+    .data-table th {
+      background: rgba(255, 255, 255, 0.03);
+      padding: 12px 16px;
+      text-align: left;
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border-bottom: 1px solid var(--border-glass);
+    }
+
+    .data-table td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border-glass);
+      color: var(--text-main);
+    }
+
+    .data-table tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .filter-btn-group {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 1.25rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-glass);
+      color: var(--text-muted);
+      padding: 6px 14px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: var(--transition);
+    }
+
+    .filter-btn.active, .filter-btn:hover {
+      background: var(--primary);
+      color: #050b14;
+      font-weight: 600;
+      border-color: var(--primary);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Restricted Space Topbar -->
+  <header class="restricted-header">
+    <div class="container restricted-topbar">
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <a href="../index.html" class="brand-logo" aria-label="Maurinsoft Início">
+          <img src="../assets/img/logo-maurinsoft.svg" alt="Maurinsoft" class="site-logo-img" style="height: 40px;">
+        </a>
+        <span style="border-left: 1px solid var(--border-glass); padding-left: 1rem; color: var(--primary); font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">
+          Espaço de Prestação de Serviços
+        </span>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <div class="user-badge">
+          <span class="status-indicator"></span>
+          <span id="user-display-name" style="color: #fff; font-weight: 600;">Cliente Conectado</span>
+          <span id="user-display-profile" style="color: var(--text-dim); font-size: 0.78rem;">(Cliente Corporativo)</span>
+        </div>
+
+        <a href="../index.html" class="btn btn-secondary btn-sm" title="Ir para o site público">
+          Portal Público
+        </a>
+
+        <button id="btn-logout" class="btn btn-outline btn-sm" style="color: #ef4444; border-color: rgba(239, 68, 68, 0.4);">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+          Sair
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Dashboard -->
+  <main class="section" style="padding-top: 2.5rem;">
+    <div class="container">
+      
+      <!-- Top Metrics Banner -->
+      <div class="stats-banner" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); padding: 1.75rem; margin-bottom: 2.5rem;">
+        <div class="stat-box">
+          <span class="stat-number" id="count-os-ativas">3</span>
+          <span class="stat-title">O.S. em Andamento</span>
+          <span class="stat-sub">Serviços técnicos ativos</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-number" style="color: var(--accent-green);">8</span>
+          <span class="stat-title">Equipamentos Cadastrados</span>
+          <span class="stat-sub">Hardware & módulos em campo</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-number" style="color: var(--accent-bio);">14</span>
+          <span class="stat-title">Chamados Concluídos</span>
+          <span class="stat-sub">Neste trimestre</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-number" style="color: var(--accent-amber);">&lt; 2h</span>
+          <span class="stat-title">Tempo Médio de SLA</span>
+          <span class="stat-sub">Resposta técnica direta</span>
+        </div>
+      </div>
+
+      <!-- Navigation Tabs -->
+      <div class="tab-header">
+        <button type="button" class="tab-btn active" data-tab="tab-os">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: -3px; margin-right: 6px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+          Quadro de Ordens de Serviço (O.S.)
+        </button>
+
+        <button type="button" class="tab-btn" data-tab="tab-novo-chamado">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: -3px; margin-right: 6px;"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+          Abrir Nova Ordem de Serviço
+        </button>
+
+        <button type="button" class="tab-btn" data-tab="tab-equipamentos">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: -3px; margin-right: 6px;"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line></svg>
+          Parque de Equipamentos
+        </button>
+
+        <button type="button" class="tab-btn" data-tab="tab-downloads">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: -3px; margin-right: 6px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+          Firmwares & Manuais Técnicos
+        </button>
+      </div>
+
+      <!-- TAB 1: Ordens de Serviço (O.S.) -->
+      <div id="tab-os" class="tab-pane active">
+        <div class="specs-card" style="padding: 1.75rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem;">
+            <div>
+              <h3 style="font-family: var(--font-heading); font-size: 1.35rem; color: #fff; margin-bottom: 4px;">
+                Acompanhamento de Serviços em Andamento
+              </h3>
+              <p style="color: var(--text-muted); font-size: 0.88rem;">
+                Gerenciamento das intervenções de bancada, prototipagem e suporte de software da Maurinsoft.
+              </p>
+            </div>
+
+            <div class="filter-btn-group" id="os-filter-buttons">
+              <button class="filter-btn active" data-filter="all">Todos (4)</button>
+              <button class="filter-btn" data-filter="andamento">Em Andamento (2)</button>
+              <button class="filter-btn" data-filter="diagnostico">Em Diagnóstico (1)</button>
+              <button class="filter-btn" data-filter="concluido">Concluídos (1)</button>
+            </div>
+          </div>
+
+          <div style="overflow-x: auto;">
+            <table class="data-table" id="os-table">
+              <thead>
+                <tr>
+                  <th>Protocolo</th>
+                  <th>Serviço / Descrição</th>
+                  <th>Categoria</th>
+                  <th>Equipamento</th>
+                  <th>Previsão / Conclusão</th>
+                  <th>Status</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody id="os-table-body">
+                <tr data-status="diagnostico">
+                  <td><strong style="color: var(--primary);">#OS-2026-088</strong></td>
+                  <td>
+                    <strong>Calibração de Algoritmo de Visão (Hemácias)</strong>
+                    <div style="font-size: 0.8rem; color: var(--text-dim);">Refinamento de segmentação Watershed e avaliação de foco em lâminas</div>
+                  </td>
+                  <td><span class="tag-pill" style="color: var(--accent-amber); border-color: rgba(245, 158, 11, 0.4);">P&D Biomédico</span></td>
+                  <td>Microscópio C-Mount (Protótipo)</td>
+                  <td>28/09/2026</td>
+                  <td><span class="os-badge os-status-diagnostico">Em Calibração</span></td>
+                  <td>
+                    <button class="btn btn-secondary btn-sm" onclick="alert('O.S. #2026-088: Ajuste do parâmetro de variância laplaciana e limiares de raio celular. Repositório: github.com/marcelomaurin/hemacias');">Ver Relatório</button>
+                  </td>
+                </tr>
+
+                <tr data-status="andamento">
+                  <td><strong style="color: var(--primary);">#OS-2026-084</strong></td>
+                  <td>
+                    <strong>Prototipagem de Módulo ESP32</strong>
+                    <div style="font-size: 0.8rem; color: var(--text-dim);">Integração de sensor de fluxo e display OLED</div>
+                  </td>
+                  <td><span class="tag-pill">Prototipagem</span></td>
+                  <td>Placa Controladora IoT v2</td>
+                  <td>24/09/2026</td>
+                  <td><span class="os-badge os-status-andamento">Em Bancada</span></td>
+                  <td>
+                    <button class="btn btn-secondary btn-sm" onclick="alert('O.S. #2026-084: Componentes soldados com sucesso. Aguardando calibração de firmware bare-metal.');">Ver Relatório</button>
+                  </td>
+                </tr>
+
+                <tr data-status="diagnostico">
+                  <td><strong style="color: var(--primary);">#OS-2026-081</strong></td>
+                  <td>
+                    <strong>Calibração de Protocolo Serial Doctor</strong>
+                    <div style="font-size: 0.8rem; color: var(--text-dim);">Ajuste de taxa baud rate e timeout de resposta I2C</div>
+                  </td>
+                  <td><span class="tag-pill">Biomédico</span></td>
+                  <td>Módulo Doctor Analisador</td>
+                  <td>22/09/2026</td>
+                  <td><span class="os-badge os-status-diagnostico">Em Diagnóstico</span></td>
+                  <td>
+                    <button class="btn btn-secondary btn-sm" onclick="alert('O.S. #2026-081: Em análise no osciloscópio de bancada.');">Ver Relatório</button>
+                  </td>
+                </tr>
+
+                <tr data-status="andamento">
+                  <td><strong style="color: var(--primary);">#OS-2026-079</strong></td>
+                  <td>
+                    <strong>Troca de Cabeça Térmica & Manutenção</strong>
+                    <div style="font-size: 0.8rem; color: var(--text-dim);">Revisão preventiva do mecanismo tracionador de papel</div>
+                  </td>
+                  <td><span class="tag-pill">Varejo</span></td>
+                  <td>Zebra ZD220 Térmica</td>
+                  <td>21/09/2026</td>
+                  <td><span class="os-badge os-status-andamento">Em Bancada</span></td>
+                  <td>
+                    <button class="btn btn-secondary btn-sm" onclick="alert('O.S. #2026-079: Peça de reposição original instalada. Realizando teste de 500 etiquetas.');">Ver Relatório</button>
+                  </td>
+                </tr>
+
+                <tr data-status="concluido">
+                  <td><strong style="color: var(--primary);">#OS-2026-075</strong></td>
+                  <td>
+                    <strong>Atualização do Projeto Fila v3.4.1</strong>
+                    <div style="font-size: 0.8rem; color: var(--text-dim);">Configuração de rede TCP 8095 e voz do PainelDesk</div>
+                  </td>
+                  <td><span class="tag-pill">Software</span></td>
+                  <td>Servidor de Senhas Fila</td>
+                  <td>18/09/2026</td>
+                  <td><span class="os-badge os-status-concluido">Concluído</span></td>
+                  <td>
+                    <button class="btn btn-secondary btn-sm" onclick="alert('O.S. #2026-075: Serviço concluído e homologado. Relatório emitido e assinado.');">Ver Relatório</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 2: Abertura de Novo Chamado -->
+      <div id="tab-novo-chamado" class="tab-pane">
+        <div class="specs-card" style="padding: 2rem; max-width: 840px; margin: 0 auto;">
+          <h3 style="font-family: var(--font-heading); font-size: 1.4rem; color: #fff; margin-bottom: 0.5rem;">
+            Abertura de Nova Solicitação de Serviço
+          </h3>
+          <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.75rem;">
+            Descreva o serviço técnico necessário. Uma Ordem de Serviço (O.S.) será gerada imediatamente com notificação à equipe de engenharia.
+          </p>
+
+          <form id="form-nova-os">
+            <div class="form-group">
+              <label class="form-label" for="os-titulo">Título Resumido da Solicitação *</label>
+              <input type="text" id="os-titulo" class="form-control" placeholder="ex: Manutenção em Totem de Fila ou Prototipagem de Placa" required>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+              <div class="form-group">
+                <label class="form-label" for="os-categoria">Categoria do Serviço *</label>
+                <select id="os-categoria" class="form-control" required>
+                  <option value="Prototipagem de Hardware">Prototipagem de Hardware / Placa</option>
+                  <option value="Manutenção de Equipamento">Manutenção de Equipamento (Totem, Impressora)</option>
+                  <option value="Sistemas Biomédicos / Doctor">Sistemas Biomédicos / Doctor</option>
+                  <option value="Software Projeto Fila">Software / Projeto Fila / Guichê</option>
+                  <option value="Etiquetas de Gôndola">Etiquetas de Gôndola & Varejo</option>
+                  <option value="Outro Serviço Especializado">Outro Serviço Especializado</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="os-prioridade">Nível de Urgência *</label>
+                <select id="os-prioridade" class="form-control">
+                  <option value="Normal">Normal (Até 48h)</option>
+                  <option value="Alta">Alta (Até 24h)</option>
+                  <option value="Crítica">Crítica / Parada de Operação (Atendimento Imediato)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="os-equipamento">Equipamento ou Módulo Vinculado</label>
+              <input type="text" id="os-equipamento" class="form-control" placeholder="ex: Impressora Zebra ZD220 (Serial #1234) ou Sistema Fila Jardinópolis">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="os-detalhes">Detalhamento Técnico / Sintomas Observados *</label>
+              <textarea id="os-detalhes" class="form-control" placeholder="Descreva os testes já realizados, mensagens de erro apresentadas ou os requisitos técnicos desejados..." required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Gerar Ordem de Serviço Imediata
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <!-- TAB 3: Parque de Equipamentos -->
+      <div id="tab-equipamentos" class="tab-pane">
+        <div class="specs-card" style="padding: 1.75rem;">
+          <h3 style="font-family: var(--font-heading); font-size: 1.35rem; color: #fff; margin-bottom: 4px;">
+            Hardware e Equipamentos Homologados
+          </h3>
+          <p style="color: var(--text-muted); font-size: 0.88rem; margin-bottom: 1.5rem;">
+            Dispositivos cadastrados na sua conta com firmware ativo, garantia e histórico de intervenções.
+          </p>
+
+          <div style="overflow-x: auto;">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Identificação / Serial</th>
+                  <th>Equipamento</th>
+                  <th>Localização / IP</th>
+                  <th>Versão Firmware</th>
+                  <th>Garantia / Suporte</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong style="color: #fff;">MS-FILA-2024-009</strong></td>
+                  <td>Totem Emissor de Senhas com Impressora Térmica</td>
+                  <td>Recepção Central • IP 192.168.1.10</td>
+                  <td>v3.4.1 (Lazarus RT)</td>
+                  <td><span class="os-badge os-status-concluido">Suporte Ativo</span></td>
+                  <td>
+                    <button class="btn btn-secondary btn-sm" onclick="alert('Equipamento operando normalmente. Último heartbeat recebido há 3 minutos.');">Diagnóstico</button>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td><strong style="color: #fff;">MS-GCH-2024-012</strong></td>
+                  <td>Terminal Guichê Atendimento</td>
+                  <td>Guichê 01 • IP 192.168.1.15</td>
+                  <td>v2.8.0</td>
+                  <td><span class="os-badge os-status-concluido">Suporte Ativo</span></td>
+                  <td>
+                    <button class="btn btn-secondary btn-sm" onclick="alert('Terminal Guichê 01 sincronizado com porta TCP 8095.');">Diagnóstico</button>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td><strong style="color: #fff;">ZB-PRN-2025-044</strong></td>
+                  <td>Impressora Térmica de Etiquetas de Gôndola</td>
+                  <td>Estoque Central • USB Direct</td>
+                  <td>ZPL II Emulation</td>
+                  <td><span class="os-badge os-status-andamento">Em Manutenção</span></td>
+                  <td>
+                    <button class="btn btn-secondary btn-sm" onclick="alert('Aguardando conclusão da O.S. #2026-079 para reinstalação.');">Ver O.S.</button>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td><strong style="color: #fff;">MS-BIO-2025-004</strong></td>
+                  <td>Controlador Biomédico Doctor I2C / Serial</td>
+                  <td>Laboratório de Triagem</td>
+                  <td>Firmware C++ v1.9</td>
+                  <td><span class="os-badge os-status-diagnostico">Em Calibração</span></td>
+                  <td>
+                    <button class="btn btn-secondary btn-sm" onclick="alert('Em bancada de testes. Relatório disponível na O.S. #2026-081.');">Ver O.S.</button>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td><strong style="color: #fbbf24;">MS-HEM-2026-001</strong></td>
+                  <td>Microscópio C-Mount com Módulo de Visão (Hemácias)</td>
+                  <td>Bancada P&D Biomédico • USB 3.0</td>
+                  <td>Python/OpenCV v1.4 (Watershed)</td>
+                  <td><span class="os-badge os-status-diagnostico" style="background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3);">Protótipo em Testes</span></td>
+                  <td>
+                    <button class="btn btn-secondary btn-sm" onclick="alert('Protótipo experimental de visão computacional. Integração com API REST web/ ativa.');">Diagnóstico</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 4: Downloads Técnicos -->
+      <div id="tab-downloads" class="tab-pane">
+        <div class="specs-card" style="padding: 1.75rem;">
+          <h3 style="font-family: var(--font-heading); font-size: 1.35rem; color: #fff; margin-bottom: 4px;">
+            Central de Downloads Técnicos & Firmwares Oficiais
+          </h3>
+          <p style="color: var(--text-muted); font-size: 0.88rem; margin-bottom: 1.5rem;">
+            Pacotes de instalação, drivers de comunicação e documentações restritas de protocolos.
+          </p>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.25rem;">
+            <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-glass); border-radius: var(--radius-sm); padding: 1.25rem;">
+              <strong style="color: #fff; font-size: 1.05rem; display: block; margin-bottom: 4px;">Projeto Fila - Pacote Completo v3.4.1</strong>
+              <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1rem;">Executáveis do Servidor Fila, Guichê e PainelDesk compilados para Windows e Linux.</p>
+              <button class="btn btn-primary btn-sm" onclick="alert('Download do pacote Projeto Fila v3.4.1 iniciado.');">Baixar Pacote (.ZIP)</button>
+            </div>
+
+            <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-glass); border-radius: var(--radius-sm); padding: 1.25rem;">
+              <strong style="color: #fff; font-size: 1.05rem; display: block; margin-bottom: 4px;">Drivers USB/Serial ESP32 & Arduino</strong>
+              <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1rem;">Drivers certificados CP210x / CH340 para comunicação com placas microcontroladas.</p>
+              <button class="btn btn-secondary btn-sm" onclick="alert('Download do driver oficial iniciado.');">Baixar Drivers</button>
+            </div>
+
+            <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-glass); border-radius: var(--radius-sm); padding: 1.25rem;">
+              <strong style="color: #fff; font-size: 1.05rem; display: block; margin-bottom: 4px;">Manual de Protocolos TCP & Serial Doctor</strong>
+              <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1rem;">Documentação técnica de sockets TCP (8095/8196) e comandos I2C para desenvolvedores.</p>
+              <button class="btn btn-secondary btn-sm" onclick="alert('Download do Manual de Engenharia (PDF) iniciado.');">Baixar Manual Técnico</button>
+            </div>
+
+            <div style="background: rgba(245, 158, 11, 0.04); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: var(--radius-sm); padding: 1.25rem;">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
+                <strong style="color: #fbbf24; font-size: 1.05rem;">Contador de Hemácias - Scripts & API REST v1.4</strong>
+                <span style="font-size: 0.7rem; color: #fbbf24; background: rgba(245, 158, 11, 0.2); padding: 2px 6px; border-radius: 4px; font-weight: 700;">PROTÓTIPO P&D</span>
+              </div>
+              <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1rem;">Pacote Python (teste04.py, camera.py, counter.py), dataset e schema MySQL do gerenciador web.</p>
+              <div style="display: flex; gap: 8px;">
+                <a href="https://github.com/marcelomaurin/hemacias" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm" style="display: inline-block;">Repositório GitHub</a>
+                <button class="btn btn-secondary btn-sm" onclick="alert('Download do pacote experimental Hemácias v1.4 (.ZIP) iniciado.');">Baixar (.ZIP)</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Session check
+      const auth = sessionStorage.getItem('maurinsoft_auth');
+      const user = sessionStorage.getItem('maurinsoft_user') || 'Cliente Corporativo';
+      const perfil = sessionStorage.getItem('maurinsoft_perfil') || 'cliente';
+
+      const userDisplay = document.getElementById('user-display-name');
+      const perfilDisplay = document.getElementById('user-display-profile');
+      if (userDisplay) userDisplay.textContent = user;
+      if (perfilDisplay) {
+        if (perfil === 'prestador') perfilDisplay.textContent = '(Engenharia / Prestador)';
+        else if (perfil === 'laboratorio') perfilDisplay.textContent = '(Clínica Biomédica)';
+        else perfilDisplay.textContent = '(Cliente Autorizado)';
+      }
+
+      // Logout handler
+      document.getElementById('btn-logout')?.addEventListener('click', () => {
+        sessionStorage.clear();
+        window.location.href = 'login.html';
+      });
+
+      // Tab switcher explicitly handled
+      const tabButtons = document.querySelectorAll('.tab-btn');
+      const tabPanes = document.querySelectorAll('.tab-pane');
+
+      function activateTab(tabId) {
+        tabButtons.forEach(b => {
+          if (b.getAttribute('data-tab') === tabId) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+        tabPanes.forEach(p => {
+          if (p.id === tabId) {
+            p.classList.add('active');
+          } else {
+            p.classList.remove('active');
+          }
+        });
+      }
+
+      tabButtons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          const target = btn.getAttribute('data-tab');
+          if (target) activateTab(target);
+        });
+      });
+
+      // Handle direct hash navigation
+      if (window.location.hash) {
+        const hash = window.location.hash.replace('#', '');
+        if (hash === 'abrir-os' || hash === 'novo-chamado') activateTab('tab-novo-chamado');
+        else if (hash === 'equipamentos') activateTab('tab-equipamentos');
+        else if (hash === 'downloads') activateTab('tab-downloads');
+        else if (hash === 'os') activateTab('tab-os');
+      }
+
+      // 2. Filter OS Table
+      const filterBtns = document.querySelectorAll('#os-filter-buttons .filter-btn');
+      const osRows = document.querySelectorAll('#os-table-body tr');
+
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          filterBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          const filter = btn.getAttribute('data-filter');
+
+          osRows.forEach(row => {
+            const status = row.getAttribute('data-status');
+            if (filter === 'all' || status === filter) {
+              row.style.display = '';
+            } else {
+              row.style.display = 'none';
+            }
+          });
+        });
+      });
+
+      // 3. New OS creation form
+      const formOS = document.getElementById('form-nova-os');
+      if (formOS) {
+        formOS.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const titulo = document.getElementById('os-titulo').value.trim();
+          const categoria = document.getElementById('os-categoria').value;
+          const equipamento = document.getElementById('os-equipamento').value.trim() || 'Equipamento em Campo';
+          const detalhes = document.getElementById('os-detalhes').value.trim();
+
+          const newProtocol = `#OS-2026-${Math.floor(100 + Math.random() * 900)}`;
+          const today = new Date().toLocaleDateString('pt-BR');
+
+          // Append to OS Table Body
+          const tableBody = document.getElementById('os-table-body');
+          const newRow = document.createElement('tr');
+          newRow.setAttribute('data-status', 'andamento');
+          newRow.innerHTML = `
+            <td><strong style="color: var(--primary);">${newProtocol}</strong></td>
+            <td>
+              <strong>${titulo}</strong>
+              <div style="font-size: 0.8rem; color: var(--text-dim);">${detalhes.substring(0, 50)}...</div>
+            </td>
+            <td><span class="tag-pill">${categoria}</span></td>
+            <td>${equipamento}</td>
+            <td>${today}</td>
+            <td><span class="os-badge os-status-andamento">Em Andamento</span></td>
+            <td>
+              <button class="btn btn-secondary btn-sm" onclick="alert('Chamado ${newProtocol} em triagem pela engenharia Maurinsoft.');">Ver Relatório</button>
+            </td>
+          `;
+
+          tableBody.insertBefore(newRow, tableBody.firstChild);
+
+          // Update active count
+          const countEl = document.getElementById('count-os-ativas');
+          if (countEl) countEl.textContent = parseInt(countEl.textContent || '3') + 1;
+
+          alert(`Ordem de Serviço ${newProtocol} aberta com sucesso! Nossos técnicos foram notificados.`);
+          formOS.reset();
+
+          // Switch back to OS tab
+          document.querySelector('.tab-btn[data-tab="tab-os"]')?.click();
+        });
+      }
+    });
+  </script>
+</body>
+</html>

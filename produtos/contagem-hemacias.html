@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contador de Hemácias por Visão Computacional (Protótipo) | Maurinsoft</title>
+  <meta name="description" content="Projeto de P&D biomédico da Maurinsoft para detecção e contagem automatizada de hemácias em microscopia óptica utilizando Python, OpenCV e algoritmo Watershed.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="header-container">
+      <a href="../index.html" class="brand-logo" aria-label="Maurinsoft Home">
+        <img src="../assets/img/logo-maurinsoft.svg" alt="Maurinsoft - Tecnologia Acessível" class="brand-img">
+      </a>
+
+      <nav class="nav-menu" aria-label="Navegação Principal">
+        <a href="../index.html" class="nav-link">Início</a>
+        <a href="../sobre.html" class="nav-link">Sobre Nós</a>
+        <a href="../servicos.html" class="nav-link">Serviços & Prototipagem</a>
+        
+        <div class="nav-dropdown">
+          <button class="nav-link nav-dropdown-btn active">
+            Produtos & Soluções
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="dropdown-content">
+            <a href="gestao-filas.html" class="dropdown-item">
+              <strong>Gestão de Filas</strong>
+              <span>Totens, Guichê & Painel TV</span>
+            </a>
+            <a href="etiquetas-varejo.html" class="dropdown-item">
+              <strong>Etiquetas de Gôndola</strong>
+              <span>Impressão ZPL & Automação</span>
+            </a>
+            <a href="video-chamada.html" class="dropdown-item">
+              <strong>Vídeo Chamada</strong>
+              <span>Telemedicina WebRTC</span>
+            </a>
+            <a href="chatbot.html" class="dropdown-item">
+              <strong>Chatbot Inteligente</strong>
+              <span>IA & WhatsApp API</span>
+            </a>
+            <a href="gestao-a-vista.html" class="dropdown-item">
+              <strong>Gestão à Vista</strong>
+              <span>Dashboards & Andon TV</span>
+            </a>
+            <a href="contagem-hemacias.html" class="dropdown-item">
+              <strong>Contador de Hemácias <span style="font-size:0.7rem; color:var(--accent-amber); font-weight:700;">(Protótipo)</span></strong>
+              <span>Visão Computacional & P&D</span>
+            </a>
+          </div>
+        </div>
+
+        <a href="../restrita/index.html" class="nav-link" style="color: var(--primary-light);">Área Restrita</a>
+        <a href="../contato.html" class="nav-link">Contato</a>
+      </nav>
+
+      <div class="header-actions">
+        <a href="../restrita/login.html" class="btn btn-secondary btn-sm" style="margin-right: 8px;">Área Restrita</a>
+        <a href="../contato.html" class="btn btn-primary btn-sm nav-cta">Fale com Engenharia</a>
+        <button class="hamburger" aria-label="Abrir Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-main">
+    <div class="container">
+      
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb" style="display: flex; gap: 8px; font-size: 0.88rem; color: var(--text-dim); margin-bottom: 2rem;">
+        <a href="../index.html" style="color: var(--text-muted);">Início</a> / 
+        <a href="../servicos.html" style="color: var(--text-muted);">Soluções Biomédicas</a> / 
+        <span style="color: var(--primary);">Contador de Hemácias (Protótipo)</span>
+      </nav>
+
+      <!-- Experimental Status Alert Banner -->
+      <div style="background: rgba(245, 158, 11, 0.12); border: 1px solid var(--accent-amber); border-radius: var(--radius-md); padding: 1.25rem 1.5rem; margin-bottom: 2.5rem; display: flex; align-items: flex-start; gap: 1rem;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" style="flex-shrink: 0; margin-top: 2px;">
+          <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+          <line x1="12" y1="9" x2="12" y2="13"></line>
+          <line x1="12" y1="17" x2="12.01" y2="17"></line>
+        </svg>
+        <div>
+          <strong style="color: #fbbf24; font-size: 1.05rem; display: block; margin-bottom: 4px;">
+            Protótipo Experimental em Desenvolvimento Ativo (P&D Biomédico)
+          </strong>
+          <p style="color: #fde68a; font-size: 0.92rem; line-height: 1.5; margin: 0;">
+            Este projeto é uma iniciativa científica e educacional de engenharia de software biomédico da Maurinsoft. O algoritmo de contagem automatizada por visão computacional encontra-se em fase de aprimoramento contínuo e validação comparativa contra métodos de referência (câmara de Neubauer / hemocitômetro) antes de homologação diagnóstica. Código-fonte aberto e aberto a parcerias de pesquisa.
+          </p>
+        </div>
+      </div>
+
+      <!-- Hero Product Section -->
+      <div class="product-hero-grid">
+        <div class="product-hero-text">
+          <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1rem;">
+            <span class="badge-product-category" style="background: rgba(245, 158, 11, 0.2); color: #fbbf24; border-color: rgba(245, 158, 11, 0.4);">
+              PROTÓTIPO EM DESENVOLVIMENTO
+            </span>
+            <span class="badge-product-category">VISÃO COMPUTACIONAL BIOMÉDICA</span>
+          </div>
+
+          <h1 style="font-family: var(--font-heading); font-size: 2.75rem; font-weight: 800; line-height: 1.15; color: #fff; margin-bottom: 1.25rem;">
+            Detecção e Contagem de Hemácias por Microscopia Óptica
+          </h1>
+
+          <p style="font-size: 1.15rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 2rem;">
+            Solução baseada em <strong>Python 3.10+</strong>, <strong>OpenCV</strong> e algoritmos avançados de segmentação celular (<strong>Watershed</strong> e transformada circular de Hough) para quantificação automática de glóbulos vermelhos em lâminas laboratoriais, integrada a um gerenciador web completo com API REST.
+          </p>
+
+          <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2.5rem;">
+            <a href="https://github.com/marcelomaurin/hemacias" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+              Ver Projeto no GitHub
+            </a>
+            <a href="https://maurinsoft.com.br/projeto-contagem-de-hemacias/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+              Artigo Científico Original
+            </a>
+            <a href="../contato.html?interesse=hemacias" class="btn btn-secondary">
+              Parceria em Pesquisa
+            </a>
+          </div>
+
+          <!-- Feature Bullets -->
+          <div class="product-highlights-list">
+            <div class="highlight-item">
+              <span class="check-icon">✓</span>
+              <div>
+                <strong>Segmentação Celular por Watershed:</strong>
+                <span>Separação morfológica superior para células sanguíneas agrupadas ou sobrepostas na lâmina.</span>
+              </div>
+            </div>
+
+            <div class="highlight-item">
+              <span class="check-icon">✓</span>
+              <div>
+                <strong>Avaliação Automática de Foco:</strong>
+                <span>Métrica de variância Laplaciana em tempo real que descarta quadros desfocados ou em movimento.</span>
+              </div>
+            </div>
+
+            <div class="highlight-item">
+              <span class="check-icon">✓</span>
+              <div>
+                <strong>Estabilização Temporal Multiframe:</strong>
+                <span>Filtro de média e desvio temporal que impede oscilações espúrias na contagem final.</span>
+              </div>
+            </div>
+
+            <div class="highlight-item">
+              <span class="check-icon">✓</span>
+              <div>
+                <strong>Gerenciador Web & API REST Integrada:</strong>
+                <span>Backend completo em PHP/MySQL para prontuários, amostras, laudos e auditoria com chave de API.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product Media Mockup -->
+        <div class="product-hero-media">
+          <div class="main-media-frame">
+            <img id="main-gallery-img" src="../assets/img/hemacias-microscopia.jpg" alt="Detecção e Contagem de Hemácias por Visão Computacional sob Microscópio Óptico">
+          </div>
+          <div class="product-caption" style="text-align: center; margin-top: 10px; font-size: 0.85rem; color: var(--text-dim);">
+            Interface experimental do sistema capturando imagens via câmera de microscopia com marcação celular em tempo real.
+          </div>
+        </div>
+      </div>
+
+      <!-- Pipeline de Processamento de Imagem -->
+      <section style="margin: 4.5rem 0;">
+        <div style="text-align: center; max-width: 800px; margin: 0 auto 3rem auto;">
+          <h2 style="font-family: var(--font-heading); font-size: 2.1rem; color: #fff; margin-bottom: 12px;">
+            Pipeline Científico de Visão Computacional
+          </h2>
+          <p style="color: var(--text-muted); font-size: 1.05rem;">
+            Do sinal ótico analógico à quantificação celular validada em cinco etapas modulares.
+          </p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem;">
+          <div class="spec-card" style="padding: 1.75rem;">
+            <div style="font-size: 1.8rem; font-weight: 800; color: var(--primary); font-family: var(--font-mono); margin-bottom: 8px;">01</div>
+            <strong style="color: #fff; font-size: 1.1rem; display: block; margin-bottom: 8px;">Aquisição Óptica</strong>
+            <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.5;">
+              Módulo <code>hemacias/camera.py</code> com descoberta automática de dispositivos USB, C-mount e webcams industriais.
+            </p>
+          </div>
+
+          <div class="spec-card" style="padding: 1.75rem;">
+            <div style="font-size: 1.8rem; font-weight: 800; color: var(--accent-cyan); font-family: var(--font-mono); margin-bottom: 8px;">02</div>
+            <strong style="color: #fff; font-size: 1.1rem; display: block; margin-bottom: 8px;">Avaliação de Foco</strong>
+            <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.5;">
+              Cálculo de nitidez por gradiente Laplaciano. O sistema só autoriza amostragem de frames acima do limiar de clareza.
+            </p>
+          </div>
+
+          <div class="spec-card" style="padding: 1.75rem;">
+            <div style="font-size: 1.8rem; font-weight: 800; color: var(--accent-amber); font-family: var(--font-mono); margin-bottom: 8px;">03</div>
+            <strong style="color: #fff; font-size: 1.1rem; display: block; margin-bottom: 8px;">Segmentação Watershed</strong>
+            <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.5;">
+              Transformação de distância euclidiana e marcadores morfológicos para separar eritrócitos aglomerados com alta precisão.
+            </p>
+          </div>
+
+          <div class="spec-card" style="padding: 1.75rem;">
+            <div style="font-size: 1.8rem; font-weight: 800; color: var(--accent-green); font-family: var(--font-mono); margin-bottom: 8px;">04</div>
+            <strong style="color: #fff; font-size: 1.1rem; display: block; margin-bottom: 8px;">Filtro Multiframe</strong>
+            <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.5;">
+              Estabilização temporal de contagem entre múltiplos quadros sucessivos, eliminando artefatos e ruídos transitórios.
+            </p>
+          </div>
+
+          <div class="spec-card" style="padding: 1.75rem;">
+            <div style="font-size: 1.8rem; font-weight: 800; color: #a855f7; font-family: var(--font-mono); margin-bottom: 8px;">05</div>
+            <strong style="color: #fff; font-size: 1.1rem; display: block; margin-bottom: 8px;">Sincronismo API REST</strong>
+            <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.5;">
+              Ao pressionar tecla <code>S</code>, a imagem, contagem e metadados de magnificação são enviados ao gerenciador web seguro.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Interactive Tab System -->
+      <section class="product-tabs-section" style="margin-bottom: 4rem;">
+        <div class="tab-header">
+          <button class="tab-btn active" data-tab="tab-python">
+            Motor de Visão (Python & OpenCV)
+          </button>
+          <button class="tab-btn" data-tab="tab-web">
+            Gerenciador Web PHP & API
+          </button>
+          <button class="tab-btn" data-tab="tab-validacao">
+            Metodologia & Validação Laboratorial
+          </button>
+        </div>
+
+        <!-- TAB 1: Python Engine -->
+        <div id="tab-python" class="tab-pane active">
+          <div class="specs-card" style="padding: 2.25rem;">
+            <h3 style="font-family: var(--font-heading); font-size: 1.45rem; color: #fff; margin-bottom: 1rem;">
+              Arquitetura do Motor de Processamento em Tempo Real
+            </h3>
+            <p style="color: var(--text-muted); line-height: 1.6; margin-bottom: 1.5rem;">
+              O projeto foi refatorado para garantir código limpo, separando a captura de vídeo (`camera.py`), a computação visual (`counter.py`) e a interface gráfica de operação (`teste04.py`).
+            </p>
+
+            <div style="background: #060d17; border: 1px solid var(--border-glass); border-radius: var(--radius-sm); padding: 1.25rem; font-family: var(--font-mono); font-size: 0.88rem; color: #cbd5e1; margin-bottom: 1.5rem; overflow-x: auto;">
+              <span style="color: #64748b;"># Executar detecção com segmentação watershed e calibração de raio:</span><br>
+              <span style="color: var(--primary);">python</span> teste04.py --method watershed --min-radius 15 --max-radius 35<br><br>
+              <span style="color: #64748b;"># Listar câmeras disponíveis:</span><br>
+              <span style="color: var(--primary);">python</span> teste04.py --list-videos<br><br>
+              <span style="color: #64748b;"># Integração direta com servidor web de prontuários:</span><br>
+              <span style="color: var(--primary);">python</span> teste04.py --api-url https://servidor/hemacias/web --api-key SUA_CHAVE --patient-name "Paciente Teste"
+            </div>
+
+            <div class="specs-table-container">
+              <table class="specs-table">
+                <tbody>
+                  <tr>
+                    <th>Comando de Teclado 'Q'</th>
+                    <td>Encerramento seguro do loop de vídeo e liberação do hardware de captura.</td>
+                  </tr>
+                  <tr>
+                    <th>Comando de Teclado 'C'</th>
+                    <td>Limpeza e reinicialização do buffer histórico de estabilização de frames.</td>
+                  </tr>
+                  <tr>
+                    <th>Comando de Teclado 'S'</th>
+                    <td>Disparo de persistência instantânea via API (imagem, coordenadas de hemácias e contagem).</td>
+                  </tr>
+                  <tr>
+                    <th>Métodos Disponíveis</th>
+                    <td><code>watershed</code> (padrão para agrupamentos) e <code>hough</code> (círculos geométricos).</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 2: Web Management -->
+        <div id="tab-web" class="tab-pane">
+          <div class="specs-card" style="padding: 2.25rem;">
+            <h3 style="font-family: var(--font-heading); font-size: 1.45rem; color: #fff; margin-bottom: 1rem;">
+              Gerenciador Laboratorial Web PHP & MySQL
+            </h3>
+            <p style="color: var(--text-muted); line-height: 1.6; margin-bottom: 1.5rem;">
+              O diretório <code>web/</code> contém uma aplicação web completa projetada para laboratórios de análises clínicas e centros de pesquisa biomédica:
+            </p>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; margin-bottom: 1.5rem;">
+              <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-glass); border-radius: var(--radius-sm); padding: 1.25rem;">
+                <strong style="color: #fff; display: block; margin-bottom: 6px;">Prontuário & Pacientes</strong>
+                <span style="font-size: 0.88rem; color: var(--text-muted);">Cadastro de pacientes com ID externo, histórico clínico e vinculação de múltiplas amostras sanguíneas por paciente.</span>
+              </div>
+              <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-glass); border-radius: var(--radius-sm); padding: 1.25rem;">
+                <strong style="color: #fff; display: block; margin-bottom: 6px;">Metadados de Microscopia</strong>
+                <span style="font-size: 0.88rem; color: var(--text-muted);">Armazenamento de escala micrométrica, índice de magnificação (ex: 400x, 1000x), método utilizado e avaliação de foco.</span>
+              </div>
+              <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-glass); border-radius: var(--radius-sm); padding: 1.25rem;">
+                <strong style="color: #fff; display: block; margin-bottom: 6px;">API REST com Chave de Segurança</strong>
+                <span style="font-size: 0.88rem; color: var(--text-muted);">Endpoints autenticados para recebimento autônomo de dados gerados pelos scripts de visão computacional Python.</span>
+              </div>
+              <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-glass); border-radius: var(--radius-sm); padding: 1.25rem;">
+                <strong style="color: #fff; display: block; margin-bottom: 6px;">Auditoria & Rastreabilidade</strong>
+                <span style="font-size: 0.88rem; color: var(--text-muted);">Trilha completa de logs administrativos, controle de acessos por perfil e registro imutável de datas e intervenções.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 3: Validação & Roadmap -->
+        <div id="tab-validacao" class="tab-pane">
+          <div class="specs-card" style="padding: 2.25rem;">
+            <h3 style="font-family: var(--font-heading); font-size: 1.45rem; color: #fff; margin-bottom: 1rem;">
+              Plano de Evolução Técnica & Validação Biomédica
+            </h3>
+            <p style="color: var(--text-muted); line-height: 1.6; margin-bottom: 1.5rem;">
+              A engenharia biomédica da Maurinsoft estruturou um roadmap rigoroso documentado em <code>docs/PLANO_MELHORIAS.md</code> para elevar o protótipo ao estágio de homologação clínica:
+            </p>
+
+            <ul style="color: var(--text-muted); line-height: 1.8; font-size: 0.95rem; margin-left: 1.5rem; margin-bottom: 1.5rem;">
+              <li><strong>Calibração Óptica com Lâmina Micrométrica:</strong> Conversão precisa de pixels para micrômetros (&mu;m) de acordo com a objetiva ótica.</li>
+              <li><strong>Classificação Morfológica Celular:</strong> Diferenciação automática entre normócitos, microcitos, macrocitos e detecção preliminar de poiquilocitose.</li>
+              <li><strong>Validação Estatística em Câmara de Neubauer:</strong> Protocolo de testes cegos comparando a contagem manual por biomédico com a inferência do software.</li>
+              <li><strong>Integração com Sistemas LIS / HIS:</strong> Exportação de laudos estruturados nos padrões de laboratório clínico.</li>
+            </ul>
+
+            <div style="text-align: center; margin-top: 2rem;">
+              <a href="https://github.com/marcelomaurin/hemacias" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                Acompanhar Desenvolvimento no GitHub
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Banner de Colaboração e P&D -->
+      <section class="cta-banner" style="margin-bottom: 4rem;">
+        <div class="cta-content">
+          <h2 style="font-family: var(--font-heading); font-size: 2.2rem; margin-bottom: 12px; color: #fff;">
+            Interesse em Pesquisa Biomédica ou Parceria Tecnológica?
+          </h2>
+          <p style="color: var(--text-muted); font-size: 1.1rem; max-width: 650px; margin: 0 auto 2rem auto;">
+            A Maurinsoft desenvolve equipamentos customizados, interfaces para microscópios e sistemas embarcados sob medida. Converse diretamente com nossa engenharia.
+          </p>
+          <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+            <a href="../contato.html?interesse=hemacias" class="btn btn-primary">
+              Propor Projeto / Parceria
+            </a>
+            <a href="https://wa.me/5516981434112?text=Ol%C3%A1%20Maurinsoft!%20Gostaria%20de%20conversar%20sobre%20o%20projeto%20de%20Contagem%20de%20Hem%C3%A1cias." target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+              WhatsApp da Engenharia
+            </a>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-col footer-about">
+        <a href="../index.html" class="brand-logo" aria-label="Maurinsoft Home" style="margin-bottom: 1rem; display: inline-block;">
+          <img src="../assets/img/logo-maurinsoft.svg" alt="Maurinsoft" class="brand-img">
+        </a>
+        <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; margin-bottom: 1.25rem;">
+          Engenharia de software especializada em prototipagem de equipamentos, sistemas biomédicos e automação comercial para o varejo.
+        </p>
+        <div style="color: var(--text-dim); font-size: 0.85rem;">
+          Jardinópolis - SP • Atendimento em todo o Brasil
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4 class="footer-title">Soluções & Produtos</h4>
+        <ul class="footer-links">
+          <li><a href="gestao-filas.html">Sistema de Gestão de Filas</a></li>
+          <li><a href="etiquetas-varejo.html">Etiquetas de Gôndola & Varejo</a></li>
+          <li><a href="video-chamada.html">Vídeo Chamada & Telemedicina</a></li>
+          <li><a href="chatbot.html">Chatbot com IA & WhatsApp</a></li>
+          <li><a href="gestao-a-vista.html">Gestão à Vista & Andon TV</a></li>
+          <li><a href="contagem-hemacias.html" style="color: var(--accent-amber);">Contador de Hemácias (Protótipo)</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4 class="footer-title">Institucional</h4>
+        <ul class="footer-links">
+          <li><a href="../sobre.html">Sobre a Maurinsoft</a></li>
+          <li><a href="../servicos.html">Metodologia de Prototipagem</a></li>
+          <li><a href="../restrita/index.html" style="color: var(--primary-light);">Área Restrita (Serviços)</a></li>
+          <li><a href="../contato.html">Contato & Orçamentos</a></li>
+          <li><a href="https://github.com/marcelomaurin" target="_blank" rel="noopener noreferrer">GitHub Oficial</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4 class="footer-title">Contato Direto</h4>
+        <ul class="footer-contact">
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <a href="https://wa.me/5516981434112" target="_blank">(16) 98143-4112</a>
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <a href="mailto:marcelomaurinmartins@gmail.com">marcelomaurinmartins@gmail.com</a>
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <span>Seg - Sex: 08:00 às 18:00</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+        <p style="margin: 0;">&copy; 2026 Maurinsoft - Todos os direitos reservados. Jardinópolis - SP.</p>
+        <p style="margin: 0; color: var(--text-dim);">Tecnologia Acessível • Prototipagem & Software</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>
