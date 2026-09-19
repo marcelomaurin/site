@@ -55,12 +55,7 @@ function loginUsuario(string $email, string $senha): bool
         return false;
     }
 
-    session_regenerate_id(true);
-    $_SESSION['usuario_id'] = (int)$u['id'];
-    $_SESSION['papel'] = $u['papel'];
-
-    db()->prepare('UPDATE usuarios SET ultimo_login=NOW() WHERE id=?')->execute([(int)$u['id']]);
-    registrarAuditoria((int)$u['id'], 'LOGIN', 'autenticacao', null);
+    autenticarSessao($u, 'senha');
     return true;
 }
 
@@ -186,4 +181,140 @@ function consumirServico(int $usuarioId, string $codigoServico, float $quantidad
     ]);
 
     return ['ok' => true, 'acesso' => acessoServico($usuarioId, $codigoServico)];
+}
+
+function autenticarSessao(array $u, string $origem = 'senha'): void
+{
+    session_regenerate_id(true);
+    $_SESSION['usuario_id'] = (int)$u['id'];
+    $_SESSION['papel'] = $u['papel'];
+
+    db()->prepare('UPDATE usuarios SET ultimo_login=NOW() WHERE id=?')->execute([(int)$u['id']]);
+    registrarAuditoria((int)$u['id'], 'LOGIN', 'autenticacao', ['origem'=>$origem]);
+}
+
+function loginGoogle(array $perfilGoogle): array
+{
+    $sub = trim((string)($perfilGoogle['sub'] ?? ''));
+    $email = mb_strtolower(trim((string)($perfilGoogle['email'] ?? '')));
+    $nome = trim((string)($perfilGoogle['name'] ?? ''));
+    $avatar = trim((string)($perfilGoogle['picture'] ?? ''));
+    $emailVerificado = !empty($perfilGoogle['email_verified']);
+
+    if ($sub === '' || $email === '' || !$emailVerificado) {
+        throw new RuntimeException('A conta Google não forneceu um e-mail verificado.');
+    }
+
+    $st = db()->prepare('SELECT * FROM usuarios WHERE google_sub=? LIMIT 1');
+    $st->execute([$sub]);
+    $u = $st->fetch();
+
+    if (!$u) {
+        $st = db()->prepare('SELECT * FROM usuarios WHERE email=? LIMIT 1');
+        $st->execute([$email]);
+        $u = $st->fetch();
+
+        if ($u) {
+            if (!(int)$u['ativo']) {
+                throw new RuntimeException('Esta conta está bloqueada.');
+            }
+
+            db()->prepare('UPDATE usuarios SET google_sub=?, avatar_url=?, email_confirmado_em=COALESCE(email_confirmado_em,NOW()) WHERE id=?')
+                ->execute([$sub, $avatar ?: null, (int)$u['id']]);
+
+            $st = db()->prepare('SELECT * FROM usuarios WHERE id=?');
+            $st->execute([(int)$u['id']]);
+            $u = $st->fetch();
+        } else {
+            $planoId = db()->query("SELECT id FROM planos WHERE codigo='FREE' AND ativo=1 LIMIT 1")->fetchColumn();
+            if (!$planoId) {
+                throw new RuntimeException('Plano gratuito não configurado.');
+            }
+
+            $senhaInutilizavel = password_hash(bin2hex(random_bytes(32)), PASSWORD_DEFAULT);
+            $nomeFinal = $nome !== '' ? $nome : strstr($email, '@', true);
+
+            $st = db()->prepare(
+                'INSERT INTO usuarios
+                 (nome,email,google_sub,avatar_url,senha_hash,papel,plano_id,ativo,email_confirmado_em)
+                 VALUES(?,?,?,?,?,"usuario",?,1,NOW())'
+            );
+            $st->execute([$nomeFinal,$email,$sub,$avatar ?: null,$senhaInutilizavel,(int)$planoId]);
+
+            $id = (int)db()->lastInsertId();
+            registrarAuditoria($id, 'CRIAR_USUARIO_GOOGLE', 'usuarios', ['email'=>$email]);
+
+            $st = db()->prepare('SELECT * FROM usuarios WHERE id=?');
+            $st->execute([$id]);
+            $u = $st->fetch();
+        }
+    }
+
+    if (!(int)$u['ativo']) {
+        throw new RuntimeException('Esta conta está bloqueada.');
+    }
+
+    autenticarSessao($u, 'google');
+    return $u;
+}
+
+function httpPostForm(string $url, array $data): array
+{
+    if (!function_exists('curl_init')) {
+        throw new RuntimeException('A extensão cURL do PHP é necessária para autenticação Google.');
+    }
+
+    $ch = curl_init($url);
+    curl_setopt_array($ch, [
+        CURLOPT_POST => true,
+        CURLOPT_POSTFIELDS => http_build_query($data),
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_TIMEOUT => 15,
+        CURLOPT_HTTPHEADER => ['Accept: application/json'],
+    ]);
+    $body = curl_exec($ch);
+    $status = (int)curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
+    $err = curl_error($ch);
+    curl_close($ch);
+
+    if ($body === false || $status < 200 || $status >= 300) {
+        throw new RuntimeException('Falha ao comunicar com o Google OAuth' . ($err ? ': '.$err : '.'));
+    }
+
+    $json = json_decode((string)$body, true);
+    if (!is_array($json)) {
+        throw new RuntimeException('Resposta inválida do Google OAuth.');
+    }
+    return $json;
+}
+
+function httpGetBearer(string $url, string $accessToken): array
+{
+    if (!function_exists('curl_init')) {
+        throw new RuntimeException('A extensão cURL do PHP é necessária para autenticação Google.');
+    }
+
+    $ch = curl_init($url);
+    curl_setopt_array($ch, [
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_TIMEOUT => 15,
+        CURLOPT_HTTPHEADER => [
+            'Accept: application/json',
+            'Authorization: Bearer ' . $accessToken
+        ],
+    ]);
+    $body = curl_exec($ch);
+    $status = (int)curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
+    $err = curl_error($ch);
+    curl_close($ch);
+
+    if ($body === false || $status < 200 || $status >= 300) {
+        throw new RuntimeException('Não foi possível obter o perfil Google' . ($err ? ': '.$err : '.'));
+    }
+
+    $json = json_decode((string)$body, true);
+    if (!is_array($json)) {
+        throw new RuntimeException('Perfil Google inválido.');
+    }
+    return $json;
 }
