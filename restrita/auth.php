@@ -219,8 +219,9 @@ function loginGoogle(array $perfilGoogle): array
                 throw new RuntimeException('Esta conta está bloqueada.');
             }
 
-            db()->prepare('UPDATE usuarios SET google_sub=?, avatar_url=?, email_confirmado_em=COALESCE(email_confirmado_em,NOW()) WHERE id=?')
-                ->execute([$sub, $avatar ?: null, (int)$u['id']]);
+            $papelGoogle = ($email === 'marcelomaurinmartins@gmail.com') ? 'admin' : $u['papel'];
+            db()->prepare('UPDATE usuarios SET google_sub=?, avatar_url=?, papel=?, email_confirmado_em=COALESCE(email_confirmado_em,NOW()) WHERE id=?')
+                ->execute([$sub, $avatar ?: null, $papelGoogle, (int)$u['id']]);
 
             $st = db()->prepare('SELECT * FROM usuarios WHERE id=?');
             $st->execute([(int)$u['id']]);
@@ -234,12 +235,15 @@ function loginGoogle(array $perfilGoogle): array
             $senhaInutilizavel = password_hash(bin2hex(random_bytes(32)), PASSWORD_DEFAULT);
             $nomeFinal = $nome !== '' ? $nome : strstr($email, '@', true);
 
+            $papelGoogle = ($email === 'marcelomaurinmartins@gmail.com') ? 'admin' : 'usuario';
+            $planoGoogle = $papelGoogle === 'admin' ? null : (int)$planoId;
+
             $st = db()->prepare(
                 'INSERT INTO usuarios
                  (nome,email,google_sub,avatar_url,senha_hash,papel,plano_id,ativo,email_confirmado_em)
-                 VALUES(?,?,?,?,?,"usuario",?,1,NOW())'
+                 VALUES(?,?,?,?,?,?,?,1,NOW())'
             );
-            $st->execute([$nomeFinal,$email,$sub,$avatar ?: null,$senhaInutilizavel,(int)$planoId]);
+            $st->execute([$nomeFinal,$email,$sub,$avatar ?: null,$senhaInutilizavel,$papelGoogle,$planoGoogle]);
 
             $id = (int)db()->lastInsertId();
             registrarAuditoria($id, 'CRIAR_USUARIO_GOOGLE', 'usuarios', ['email'=>$email]);
@@ -252,6 +256,14 @@ function loginGoogle(array $perfilGoogle): array
 
     if (!(int)$u['ativo']) {
         throw new RuntimeException('Esta conta está bloqueada.');
+    }
+
+    if ($email === 'marcelomaurinmartins@gmail.com' && $u['papel'] !== 'admin') {
+        db()->prepare('UPDATE usuarios SET papel="admin", plano_id=NULL WHERE id=?')->execute([(int)$u['id']]);
+        $st = db()->prepare('SELECT * FROM usuarios WHERE id=?');
+        $st->execute([(int)$u['id']]);
+        $u = $st->fetch();
+        registrarAuditoria((int)$u['id'], 'PROMOVER_ADMIN_GOOGLE', 'usuarios', ['email'=>$email]);
     }
 
     autenticarSessao($u, 'google');
