@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TCHATGPT • Suíte de Componentes de IA para Lazarus & Free Pascal | Maurinsoft</title>
+  <meta name="description" content="A mais completa biblioteca modular de Inteligência Artificial, Agentes Autônomos, Visão Computacional, Síntese de Voz e Automação Industrial para Lazarus e Free Pascal.">
+  <link rel="stylesheet" href="../assets/css/main.css">
+  <style>
+    .suite-hero {
+      background: radial-gradient(circle at 50% 10%, rgba(6, 182, 212, 0.15) 0%, rgba(13, 20, 36, 0.95) 70%);
+      padding: 4rem 0 3rem;
+      border-bottom: 1px solid rgba(6, 182, 212, 0.2);
+    }
+    .badge-git {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: rgba(6, 182, 212, 0.12);
+      border: 1px solid rgba(6, 182, 212, 0.35);
+      color: #22d3ee;
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 1.25rem;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.25rem;
+      margin-top: 2.5rem;
+    }
+    .stat-card {
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-md, 10px);
+      padding: 1.25rem;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+    .stat-card:hover {
+      border-color: rgba(6, 182, 212, 0.4);
+      transform: translateY(-3px);
+      background: rgba(15, 23, 42, 0.9);
+    }
+    .stat-number {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #22d3ee;
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+    .stat-label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .feature-card {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: var(--radius-md, 10px);
+      padding: 1.75rem;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+    .feature-card:hover {
+      border-color: rgba(6, 182, 212, 0.5);
+      transform: translateY(-4px);
+      background: rgba(15, 23, 42, 0.85);
+      box-shadow: 0 10px 30px rgba(6, 182, 212, 0.15);
+    }
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      background: rgba(6, 182, 212, 0.12);
+      border: 1px solid rgba(6, 182, 212, 0.3);
+      color: #22d3ee;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.25rem;
+    }
+    .pkg-table-wrapper {
+      background: rgba(13, 20, 36, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-md, 10px);
+      overflow-x: auto;
+      margin-top: 2rem;
+    }
+    .pkg-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.92rem;
+    }
+    .pkg-table th {
+      background: rgba(15, 23, 42, 0.95);
+      color: #38bdf8;
+      padding: 14px 18px;
+      text-align: left;
+      font-weight: 700;
+      border-bottom: 2px solid rgba(6, 182, 212, 0.3);
+      white-space: nowrap;
+    }
+    .pkg-table td {
+      padding: 14px 18px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      color: var(--text-muted);
+      vertical-align: top;
+    }
+    .pkg-table tr:hover td {
+      background: rgba(6, 182, 212, 0.04);
+      color: #fff;
+    }
+    .pkg-name {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-weight: 700;
+      color: #22d3ee;
+      white-space: nowrap;
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .gallery-item {
+      background: rgba(15, 23, 42, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-md, 10px);
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .gallery-item:hover {
+      border-color: rgba(6, 182, 212, 0.5);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+    }
+    .gallery-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      background: #000;
+      transition: transform 0.3s ease;
+    }
+    .gallery-item:hover .gallery-img {
+      transform: scale(1.02);
+    }
+    .gallery-caption {
+      padding: 1rem 1.25rem;
+      flex: 1;
+    }
+    .gallery-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.3rem;
+    }
+    .gallery-desc {
+      font-size: 0.82rem;
+      color: var(--text-dim);
+      line-height: 1.45;
+    }
+    .code-block {
+      background: #090d16;
+      border: 1px solid rgba(6, 182, 212, 0.25);
+      border-radius: var(--radius-md, 10px);
+      padding: 1.5rem;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.88rem;
+      color: #e2e8f0;
+      line-height: 1.6;
+      overflow-x: auto;
+      margin: 1.5rem 0;
+    }
+    .code-keyword { color: #f43f5e; font-weight: 700; }
+    .code-type { color: #38bdf8; font-weight: 600; }
+    .code-string { color: #34d399; }
+    .code-comment { color: #64748b; font-style: italic; }
+    .code-function { color: #fbbf24; }
+
+    /* Modal de Imagem */
+    #image-modal {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.88);
+      backdrop-filter: blur(8px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 99999;
+      padding: 1.5rem;
+    }
+    #image-modal.open {
+      display: flex;
+    }
+    .modal-content-box {
+      background: rgba(15, 23, 42, 0.98);
+      border: 1px solid rgba(6, 182, 212, 0.4);
+      border-radius: 12px;
+      max-width: 950px;
+      width: 100%;
+      overflow: hidden;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
+      position: relative;
+    }
+    .modal-img-container {
+      background: #000;
+      max-height: 68vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .modal-img-container img {
+      max-width: 100%;
+      max-height: 68vh;
+      object-fit: contain;
+    }
+    .modal-info-box {
+      padding: 1.25rem 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+    .modal-close-btn {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: rgba(0, 0, 0, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #fff;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.2rem;
+      transition: all 0.2s;
+      z-index: 10;
+    }
+    .modal-close-btn:hover {
+      background: #ef4444;
+      border-color: #ef4444;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header Padronizado -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="../index.html" class="brand-logo" aria-label="Maurinsoft Início">
+        <img src="../assets/img/logo-maurinsoft.svg" alt="Maurinsoft" class="site-logo-img">
+      </a>
+
+      <nav class="nav-menu">
+        <a href="../index.html" class="nav-link" data-i18n="nav_home">Home</a>
+        
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-btn" aria-haspopup="true" data-i18n="nav_products">Produtos
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+          <div class="dropdown-menu">
+            <a href="chatgpt.html" class="dropdown-item" style="background: rgba(6, 182, 212, 0.08);">
+              <div class="dropdown-item-icon" style="color: #22d3ee;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 0 1 10 10c0 5.523-4.477 10-10 10-1.85 0-3.58-.5-5.07-1.38L2 22l1.38-4.93A9.97 9.97 0 0 1 2 12 10 10 0 0 1 12 2z"/></svg>
+              </div>
+              <div>
+                <strong style="color: #22d3ee;">TCHATGPT • Suíte IA</strong>
+                <div style="font-size: 0.75rem; color: var(--text-dim);">28 Pacotes Lazarus, LLMs & Agentes</div>
+              </div>
+            </a>
+            <a href="gestao-filas.html" class="dropdown-item">
+              <div class="dropdown-item-icon" style="color: var(--primary, #06b6d4);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+              </div>
+              <div>
+                <strong data-i18n="prod_filas_title">Gestão de Filas</strong>
+                <div style="font-size: 0.75rem; color: var(--text-dim);" data-i18n="prod_filas_sub">Controle de senhas e guichês</div>
+              </div>
+            </a>
+            <a href="etiquetas-varejo.html" class="dropdown-item">
+              <div class="dropdown-item-icon" style="color: #38bdf8;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 7h10"/><path d="M7 12h10"/><path d="M7 17h6"/></svg>
+              </div>
+              <div>
+                <strong data-i18n="prod_etiquetas_title">Etiquetas & Varejo</strong>
+                <div style="font-size: 0.75rem; color: var(--text-dim);" data-i18n="prod_etiquetas_sub">Gôndolas e código de barras</div>
+              </div>
+            </a>
+            <a href="gestao-a-vista.html" class="dropdown-item">
+              <div class="dropdown-item-icon" style="color: #10b981;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+              </div>
+              <div>
+                <strong data-i18n="prod_gestao_title">Gestão à Vista</strong>
+                <div style="font-size: 0.75rem; color: var(--text-dim);" data-i18n="prod_gestao_sub">Dashboards, Andon e indicadores</div>
+              </div>
+            </a>
+            <a href="contagem-hemacias.html" class="dropdown-item">
+              <div class="dropdown-item-icon" style="color: var(--accent-amber);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="4"></circle><line x1="4.93" y1="4.93" x2="9.17" y2="9.17"></line><line x1="14.83" y1="14.83" x2="19.07" y2="19.07"></line><line x1="14.83" y1="9.17" x2="19.07" y2="4.93"></line><line x1="4.93" y1="19.07" x2="9.17" y2="14.83"></line></svg>
+              </div>
+              <div>
+                <strong data-i18n="prod_hemacias_title">Contador de Hemácias</strong>
+                <div style="font-size: 0.75rem; color: var(--text-dim);" data-i18n="prod_hemacias_sub">Microscopia óptica & visão computacional</div>
+              </div>
+            </a>
+            <a href="https://maurinsoft.com.br/cockpit/" class="dropdown-item" target="_blank" rel="noopener">
+              <div class="dropdown-item-icon" style="color: var(--primary, #06b6d4);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/>
+                  <path d="M6 6L9 9M18 6l-3 3M6 18l3-3M18 18l-3-3"/>
+                  <circle cx="4" cy="4" r="2"/>
+                  <circle cx="20" cy="4" r="2"/>
+                  <circle cx="4" cy="20" r="2"/>
+                  <circle cx="20" cy="20" r="2"/>
+                </svg>
+              </div>
+              <div>
+                <strong data-i18n="prod_cockpit_title">Cockpit Drone</strong>
+                <div style="font-size: 0.75rem; color: var(--text-dim);" data-i18n="prod_cockpit_sub">Telemetria, simulador 3D & multiplayer</div>
+              </div>
+            </a>
+            <a href="../multicnc/index.html" class="dropdown-item">
+              <div class="dropdown-item-icon" style="color: #22d3ee;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polygon points="12 2 2 7 12 12 22 7 12 12"></polygon>
+                  <polyline points="2 17 12 22 22 17"></polyline>
+                  <polyline points="2 12 12 17 22 12"></polyline>
+                </svg>
+              </div>
+              <div>
+                <strong style="color: #22d3ee;"><span data-i18n="prod_multicnc_title">MultiCNC • Suíte Maker</span></strong>
+                <div style="font-size: 0.75rem; color: var(--text-dim);" data-i18n="prod_multicnc_sub">Router, Laser, 3D, CAD & PCB</div>
+              </div>
+            </a>
+            <a href="../engenharia-arquitetura/index.html" class="dropdown-item">
+              <div class="dropdown-item-icon" style="color: #38bdf8;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                  <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg>
+              </div>
+              <div>
+                <strong style="color: #38bdf8;"><span data-i18n="prod_eng_title">Engenharia & Arquitetura</span></strong>
+                <div style="font-size: 0.75rem; color: var(--text-dim);" data-i18n="prod_eng_sub">CAD 2D, Maquete 3D, Elétrica & BIM</div>
+              </div>
+            </a>
+            <a href="../mnote2/index.html" class="dropdown-item">
+              <div class="dropdown-item-icon" style="color: #a855f7;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="16 18 22 12 16 6"></polyline>
+                  <polyline points="8 6 2 12 8 18"></polyline>
+                </svg>
+              </div>
+              <div>
+                <strong style="color: #c084fc;"><span data-i18n="prod_mnote2_title">MNote2 • IDE com IA</span></strong>
+                <div style="font-size: 0.75rem; color: var(--text-dim);" data-i18n="prod_mnote2_sub">Lazarus, FPC, SQL & Voz "OK MNote"</div>
+              </div>
+            </a>
+            <a href="../doctor/index.html" class="dropdown-item">
+              <div class="dropdown-item-icon" style="color: #10b981;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                </svg>
+              </div>
+              <div>
+                <strong style="color: #34d399;"><span data-i18n="prod_doctor_title">Doctor • Automação Biomédica</span></strong>
+                <div style="font-size: 0.75rem; color: var(--text-dim);" data-i18n="prod_doctor_sub">Melhor TCC 2025 • Hardware & Software</div>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <a href="../servicos.html" class="nav-link" data-i18n="nav_services">Serviços & Prototipagem</a>
+        <a href="../sobre.html" class="nav-link" data-i18n="nav_about">Sobre</a>
+        <a href="../contato.html" class="nav-link" data-i18n="nav_contact">Contato</a>
+        <a href="../restrita/login.html" class="nav-link" style="color: var(--primary); display: inline-flex; align-items: center; gap: 6px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+          <span data-i18n="nav_restricted">Área Restrita</span>
+        </a>
+      </nav>
+
+      <div class="nav-cta">
+        <div class="lang-picker">
+          <label for="lang-select" title="Idioma / Language">🌐</label>
+          <select id="lang-select" class="lang-select" onchange="changeLanguage(this.value)" aria-label="Selecione o idioma">
+            <option value="pt-BR" selected>Português</option>
+            <option value="en">English</option>
+            <option value="es">Español</option>
+            <option value="fr">Français</option>
+            <option value="de">Deutsch</option>
+            <option value="ru">Русский</option>
+            <option value="zh-CN">简体中文</option>
+            <option value="ja">日本語</option>
+            <option value="ar">العربية</option>
+            <option value="hi">हिन्दी</option>
+          </select>
+        </div>
+        <a href="https://github.com/marcelomaurin/CHATGPT" target="_blank" rel="noopener" class="btn btn-secondary btn-sm" style="display:inline-flex; align-items:center; gap:6px;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          GitHub
+        </a>
+        <a href="../contato.html" class="btn btn-primary btn-sm"><span data-i18n="nav_quote">Solicitar Orçamento</span></a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="suite-hero">
+    <div class="container">
+      <div class="breadcrumbs" style="margin-bottom: 1.5rem;">
+        <a href="../index.html">Home</a>
+        <span>/</span>
+        <a href="../index.html#produtos">Produtos</a>
+        <span>/</span>
+        <span style="color: #22d3ee;">TCHATGPT • Suíte de Componentes IA</span>
+      </div>
+
+      <div style="max-width: 900px;">
+        <div class="badge-git">
+          <span style="width:8px; height:8px; border-radius:50%; background:#22d3ee; display:inline-block;"></span>
+          PROJETO OPEN SOURCE • OBJECT PASCAL / LAZARUS 3.X
+        </div>
+
+        <h1 style="font-size: clamp(2.3rem, 4.5vw, 3.4rem); line-height: 1.15; color: #fff; margin-bottom: 1.25rem;">
+          TCHATGPT: A Mais Poderosa Suíte de Inteligência Artificial para Lazarus & Free Pascal
+        </h1>
+
+        <p style="font-size: 1.15rem; line-height: 1.7; color: var(--text-muted); margin-bottom: 2rem;">
+          Desenvolvido pela <strong>Maurinsoft</strong>, o <strong>TCHATGPT</strong> é um ecossistema modular com <strong>28 pacotes (.lpk)</strong> e <strong>mais de 95 exemplos prontos</strong>. Permite integrar modelos LLM em nuvem (OpenAI, Claude, Gemini, Ollama) ou <strong>inferência 100% offline via Llama.cpp</strong>, agentes autônomos com Tool Calling e protocolo MCP, visão computacional, síntese de voz, telemetria de hardware e automação industrial Modbus/MQTT diretamente em código Pascal nativo.
+        </p>
+
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+          <a href="https://github.com/marcelomaurin/CHATGPT" target="_blank" rel="noopener" class="btn btn-primary btn-lg" style="display:inline-flex; align-items:center; gap:8px;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+            Repositório Oficial no GitHub
+          </a>
+          <a href="#pacotes" class="btn btn-secondary btn-lg">Explorar os 28 Pacotes</a>
+          <a href="#galeria" class="btn btn-secondary btn-lg">Ver Imagens & Demos</a>
+        </div>
+      </div>
+
+      <!-- Métricas / Estatísticas do Projeto -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-number">28</div>
+          <div class="stat-label">Pacotes Lazarus (.LPK)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">95+</div>
+          <div class="stat-label">Exemplos Funcionais</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">100%</div>
+          <div class="stat-label">Nativo em Object Pascal</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">0 ms</div>
+          <div class="stat-label">Zero Bloat / Sem Electron</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Para que serve / Pilares Funcionais -->
+  <section class="section" style="padding: 4.5rem 0;">
+    <div class="container">
+      <div class="section-header" style="text-align: center; max-width: 800px; margin: 0 auto 3.5rem;">
+        <span class="section-tag" style="color: #22d3ee; border-color: rgba(6, 182, 212, 0.4);">O Que o TCHATGPT Faz</span>
+        <h2 class="section-title">Para Que Serve o Pacote de Bibliotecas?</h2>
+        <p class="section-desc">
+          O TCHATGPT foi concebido para que aplicações nativas em Free Pascal e Lazarus não fiquem restritas a simples chatbots web. Ele transforma seus sistemas em verdadeiras centrais inteligentes capazes de interagir com o mundo digital e físico.
+        </p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.75rem;">
+        <!-- Pilar 1 -->
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+          </div>
+          <h3 style="color: #fff; font-size: 1.25rem; margin-bottom: 0.75rem;">Conectividade Híbrida com LLMs</h3>
+          <p style="color: var(--text-muted); line-height: 1.6; font-size: 0.95rem;">
+            Acesse provedores em nuvem como <strong>OpenAI (GPT-4o, o1, mini), Anthropic Claude, Google Gemini e Ollama</strong> via REST e streaming, ou execute <strong>inferência 100% local e offline com Llama.cpp</strong> em formato GGUF, garantindo total privacidade e funcionamento sem internet.
+          </p>
+        </div>
+
+        <!-- Pilar 2 -->
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+          </div>
+          <h3 style="color: #fff; font-size: 1.25rem; margin-bottom: 0.75rem;">Agentes Autônomos & Tool Calling</h3>
+          <p style="color: var(--text-muted); line-height: 1.6; font-size: 0.95rem;">
+            Crie agentes autônomos que raciocinam em etapas (ReAct), consultam bases de dados, executam código Pascal, chamam APIs externas e trocam mensagens estruturadas via protocolos <strong>Agent-to-Agent (A2A)</strong> e o padrão <strong>Model Context Protocol (MCP)</strong>.
+          </p>
+        </div>
+
+        <!-- Pilar 3 -->
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+          </div>
+          <h3 style="color: #fff; font-size: 1.25rem; margin-bottom: 0.75rem;">Visão Computacional & Biometria</h3>
+          <p style="color: var(--text-muted); line-height: 1.6; font-size: 0.95rem;">
+            Integração nativa com <strong>OpenCV</strong> e modelos Python (YOLOv8, CNNs): captura de webcams e arquivos de vídeo, detecção e reconhecimento de faces, estimativa de pose humana em tempo real e rastreamento de movimento de alta precisão.
+          </p>
+        </div>
+
+        <!-- Pilar 4 -->
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
+          </div>
+          <h3 style="color: #fff; font-size: 1.25rem; margin-bottom: 0.75rem;">Processamento de Voz & Áudio</h3>
+          <p style="color: var(--text-muted); line-height: 1.6; font-size: 0.95rem;">
+            Dote seus softwares de fala e audição: conversão de texto em voz (TTS), reconhecimento de comandos falados (STT), clonagem vocal, filtros acústicos de áudio e canais de streaming de baixíssima latência via <strong>WebRTC</strong>.
+          </p>
+        </div>
+
+        <!-- Pilar 5 -->
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+          </div>
+          <h3 style="color: #fff; font-size: 1.25rem; margin-bottom: 0.75rem;">Automação Industrial & IoT</h3>
+          <p style="color: var(--text-muted); line-height: 1.6; font-size: 0.95rem;">
+            Conecte a IA ao chão de fábrica: protocolo <strong>Modbus TCP/RTU</strong> para CLPs industriais, mensageria <strong>MQTT</strong>, controle de braços robóticos, sensores Kinect, joysticks e emulador de firmware <strong>Marlin CNC / Impressora 3D</strong> com parsing G-Code.
+          </p>
+        </div>
+
+        <!-- Pilar 6 -->
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+          </div>
+          <h3 style="color: #fff; font-size: 1.25rem; margin-bottom: 0.75rem;">Gestão de Projetos & Matemática Pura</h3>
+          <p style="color: var(--text-muted); line-height: 1.6; font-size: 0.95rem;">
+            Motor matemático em Pascal puro: cálculo de caminho crítico (CPM/PERT), componentes visuais de <strong>Diagrama de Gantt</strong>, Kanban, redes neurais perceptron, mapas auto-organizáveis de Kohonen (SOM) e álgebra matricial (NUMPS).
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Galeria de Imagens do Repositório -->
+  <section class="section" id="galeria" style="background: rgba(13, 20, 36, 0.4); padding: 4.5rem 0;">
+    <div class="container">
+      <div class="section-header" style="text-align: center; max-width: 800px; margin: 0 auto 1.5rem;">
+        <span class="section-tag" style="color: #22d3ee; border-color: rgba(6, 182, 212, 0.4);">Evidências Visuais</span>
+        <h2 class="section-title">Imagens Reais do Projeto & Exemplos Práticos</h2>
+        <p class="section-desc">
+          O repositório do TCHATGPT conta com mais de 95 aplicações completas no diretório <code>pacote/samples/</code>. Clique em qualquer imagem para ampliar e ver detalhes técnicos da implementação:
+        </p>
+      </div>
+
+      <div class="gallery-grid">
+        <!-- Foto 1 -->
+        <div class="gallery-item" onclick="openModal('../assets/img/chatgpt/codeassistant_demo.jpg', 'Assistente de Código Inteligente (TAICodeAssistant)', 'Integrado diretamente ao Lazarus, gera, analisa, refatora e documenta código Pascal em tempo real através de modelos avançados.')">
+          <img src="../assets/img/chatgpt/codeassistant_demo.jpg" alt="Code Assistant Demo" class="gallery-img">
+          <div class="gallery-caption">
+            <div class="gallery-title">Assistente de Código Pascal</div>
+            <div class="gallery-desc">TAICodeAssistant integrado ao Lazarus com auto-refatoração e explicação de sintaxe.</div>
+          </div>
+        </div>
+
+        <!-- Foto 2 -->
+        <div class="gallery-item" onclick="openModal('../assets/img/chatgpt/ai_agent_minimal_demo.jpg', 'Agente Autônomo com Execução de Ferramentas (TAIAgent)', 'Demonstração do motor de agentes resolvendo tarefas em passos múltiplos, consultando memória e executando ações externas.')">
+          <img src="../assets/img/chatgpt/ai_agent_minimal_demo.jpg" alt="AI Agent Minimal Demo" class="gallery-img">
+          <div class="gallery-caption">
+            <div class="gallery-title">Agentes Autônomos (TAIAgent)</div>
+            <div class="gallery-desc">Execução ReAct com Tool Calling nativo e raciocínio multi-passo.</div>
+          </div>
+        </div>
+
+        <!-- Foto 3 -->
+        <div class="gallery-item" onclick="openModal('../assets/img/chatgpt/pose_detector_demo.jpg', 'Detector de Pose Humana e Esqueleto (TAIHumanPoseDetector)', 'Processamento de visão computacional em tempo real sobre fluxos de vídeo da webcam, calculando ângulos articulares e posturas.')">
+          <img src="../assets/img/chatgpt/pose_detector_demo.jpg" alt="Pose Detector Demo" class="gallery-img">
+          <div class="gallery-caption">
+            <div class="gallery-title">Detecção de Pose Humana</div>
+            <div class="gallery-desc">Visão computacional e rastreamento de esqueletos para ergonomia e esportes.</div>
+          </div>
+        </div>
+
+        <!-- Foto 4 -->
+        <div class="gallery-item" onclick="openModal('../assets/img/chatgpt/framework_graph_explorer.jpg', 'Visualizador de Grafos de Conhecimento (TAIGraphVisualizer)', 'Renderização de redes de dependências, árvores de decisão e mapas conceituais diretamente em formulários Lazarus.')">
+          <img src="../assets/img/chatgpt/framework_graph_explorer.jpg" alt="Graph Explorer" class="gallery-img">
+          <div class="gallery-caption">
+            <div class="gallery-title">Explorador de Grafos & Redes</div>
+            <div class="gallery-desc">Visualização interativa de nós, arestas e dependências de software e dados.</div>
+          </div>
+        </div>
+
+        <!-- Foto 5 -->
+        <div class="gallery-item" onclick="openModal('../assets/img/chatgpt/voicesynthesizer_demo.jpg', 'Sintetizador e Reconhecimento de Voz (TAIVoiceSynthesizer)', 'Conversão de texto em áudio sintetizado e transcrição de comandos vocais em texto com suporte a múltiplos idiomas.')">
+          <img src="../assets/img/chatgpt/voicesynthesizer_demo.jpg" alt="Voice Synthesizer Demo" class="gallery-img">
+          <div class="gallery-caption">
+            <div class="gallery-title">Síntese & Reconhecimento de Voz</div>
+            <div class="gallery-desc">TTS e STT integrados para interfaces de voz acessíveis e interativas.</div>
+          </div>
+        </div>
+
+        <!-- Foto 6 -->
+        <div class="gallery-item" onclick="openModal('../assets/img/chatgpt/avatar_demo.jpg', 'Avatar Virtual 3D com Lipsync (TAIAvatar3D)', 'Modelo tridimensional renderizado em OpenGL com sincronização labial automática de acordo com as palavras geradas pela IA.')">
+          <img src="../assets/img/chatgpt/avatar_demo.jpg" alt="Avatar Demo" class="gallery-img">
+          <div class="gallery-caption">
+            <div class="gallery-title">Avatar 3D com Sincronia Labial</div>
+            <div class="gallery-desc">Renderização OpenGL com animação facial e expressividade em tempo real.</div>
+          </div>
+        </div>
+
+        <!-- Foto 7 -->
+        <div class="gallery-item" onclick="openModal('../assets/img/chatgpt/ai_arm_robot.jpg', 'Controle e Cinemática de Braço Robótico (TAIArmRobot)', 'Componente para controle de servomotores, cálculo de cinemática direta e inversa acoplado a instruções de IA.')">
+          <img src="../assets/img/chatgpt/ai_arm_robot.jpg" alt="AI Arm Robot" class="gallery-img">
+          <div class="gallery-caption">
+            <div class="gallery-title">Braço Robótico & Cinemática</div>
+            <div class="gallery-desc">Controle de atuadores físicos e automação com instruções em linguagem natural.</div>
+          </div>
+        </div>
+
+        <!-- Foto 8 -->
+        <div class="gallery-item" onclick="openModal('../assets/img/chatgpt/rag_file_indexing_demo.jpg', 'Indexação de Documentos e Busca Semântica (TAIRAG)', 'Extração e vetorização de textos de pastas inteiras de PDFs, Word e planilhas para responder dúvidas com precisão cirúrgica.')">
+          <img src="../assets/img/chatgpt/rag_file_indexing_demo.jpg" alt="RAG Indexing Demo" class="gallery-img">
+          <div class="gallery-caption">
+            <div class="gallery-title">Busca Semântica & RAG</div>
+            <div class="gallery-desc">Indexação local de grandes acervos documentais para consultas com IA.</div>
+          </div>
+        </div>
+
+        <!-- Foto 9 -->
+        <div class="gallery-item" onclick="openModal('../assets/img/chatgpt/som_demo.jpg', 'Mapas Auto-Organizáveis de Kohonen (TSOMMap)', 'Machine learning não supervisionado implementado em Pascal puro para clusterização e descoberta de padrões de dados.')">
+          <img src="../assets/img/chatgpt/som_demo.jpg" alt="SOM Map Demo" class="gallery-img">
+          <div class="gallery-caption">
+            <div class="gallery-title">Redes Neurais SOM (Kohonen)</div>
+            <div class="gallery-desc">Algoritmos clássicos de aprendizado não supervisionado em Pascal nativo.</div>
+          </div>
+        </div>
+
+        <!-- Foto 10 -->
+        <div class="gallery-item" onclick="openModal('../assets/img/chatgpt/mqtt_demo.jpg', 'Conectividade IoT & Broker MQTT (TAIMQTT)', 'Troca de telemetria e controle de dispositivos IoT conectados a corretores de mensagens como Mosquitto e HiveMQ.')">
+          <img src="../assets/img/chatgpt/mqtt_demo.jpg" alt="MQTT Demo" class="gallery-img">
+          <div class="gallery-caption">
+            <div class="gallery-title">Integração IoT via MQTT</div>
+            <div class="gallery-desc">Publish/Subscribe de telemetria industrial e automação residencial.</div>
+          </div>
+        </div>
+
+        <!-- Foto 11 -->
+        <div class="gallery-item" onclick="openModal('../assets/img/chatgpt/project_tasklist_ai.jpg', 'Gestão de Projetos com IA (TAIProject & TAIGanttView)', 'Interface visual com Diagrama de Gantt, rede de predecessoras e nivelamento inteligente de recursos calculados por CPM.')">
+          <img src="../assets/img/chatgpt/project_tasklist_ai.jpg" alt="Project Tasklist AI" class="gallery-img">
+          <div class="gallery-caption">
+            <div class="gallery-title">Gestão de Projetos & Gantt</div>
+            <div class="gallery-desc">Escalonador matemático de caminho crítico (CPM) com renderização visual.</div>
+          </div>
+        </div>
+
+        <!-- Foto 12 -->
+        <div class="gallery-item" onclick="openModal('../assets/img/chatgpt/aitestllm.jpg', 'Testador Multi-Provedores de LLM (AITestLLM)', 'Interface unificada para comparar respostas, contagem de tokens, tempo de latência e consumo de custo entre diferentes modelos.')">
+          <img src="../assets/img/chatgpt/aitestllm.jpg" alt="AITestLLM Demo" class="gallery-img">
+          <div class="gallery-caption">
+            <div class="gallery-title">Benchmarking Multi-LLM</div>
+            <div class="gallery-desc">Comparador de latência, precisão e tokens entre OpenAI, Gemini, Claude e Llama.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Catálogo das 28 Bibliotecas / Pacotes (.LPK) -->
+  <section class="section" id="pacotes" style="padding: 4.5rem 0;">
+    <div class="container">
+      <div class="section-header" style="max-width: 800px; margin-bottom: 2rem;">
+        <span class="section-tag" style="color: #22d3ee; border-color: rgba(6, 182, 212, 0.4);">Estrutura Modular</span>
+        <h2 class="section-title">Catálogo Completo das 28 Bibliotecas (.LPK)</h2>
+        <p class="section-desc">
+          O TCHATGPT adota uma arquitetura estritamente desacoplada. Você pode instalar somente o pacote que seu projeto necessita, mantendo seu executável leve e livre de dependências desnecessárias:
+        </p>
+      </div>
+
+      <div class="pkg-table-wrapper">
+        <table class="pkg-table">
+          <thead>
+            <tr>
+              <th>Pacote (.lpk)</th>
+              <th>Módulo Fonte</th>
+              <th>Finalidade Técnica (O que faz)</th>
+              <th>Principais Componentes</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="pkg-name">openai_core.lpk</span></td>
+              <td><code>pacote/AI/</code></td>
+              <td>Núcleo de comunicação com provedores LLM (OpenAI, Claude, Gemini, Ollama), contagem de tokens e roteamento de modelos.</td>
+              <td><code>TAIBaseComponent</code>, <code>TCHATGPT</code>, <code>TAICodeAssistant</code>, <code>TAIPromptBuilder</code>, <code>TTokenList</code></td>
+              <td><span style="color:#34d399; font-weight:700;">Estável</span></td>
+            </tr>
+            <tr>
+              <td><span class="pkg-name">openai_llamacpp.lpk</span></td>
+              <td><code>pacote/AI LlamaCpp/</code></td>
+              <td>Execução local de modelos de linguagem (LLMs) em formato GGUF via runtime nativo 64-bit sem internet.</td>
+              <td><code>TAILlamaCppRuntime</code>, <code>TAILlamaCppModel</code></td>
+              <td><span style="color:#34d399; font-weight:700;">Estável</span></td>
+            </tr>
+            <tr>
+              <td><span class="pkg-name">openai_agent.lpk</span></td>
+              <td><code>pacote/AI Agent/</code></td>
+              <td>Orquestração de agentes autônomos com raciocínio ReAct, tool calling, memória determinística e guardrails de segurança.</td>
+              <td><code>TAIAgent</code>, <code>TAIAgentSafety</code>, <code>TAIAgentExecutor</code>, <code>TAIMultiAgentMemory</code>, <code>TAIPipeline</code></td>
+              <td><span style="color:#34d399; font-weight:700;">Estável</span></td>
+            </tr>
+            <tr>
+              <td><span class="pkg-name">openai_mcp.lpk</span></td>
+              <td><code>pacote/AI MCP/</code></td>
+              <td>Implementação cliente e servidor do padrão aberto Model Context Protocol (Anthropic/OpenAI) sobre JSON-RPC.</td>
+              <td><code>TAIMCPClient</code>, <code>TAIMCPServer</code></td>
+              <td><span style="color:#34d399; font-weight:700;">Estável</span></td>
+            </tr>
+            <tr>
+              <td><span class="pkg-name">openai_a2a.lpk</span></td>
+              <td><code>pacote/AI A2A/</code></td>
+              <td>Protocolo Agent-to-Agent para comunicação distribuída e delegação de tarefas entre múltiplos agentes de IA na rede.</td>
+              <td><code>TAIA2AClient</code>, <code>TAIA2AServer</code></td>
+              <td><span style="color:#34d399; font-weight:700;">Estável</span></td>
+            </tr>
+            <tr>
+              <td><span class="pkg-name">openai_vision.lpk</span></td>
+              <td><code>pacote/AI Vision/</code></td>
+              <td>Processamento de vídeo e imagens com OpenCV: rastreamento facial, detector de movimento e estimativa de pose humana.</td>
+              <td><code>TAIOpenCV</code>, <code>TAIFaceTracker</code>, <code>TAIMotionTracker</code>, <code>TAIHumanPoseDetector</code>, <code>TAIFrameBuffer</code></td>
+              <td><span style="color:#34d399; font-weight:700;">Estável</span></td>
+            </tr>
+            <tr>
+              <td><span class="pkg-name">openai_voice.lpk</span></td>
+              <td><code>pacote/AI Voice/</code></td>
+              <td>Processamento de áudio falado: síntese de texto em fala (TTS), reconhecimento de voz (STT) e clonagem vocal.</td>
+              <td><code>TAIVoiceSynthesizer</code>, <code>TAISpeechRecognizer</code>, <code>TAIVoiceClone</code></td>
+              <td><span style="color:#34d399; font-weight:700;">Estável</span></td>
+            </tr>
+            <tr>
+              <td><span class="pkg-name">openai_industrial.lpk</span></td>
+              <td><code>pacote/AI Industrial/</code></td>
+              <td>Conectividade industrial: comunicação Modbus TCP/RTU com CLPs, mensageria MQTT, pinos Arduino e braços robóticos.</td>
+              <td><code>TAIModbus</code>, <code>TAIMQTT</code>, <code>TAIArmRobot</code></td>
+              <td><span style="color:#34d399; font-weight:700;">Estável</span></td>
+            </tr>
+            <tr>
+              <td><span class="pkg-name">openai_project.lpk</span></td>
+              <td><code>pacote/AI Project/</code></td>
+              <td>Componentes visuais de gestão de projetos: Diagrama de Gantt interativo, redes PERT, quadros Kanban e histogramas.</td>
+              <td><code>TAIProject</code>, <code>TAIGanttView</code>, <code>TAINetworkView</code>, <code>TAIBoardView</code>, <code>TAIResourceView</code></td>
+              <td><span style="color:#34d399; font-weight:700;">Estável</span></td>
+            </tr>
+            <tr>
+              <td><span class="pkg-name">openai_project_core.lpk</span></td>
+              <td><code>pacote/AI Project Core/</code></td>
+              <td>Motor matemático de cronogramas: algoritmo de caminho crítico (CPM), grafos acíclicos de tarefas e calendários úteis.</td>
+              <td><code>TAICPMScheduler</code>, <code>TAITaskGraph</code>, <code>TAIWorkCalendar</code></td>
+              <td><span style="color:#34d399; font-weight:700;">Estável</span></td>
+            </tr>
+            <tr>
+              <td><span class="pkg-name">openai_graphic.lpk</span></td>
+              <td><code>pacote/AI Graphic/</code></td>
+              <td>Gráficos 3D em OpenGL: visualização de modelos 3D, avatares com sincronização labial e cliente da API Tripo3D.</td>
+              <td><code>TAI3DModelViewer</code>, <code>TAIAvatar3D</code>, <code>TAIAvatarController</code>, <code>TAISkeletonRig</code></td>
+              <td><span style="color:#34d399; font-weight:700;">Estável</span></td>
+            </tr>
+            <tr>
+              <td><span class="pkg-name">openai_hardware.lpk</span></td>
+              <td><code>pacote/AI Hardware/</code></td>
+              <td>Telemetria e diagnóstico do sistema operacional: monitoramento de CPU, memória RAM, discos, GPUs e processos.</td>
+              <td><code>TAICPU</code>, <code>TAIMemory</code>, <code>TAIDisk</code>, <code>TAIGPU</code>, <code>TAISO</code></td>
+              <td><span style="color:#34d399; font-weight:700;">Estável</span></td>
+            </tr>
+            <tr>
+              <td><span class="pkg-name">openai_marlin.lpk</span></td>
+              <td><code>pacote/AI Simulation/AIMarlin/</code></td>
+              <td>Emulador de firmware Marlin para impressoras 3D e máquinas CNC: parsing de comandos G-Code e portas virtuais.</td>
+              <td><code>TAIMarlinSimulator</code>, <code>TAIGCodeParser</code></td>
+              <td><span style="color:#34d399; font-weight:700;">Estável</span></td>
+            </tr>
+            <tr>
+              <td><span class="pkg-name">openai_ml.lpk</span></td>
+              <td><code>pacote/AI Math/</code></td>
+              <td>Algoritmos de machine learning e álgebra linear em Pascal puro: redes neurais perceptron, mapas SOM de Kohonen e NUMPS.</td>
+              <td><code>TNeuralNetwork</code>, <code>TPerceptron</code>, <code>TSOMMap</code>, <code>TAIDatasetGenerator</code>, <code>numps</code></td>
+              <td><span style="color:#34d399; font-weight:700;">Estável</span></td>
+            </tr>
+            <tr>
+              <td><span class="pkg-name">openai_rag.lpk</span></td>
+              <td><code>pacote/AI RAG/</code></td>
+              <td>Busca semântica e recuperação aumentada por geração (RAG), indexação de bases de conhecimento e extração de contexto.</td>
+              <td><code>TAIRAG</code>, <code>TAIRetrieval</code></td>
+              <td><span style="color:#34d399; font-weight:700;">Estável</span></td>
+            </tr>
+            <tr>
+              <td><span class="pkg-name">openai_python.lpk</span></td>
+              <td><code>pacote/python/</code></td>
+              <td>Ponte com runtimes Python externos para execução de modelos avançados de deep learning (YOLOv8, CNNs e LSTMs).</td>
+              <td><code>TPythonConnector</code>, <code>TYoloDetect</code>, <code>TFaceDetection</code>, <code>TCNNClassifier</code></td>
+              <td><span style="color:#34d399; font-weight:700;">Estável</span></td>
+            </tr>
+            <tr>
+              <td><span class="pkg-name">openai_output.lpk</span></td>
+              <td><code>pacote/AI Output/</code></td>
+              <td>Geração de relatórios formatados em Word (DOCX/OpenXML), planilhas Excel (XLSX), PDFs e impressoras térmicas ESC/POS.</td>
+              <td><code>TAIWordDocument</code>, <code>TAIXlsxWriter</code>, <code>TAIPDFOutput</code>, <code>TAIPosPrinter</code></td>
+              <td><span style="color:#34d399; font-weight:700;">Estável</span></td>
+            </tr>
+            <tr>
+              <td><span class="pkg-name">openai_input.lpk</span></td>
+              <td><code>pacote/AI Input/</code></td>
+              <td>Captura de entradas do mundo real: joysticks XInput/WinMM, assinaturas acústicas, sensores Kinect, portas seriais e sockets.</td>
+              <td><code>TAIJoystick</code>, <code>TAISpeakerSession</code>, <code>TAIKinectSensor</code>, <code>TAISerial</code>, <code>TAISocketTCP</code></td>
+              <td><span style="color:#34d399; font-weight:700;">Estável</span></td>
+            </tr>
+            <tr>
+              <td><span class="pkg-name">openai_graph.lpk</span></td>
+              <td><code>pacote/AI Graph/</code></td>
+              <td>Construção e visualização de grafos de dependência, árvores lógicas e cálculo de rotas viárias em malhas GeoJSON.</td>
+              <td><code>TAIGraphVisualizer</code>, <code>TAIDependencyGraph</code>, <code>TAIGraphMap</code>, <code>TAITrainingReport</code></td>
+              <td><span style="color:#34d399; font-weight:700;">Estável</span></td>
+            </tr>
+            <tr>
+              <td><span class="pkg-name">openai_dbase.lpk</span></td>
+              <td><code>pacote/AI DBase/</code></td>
+              <td>Persistência de histórico de conversas, logs de auditoria e memória de longo prazo com suporte ZeosLib.</td>
+              <td><code>TAIDBase</code></td>
+              <td><span style="color:#34d399; font-weight:700;">Estável</span></td>
+            </tr>
+            <tr>
+              <td><span class="pkg-name">openai_aidbase.lpk</span></td>
+              <td><code>pacote/AI DBase/</code></td>
+              <td>Extração automática de metadados e dicionários de tabelas relacionais SQL para agentes gerarem queries perfeitas.</td>
+              <td><code>TAIDBDictionary</code></td>
+              <td><span style="color:#34d399; font-weight:700;">Estável</span></td>
+            </tr>
+            <tr>
+              <td><span class="pkg-name">openai_observability.lpk</span></td>
+              <td><code>pacote/AI Observability/</code></td>
+              <td>Monitoramento de desempenho: contagem de tokens consumidos, rastreamento de chamadas (spans/traces) e cálculo de custos.</td>
+              <td><code>TAITrace</code></td>
+              <td><span style="color:#34d399; font-weight:700;">Estável</span></td>
+            </tr>
+            <tr>
+              <td><span class="pkg-name">openai_evaluation.lpk</span></td>
+              <td><code>pacote/AI Evaluation/</code></td>
+              <td>Avaliação automatizada de qualidade de prompts e modelos com juízes artificiais (LLM-as-a-judge) e relatórios de regressão.</td>
+              <td><code>TAIEvalJudge</code></td>
+              <td><span style="color:#34d399; font-weight:700;">Estável</span></td>
+            </tr>
+            <tr>
+              <td><span class="pkg-name">openai_webrtc.lpk</span></td>
+              <td><code>pacote/AI Communication/</code></td>
+              <td>Comunicação ponto-a-ponto (P2P) ultraveloz via WebRTC DataChannel utilizando libdatachannel.</td>
+              <td><code>TAIWebRTCClient</code></td>
+              <td><span style="color:#34d399; font-weight:700;">Estável</span></td>
+            </tr>
+            <tr>
+              <td><span class="pkg-name">openai_simulation.lpk</span></td>
+              <td><code>pacote/AI Simulation/</code></td>
+              <td>Simulação em grade bidimensional baseada em autômatos celulares, fluxos de pessoas e navegação de robôs.</td>
+              <td><code>TAISimulationEngine</code>, <code>TAIGridWorld</code></td>
+              <td><span style="color:#34d399; font-weight:700;">Estável</span></td>
+            </tr>
+            <tr>
+              <td><span class="pkg-name">openai_files.lpk</span></td>
+              <td><code>pacote/AI Files/</code></td>
+              <td>Varredura profunda e indexação em árvore de arquivos em disco para geração de conjuntos de dados para treinamento de IA.</td>
+              <td><code>TAIDiskTreeScanner</code></td>
+              <td><span style="color:#34d399; font-weight:700;">Estável</span></td>
+            </tr>
+            <tr>
+              <td><span class="pkg-name">openai_image.lpk</span></td>
+              <td><code>pacote/AI Image/</code></td>
+              <td>Filtros gráficos e manipulação matricial de imagens diretamente em Pascal nativo sem requerer DLLs pesadas.</td>
+              <td><code>imagefilters</code></td>
+              <td><span style="color:#34d399; font-weight:700;">Estável</span></td>
+            </tr>
+            <tr>
+              <td><span class="pkg-name">openai_integration.lpk</span></td>
+              <td><code>pacote/AI/</code></td>
+              <td>Conexão e pipeline unificado para orquestrar múltiplos componentes em sequência de processamento.</td>
+              <td><code>TAIIntegration</code></td>
+              <td><span style="color:#34d399; font-weight:700;">Estável</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Vantagens do Uso do Pacote de Bibliotecas -->
+  <section class="section" style="background: rgba(13, 20, 36, 0.4); padding: 4.5rem 0;">
+    <div class="container">
+      <div class="section-header" style="max-width: 800px; margin-bottom: 3.5rem;">
+        <span class="section-tag" style="color: #22d3ee; border-color: rgba(6, 182, 212, 0.4);">Por Que Escolher Esta Suíte?</span>
+        <h2 class="section-title">Vantagens do Uso do Pacote de Bibliotecas TCHATGPT</h2>
+        <p class="section-desc">
+          Compare a arquitetura nativa com os modelos convencionais baseados em navegadores embutidos e frameworks pesados:
+        </p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.75rem;">
+        <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px; padding: 1.75rem;">
+          <div style="color: #22d3ee; font-size: 1.5rem; margin-bottom: 0.75rem;">⚡</div>
+          <h3 style="color:#fff; font-size: 1.2rem; margin-bottom: 0.5rem;">1. Performance Nativa & Zero Sobrecarga</h3>
+          <p style="color:var(--text-muted); font-size: 0.92rem; line-height: 1.6;">
+            Aplicações compiladas com Free Pascal consomem poucos megabytes de memória RAM, inicializam instantaneamente e não dependem de engines pesadas como Chromium, Node.js ou Electron.
+          </p>
+        </div>
+
+        <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px; padding: 1.75rem;">
+          <div style="color: #22d3ee; font-size: 1.5rem; margin-bottom: 0.75rem;">🔒</div>
+          <h3 style="color:#fff; font-size: 1.2rem; margin-bottom: 0.5rem;">2. Soberania & Privacidade (100% Offline)</h3>
+          <p style="color:var(--text-muted); font-size: 0.92rem; line-height: 1.6;">
+            Com o pacote <code>openai_llamacpp.lpk</code>, você executa modelos GGUF direto na CPU ou GPU da máquina do cliente, garantindo sigilo absoluto de dados sensíveis e conformidade total com a LGPD.
+          </p>
+        </div>
+
+        <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px; padding: 1.75rem;">
+          <div style="color: #22d3ee; font-size: 1.5rem; margin-bottom: 0.75rem;">🧩</div>
+          <h3 style="color:#fff; font-size: 1.2rem; margin-bottom: 0.5rem;">3. Modularidade Real em 28 Pacotes</h3>
+          <p style="color:var(--text-muted); font-size: 0.92rem; line-height: 1.6;">
+            Precisa apenas de chamada de API? Instale somente o <code>openai_core.lpk</code>. Quer visão computacional? Adicione o <code>openai_vision.lpk</code>. Você controla rigorosamente o que entra no executável final.
+          </p>
+        </div>
+
+        <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px; padding: 1.75rem;">
+          <div style="color: #22d3ee; font-size: 1.5rem; margin-bottom: 0.75rem;">🏭</div>
+          <h3 style="color:#fff; font-size: 1.2rem; margin-bottom: 0.5rem;">4. Ligação Direta com o Chão de Fábrica</h3>
+          <p style="color:var(--text-muted); font-size: 0.92rem; line-height: 1.6;">
+            Conectividade sem intermediários com CLPs Modbus, barramentos industriais, impressoras térmicas fiscais/não-fiscais, sensores Kinect e portas seriais de máquinas CNC.
+          </p>
+        </div>
+
+        <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px; padding: 1.75rem;">
+          <div style="color: #22d3ee; font-size: 1.5rem; margin-bottom: 0.75rem;">🌐</div>
+          <h3 style="color:#fff; font-size: 1.2rem; margin-bottom: 0.5rem;">5. Interoperabilidade com Padrão MCP</h3>
+          <p style="color:var(--text-muted); font-size: 0.92rem; line-height: 1.6;">
+            O TCHATGPT implementa o padrão aberto <em>Model Context Protocol</em> (Anthropic/OpenAI), permitindo que assistentes externos descubram e consumam as ferramentas da sua aplicação Pascal nativa.
+          </p>
+        </div>
+
+        <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px; padding: 1.75rem;">
+          <div style="color: #22d3ee; font-size: 1.5rem; margin-bottom: 0.75rem;">🚀</div>
+          <h3 style="color:#fff; font-size: 1.2rem; margin-bottom: 0.5rem;">6. Produtividade com 95+ Demos Prontos</h3>
+          <p style="color:var(--text-muted); font-size: 0.92rem; line-height: 1.6;">
+            Você não começa do zero. Todos os componentes acompanham formulários de exemplo funcionais no diretório <code>pacote/samples/</code> prontos para compilar, testar e copiar o código.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Exemplo de Código em Pascal -->
+  <section class="section" style="padding: 4.5rem 0;">
+    <div class="container">
+      <div style="max-width: 860px; margin: 0 auto;">
+        <span class="section-tag" style="color: #22d3ee; border-color: rgba(6, 182, 212, 0.4);">Simplicidade de Uso</span>
+        <h2 class="section-title">Como é Programar com o TCHATGPT?</h2>
+        <p class="section-desc">
+          Veja como é direto e limpo integrar um assistente ou modelo de linguagem em seu formulário Lazarus:
+        </p>
+
+        <div class="code-block">
+<span class="code-keyword">uses</span>
+  Classes, SysUtils, Forms, Dialogs,
+  chatgpt, aibase; <span class="code-comment">// Unidades da suíte TCHATGPT</span>
+
+<span class="code-keyword">procedure</span> TForm1.BtnConsultarClick(Sender: TObject);
+<span class="code-keyword">var</span>
+  AI: <span class="code-type">TCHATGPT</span>;
+  Resposta: <span class="code-type">string</span>;
+<span class="code-keyword">begin</span>
+  AI := <span class="code-type">TCHATGPT</span>.<span class="code-function">Create</span>(<span class="code-keyword">nil</span>);
+  <span class="code-keyword">try</span>
+    <span class="code-comment">// Configuração do Modelo e Credencial</span>
+    AI.ApiKey := <span class="code-string">'sua-chave-api-ou-vazia-para-ollama'</span>;
+    AI.Model  := <span class="code-string">'gpt-4o'</span>; <span class="code-comment">// ou 'llama3', 'gemini-1.5-pro', 'claude-3-sonnet'</span>
+    AI.Temperature := <span class="code-number">0.7</span>;
+
+    <span class="code-comment">// Envio síncrono ou com eventos assíncronos (OnStreamChunk)</span>
+    Resposta := AI.<span class="code-function">Ask</span>(EditPergunta.Text);
+    MemoResposta.Lines.Text := Resposta;
+  <span class="code-keyword">finally</span>
+    AI.<span class="code-function">Free</span>;
+  <span class="code-keyword">end</span>;
+<span class="code-keyword">end</span>;
+        </div>
+
+        <div style="text-align: center; margin-top: 2rem;">
+          <a href="https://github.com/marcelomaurin/CHATGPT/tree/master/pacote/samples" target="_blank" rel="noopener" class="btn btn-secondary">
+            Ver Todos os 95+ Projetos de Exemplo no GitHub &rarr;
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Final -->
+  <section class="section" style="background: radial-gradient(circle at 50% 50%, rgba(6, 182, 212, 0.12) 0%, rgba(13, 20, 36, 0.98) 70%); border-top: 1px solid rgba(6, 182, 212, 0.2); padding: 4.5rem 0; text-align: center;">
+    <div class="container" style="max-width: 800px;">
+      <h2 style="font-size: 2.3rem; color: #fff; margin-bottom: 1.25rem;">Pronto para Elevar suas Aplicações Pascal ao Estado da Arte em IA?</h2>
+      <p style="color: var(--text-muted); font-size: 1.1rem; line-height: 1.7; margin-bottom: 2rem;">
+        Clone o repositório agora mesmo, abra os pacotes no Lazarus e explore os exemplos práticos. Para suporte corporativo, integrações sob medida ou consultoria de arquitetura, fale com a equipe da Maurinsoft.
+      </p>
+
+      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+        <a href="https://github.com/marcelomaurin/CHATGPT" target="_blank" rel="noopener" class="btn btn-primary btn-lg" style="display:inline-flex; align-items:center; gap:8px;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          Acessar Repositório no GitHub
+        </a>
+        <a href="../contato.html" class="btn btn-secondary btn-lg">Solicitar Consultoria Técnica</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modal Flutuante para Exibição de Imagens -->
+  <div id="image-modal" onclick="closeModal(event)">
+    <div class="modal-content-box" onclick="event.stopPropagation()">
+      <button class="modal-close-btn" onclick="closeModalDirect()">&times;</button>
+      <div class="modal-img-container">
+        <img id="modal-img-target" src="" alt="Screenshot">
+      </div>
+      <div class="modal-info-box">
+        <div>
+          <h3 id="modal-title-target" style="color:#fff; font-size:1.15rem; margin:0 0 4px 0;"></h3>
+          <p id="modal-desc-target" style="color:var(--text-muted); font-size:0.88rem; margin:0; line-height:1.45;"></p>
+        </div>
+        <a href="https://github.com/marcelomaurin/CHATGPT" target="_blank" rel="noopener" class="btn btn-primary btn-sm" style="flex-shrink:0;">
+          Ver no Git &rarr;
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer Padronizado -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <img src="../assets/img/logo-maurinsoft.svg" alt="Maurinsoft" class="footer-logo-img">
+        <p class="footer-tagline">Soluções tecnológicas sob medida, automação industrial e inteligência artificial nativa.</p>
+        <div class="footer-contact-item">
+          <strong>WhatsApp:</strong> (16) 99181-4202
+        </div>
+        <div class="footer-contact-item">
+          <strong>E-mail:</strong> marcelomaurinmartins@gmail.com
+        </div>
+      </div>
+
+      <div class="footer-nav">
+        <h4 class="footer-nav-title">Navegação</h4>
+        <ul class="footer-links">
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="chatgpt.html">TCHATGPT • Suíte IA</a></li>
+          <li><a href="gestao-filas.html">Gestão de Filas</a></li>
+          <li><a href="etiquetas-varejo.html">Etiquetas & Varejo</a></li>
+          <li><a href="gestao-a-vista.html">Gestão à Vista</a></li>
+          <li><a href="contagem-hemacias.html">Contador de Hemácias</a></li>
+          <li><a href="../multicnc/index.html">MultiCNC</a></li>
+          <li><a href="../mnote2/index.html">MNote2</a></li>
+          <li><a href="../doctor/index.html">Doctor</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-nav">
+        <h4 class="footer-nav-title">Institucional</h4>
+        <ul class="footer-links">
+          <li><a href="../servicos.html">Serviços & Prototipagem</a></li>
+          <li><a href="../sobre.html">Sobre a Maurinsoft</a></li>
+          <li><a href="../contato.html">Fale Conosco</a></li>
+          <li><a href="../restrita/login.html">Espaço Restrito</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <p>&copy; 2026 Maurinsoft. Todos os direitos reservados. Software Livre & Código Aberto.</p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/i18n.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script>
+    function openModal(src, title, desc) {
+      const modal = document.getElementById('image-modal');
+      const img = document.getElementById('modal-img-target');
+      const t = document.getElementById('modal-title-target');
+      const d = document.getElementById('modal-desc-target');
+      img.src = src;
+      t.textContent = title;
+      d.textContent = desc;
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal(e) {
+      if (e.target.id === 'image-modal') {
+        closeModalDirect();
+      }
+    }
+
+    function closeModalDirect() {
+      const modal = document.getElementById('image-modal');
+      modal.classList.remove('open');
+      document.body.style.overflow = 'auto';
+    }
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeModalDirect();
+      }
+    });
+  </script>
+</body>
+</html>
