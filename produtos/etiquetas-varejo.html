@@ -17,7 +17,7 @@
       </a>
 
       <nav class="nav-menu">
-        <a href="index.html" class="nav-link" data-i18n="nav_home">Home</a>
+        <a href="../index.html" class="nav-link" data-i18n="nav_home">Home</a>
         
         <div class="nav-dropdown">
           <button class="nav-dropdown-btn" aria-haspopup="true" data-i18n="nav_products">Produtos
@@ -27,33 +27,39 @@
           </button>
           <div class="dropdown-menu">
             <a href="gestao-filas.html" class="dropdown-item">
-              <div class="dropdown-item-icon">
+              <div class="dropdown-item-icon" style="color: var(--primary, #06b6d4);">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
               </div>
               <div>
                 <strong data-i18n="prod_filas_title">Gestão de Filas</strong>
-                <div style="font-size: 0.75rem; color: var(--text-dim);">Controle de senhas e guichês</div>
+                <div style="font-size: 0.75rem; color: var(--text-dim);" data-i18n="prod_filas_sub">Controle de senhas e guichês</div>
               </div>
             </a>
             <a href="etiquetas-varejo.html" class="dropdown-item">
-              <div class="dropdown-item-icon">
+              <div class="dropdown-item-icon" style="color: #38bdf8;">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 7h10"/><path d="M7 12h10"/><path d="M7 17h6"/></svg>
               </div>
               <div>
                 <strong data-i18n="prod_etiquetas_title">Etiquetas & Varejo</strong>
-                <div style="font-size: 0.75rem; color: var(--text-dim);">Gôndolas e código de barras</div>
+                <div style="font-size: 0.75rem; color: var(--text-dim);" data-i18n="prod_etiquetas_sub">Gôndolas e código de barras</div>
               </div>
             </a>
             <a href="gestao-a-vista.html" class="dropdown-item">
-              <div class="dropdown-item-icon">
+              <div class="dropdown-item-icon" style="color: #10b981;">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
-                          <a href="contagem-hemacias.html" class="dropdown-item">
+              </div>
+              <div>
+                <strong data-i18n="prod_gestao_title">Gestão à Vista</strong>
+                <div style="font-size: 0.75rem; color: var(--text-dim);" data-i18n="prod_gestao_sub">Dashboards, Andon e indicadores</div>
+              </div>
+            </a>
+            <a href="contagem-hemacias.html" class="dropdown-item">
               <div class="dropdown-item-icon" style="color: var(--accent-amber);">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="4"></circle><line x1="4.93" y1="4.93" x2="9.17" y2="9.17"></line><line x1="14.83" y1="14.83" x2="19.07" y2="19.07"></line><line x1="14.83" y1="9.17" x2="19.07" y2="4.93"></line><line x1="4.93" y1="19.07" x2="9.17" y2="14.83"></line></svg>
               </div>
               <div>
-                <strong>Contador de Hemácias <span style="font-size: 0.68rem; color: var(--accent-amber); font-weight: 700; border: 1px solid rgba(245, 158, 11, 0.4); padding: 1px 4px; border-radius: 4px; margin-left: 2px;">PROTÓTIPO</span></strong>
-                <div style="font-size: 0.75rem; color: var(--text-dim);">Microscopia óptica & visão computacional</div>
+                <strong data-i18n="prod_hemacias_title">Contador de Hemácias</strong>
+                <div style="font-size: 0.75rem; color: var(--text-dim);" data-i18n="prod_hemacias_sub">Microscopia óptica & visão computacional</div>
               </div>
             </a>
             <a href="https://maurinsoft.com.br/cockpit/" class="dropdown-item" target="_blank" rel="noopener">
@@ -69,7 +75,7 @@
               </div>
               <div>
                 <strong data-i18n="prod_cockpit_title">Cockpit Drone</strong>
-                <div style="font-size: 0.75rem; color: var(--text-dim);">Telemetria, simulador 3D & multiplayer</div>
+                <div style="font-size: 0.75rem; color: var(--text-dim);" data-i18n="prod_cockpit_sub">Telemetria, simulador 3D & multiplayer</div>
               </div>
             </a>
             <a href="../multicnc/index.html" class="dropdown-item">
@@ -82,7 +88,7 @@
               </div>
               <div>
                 <strong style="color: #22d3ee;"><span data-i18n="prod_multicnc_title">MultiCNC • Suíte Maker</span></strong>
-                <div style="font-size: 0.75rem; color: var(--text-dim);">Router, Laser, 3D, CAD & PCB</div>
+                <div style="font-size: 0.75rem; color: var(--text-dim);" data-i18n="prod_multicnc_sub">Router, Laser, 3D, CAD & PCB</div>
               </div>
             </a>
             <a href="../engenharia-arquitetura/index.html" class="dropdown-item">
@@ -94,7 +100,7 @@
               </div>
               <div>
                 <strong style="color: #38bdf8;"><span data-i18n="prod_eng_title">Engenharia & Arquitetura</span></strong>
-                <div style="font-size: 0.75rem; color: var(--text-dim);">CAD 2D, Maquete 3D, Elétrica & BIM</div>
+                <div style="font-size: 0.75rem; color: var(--text-dim);" data-i18n="prod_eng_sub">CAD 2D, Maquete 3D, Elétrica & BIM</div>
               </div>
             </a>
             <a href="../mnote2/index.html" class="dropdown-item">
@@ -120,50 +126,16 @@
                 <div style="font-size: 0.75rem; color: var(--text-dim);" data-i18n="prod_doctor_sub">Melhor TCC 2025 • Hardware & Software</div>
               </div>
             </a>
-
-
-          </div>
-              <div>
-                <strong data-i18n="prod_gestao_title">Gestão à Vista</strong>
-                <div style="font-size: 0.75rem; color: var(--text-dim);">Dashboards e indicadores            <a href="contagem-hemacias.html" class="dropdown-item">
-              <div class="dropdown-item-icon" style="color: var(--accent-amber);">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="4"></circle><line x1="4.93" y1="4.93" x2="9.17" y2="9.17"></line><line x1="14.83" y1="14.83" x2="19.07" y2="19.07"></line><line x1="14.83" y1="9.17" x2="19.07" y2="4.93"></line><line x1="4.93" y1="19.07" x2="9.17" y2="14.83"></line></svg>
-              </div>
-              <div>
-                <strong>Contador de Hemácias <span style="font-size: 0.68rem; color: var(--accent-amber); font-weight: 700; border: 1px solid rgba(245, 158, 11, 0.4); padding: 1px 4px; border-radius: 4px; margin-left: 2px;">PROTÓTIPO</span></strong>
-                <div style="font-size: 0.75rem; color: var(--text-dim);">Microscopia óptica & visão computacional</div>
-              </div>
-            </a>
-          </div>
-                          <a href="contagem-hemacias.html" class="dropdown-item">
-              <div class="dropdown-item-icon" style="color: var(--accent-amber);">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="4"></circle><line x1="4.93" y1="4.93" x2="9.17" y2="9.17"></line><line x1="14.83" y1="14.83" x2="19.07" y2="19.07"></line><line x1="14.83" y1="9.17" x2="19.07" y2="4.93"></line><line x1="4.93" y1="19.07" x2="9.17" y2="14.83"></line></svg>
-              </div>
-              <div>
-                <strong>Contador de Hemácias <span style="font-size: 0.68rem; color: var(--accent-amber); font-weight: 700; border: 1px solid rgba(245, 158, 11, 0.4); padding: 1px 4px; border-radius: 4px; margin-left: 2px;">PROTÓTIPO</span></strong>
-                <div style="font-size: 0.75rem; color: var(--text-dim);">Microscopia óptica & visão computacional</div>
-              </div>
-            </a>
-          </div>
-            </a>
-                      <a href="contagem-hemacias.html" class="dropdown-item">
-              <div class="dropdown-item-icon" style="color: var(--accent-amber);">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="4"></circle><line x1="4.93" y1="4.93" x2="9.17" y2="9.17"></line><line x1="14.83" y1="14.83" x2="19.07" y2="19.07"></line><line x1="14.83" y1="9.17" x2="19.07" y2="4.93"></line><line x1="4.93" y1="19.07" x2="9.17" y2="14.83"></line></svg>
-              </div>
-              <div>
-                <strong>Contador de Hemácias <span style="font-size: 0.68rem; color: var(--accent-amber); font-weight: 700; border: 1px solid rgba(245, 158, 11, 0.4); padding: 1px 4px; border-radius: 4px; margin-left: 2px;">PROTÓTIPO</span></strong>
-                <div style="font-size: 0.75rem; color: var(--text-dim);">Microscopia óptica & visão computacional</div>
-              </div>
-            </a>
           </div>
         </div>
 
-        <a href="servicos.html" class="nav-link" data-i18n="nav_services">Serviços & Prototipagem</a>
-        <a href="sobre.html" class="nav-link" data-i18n="nav_about">Sobre</a>
-        <a href="contato.html" class="nav-link" data-i18n="nav_contact">Contato</a>
+        <a href="../servicos.html" class="nav-link" data-i18n="nav_services">Serviços & Prototipagem</a>
+        <a href="../sobre.html" class="nav-link" data-i18n="nav_about">Sobre</a>
+        <a href="../contato.html" class="nav-link" data-i18n="nav_contact">Contato</a>
         <a href="../restrita/login.html" class="nav-link" style="color: var(--primary); display: inline-flex; align-items: center; gap: 6px;">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-          <span data-i18n="nav_restricted">Área Restrita</span></a>
+          <span data-i18n="nav_restricted">Área Restrita</span>
+        </a>
       </nav>
 
       <div class="nav-cta">
@@ -184,7 +156,8 @@
         </div>
         <a href="../restrita/login.html" class="btn btn-secondary btn-sm" style="display: inline-flex; align-items: center; gap: 6px;">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-          <span data-i18n="nav_restricted">Área Restrita</span></a>
+          <span data-i18n="nav_restricted">Área Restrita</span>
+        </a>
         <a href="../contato.html" class="btn btn-primary btn-sm"><span data-i18n="nav_quote">Solicitar Orçamento</span></a>
         <button class="hamburger" aria-label="Abrir menu mobile">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -357,56 +330,48 @@
 
   <!-- Footer -->
   <footer class="site-footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <a href="../index.html" class="brand-logo" style="margin-bottom: 1.25rem;" aria-label="Maurinsoft Início">
-            <img src="../assets/img/logo-maurinsoft.svg" alt="Maurinsoft" class="site-logo-img" style="height: 40px;">
-          </a>
-          <p>
-            Soluções completas em automação para comércio, etiquetas de gôndola, gestão de filas e prototipagem de hardware.
-          </p>
-        </div>
-
-        <div class="footer-col">
-          <h4>Produtos</h4>
-          <div class="footer-links">
-            <a href="gestao-filas.html">Sistema de Gestão de Fila</a>
-            <a href="etiquetas-varejo.html">Etiquetas de Gôndola & Varejo</a>
-            <a href="gestao-a-vista.html">Gestão à Vista & Dashboards</a>
-                      <a href="https://maurinsoft.com.br/cockpit/" target="_blank" rel="noopener" style="color: var(--primary);">Cockpit Drone (Simulador 3D) &rarr;</a>
-            <a href="../multicnc/index.html" style="color: #22d3ee; font-weight: 600;">MultiCNC • Suíte Maker &rarr;</a>
-            <a href="../engenharia-arquitetura/index.html" style="color: #38bdf8; font-weight: 600;">Engenharia & Arquitetura &rarr;</a>
-
-</div>
-        </div>
-
-        <div class="footer-col">
-          <h4>Especialidades</h4>
-          <div class="footer-links">
-            <a href="../servicos.html#comercio">Automação Comercial</a>
-            <a href="../servicos.html#prototipagem">Prototipagem de Hardware</a>
-            <a href="../servicos.html#biomedicos">Sistemas Biomédicos</a>
-            <a href="../restrita/login.html" style="color: var(--primary); font-weight: 600;">Área Restrita (Serviços) &rarr;</a>
-            <a href="../sobre.html">Sobre a Empresa</a>
-          </div>
-        </div>
-
-        <div class="footer-col">
-          <h4>Contato Direto</h4>
-          <div class="footer-links">
-            <a href="https://wa.me/5516981434112" target="_blank" style="color: var(--primary);">
-              WhatsApp: (16) 98143-4112
-            </a>
-            <a href="mailto:marcelomaurinmartins@gmail.com">marcelomaurinmartins@gmail.com</a>
-            <a href="../contato.html">Formulário de Contato</a>
-          </div>
-        </div>
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a href="../index.html" class="footer-logo">
+          <img src="../assets/img/logo-maurinsoft.svg" alt="Maurinsoft" class="footer-logo-img">
+        </a>
+        <p class="footer-desc" data-i18n="footer_desc">
+          Engenharia de software especializada em prototipagem de equipamentos, sistemas biomédicos e automação industrial de missão crítica.
+        </p>
       </div>
 
-      <div class="footer-bottom">
-        <div>&copy; 2026 Maurinsoft - Todos os direitos reservados.</div>
-        <div>Tecnologia Nacional Acessível e Inovadora</div>
+      <div class="footer-links">
+        <h4 data-i18n="footer_products_title">Produtos</h4>
+        <a href="gestao-filas.html" data-i18n="prod_filas_title">Gestão de Filas</a>
+        <a href="etiquetas-varejo.html" data-i18n="prod_etiquetas_title">Etiquetas & Varejo</a>
+        <a href="gestao-a-vista.html" data-i18n="prod_gestao_title">Gestão à Vista</a>
+        <a href="contagem-hemacias.html" data-i18n="prod_hemacias_title">Contador de Hemácias</a>
+        <a href="https://maurinsoft.com.br/cockpit/" target="_blank" rel="noopener" data-i18n="prod_cockpit_title">Cockpit Drone</a>
+        <a href="../multicnc/index.html" data-i18n="prod_multicnc_title">MultiCNC • Suíte Maker</a>
+        <a href="../engenharia-arquitetura/index.html" data-i18n="prod_eng_title">Engenharia & Arquitetura</a>
+        <a href="../mnote2/index.html" data-i18n="prod_mnote2_title">MNote2 • IDE com IA</a>
+        <a href="../doctor/index.html" data-i18n="prod_doctor_title">Doctor • Automação Biomédica</a>
+      </div>
+
+      <div class="footer-links">
+        <h4 data-i18n="footer_links_title">Links Rápidos</h4>
+        <a href="../servicos.html" data-i18n="nav_services">Serviços & Prototipagem</a>
+        <a href="../sobre.html" data-i18n="nav_about">Sobre</a>
+        <a href="../contato.html" data-i18n="nav_contact">Contato</a>
+        <a href="../restrita/login.html" data-i18n="nav_restricted">Área Restrita</a>
+      </div>
+
+      <div class="footer-contact">
+        <h4 data-i18n="footer_contact_title">Contato</h4>
+        <p>Jardinópolis - SP • Brasil</p>
+        <p>E-mail: marcelomaurinmartins@gmail.com</p>
+        <p>WhatsApp: (16) 98143-4112</p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container" style="text-align: center;">
+        <p data-i18n="footer_copy">&copy; 2026 Maurinsoft Soluções em Tecnologia. Todos os direitos reservados.</p>
       </div>
     </div>
   </footer>

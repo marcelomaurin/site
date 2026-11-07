@@ -14,46 +14,86 @@
 
   <!-- Site Header -->
   <header class="site-header">
-    <div class="header-container">
-      <a href="../index.html" class="brand-logo" aria-label="Maurinsoft Home">
-        <img src="../assets/img/logo-maurinsoft.svg" alt="Maurinsoft - Tecnologia Acessível" class="brand-img">
+    <div class="container nav-container">
+      <a href="../index.html" class="brand-logo" aria-label="Maurinsoft Início">
+        <img src="../assets/img/logo-maurinsoft.svg" alt="Maurinsoft" class="site-logo-img">
       </a>
 
-      <nav class="nav-menu" aria-label="Navegação Principal">
-        <a href="../index.html" class="nav-link">Início</a>
-        <a href="../sobre.html" class="nav-link">Sobre Nós</a>
-        <a href="servicos.html" class="nav-link" data-i18n="nav_services">Serviços & Prototipagem</a>
+      <nav class="nav-menu">
+        <a href="../index.html" class="nav-link" data-i18n="nav_home">Home</a>
         
         <div class="nav-dropdown">
-          <button class="nav-link nav-dropdown-btn active">
-            Produtos & Soluções
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+          <button class="nav-dropdown-btn" aria-haspopup="true" data-i18n="nav_products">Produtos
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
           </button>
-          <div class="dropdown-content">
+          <div class="dropdown-menu">
             <a href="gestao-filas.html" class="dropdown-item">
-              <strong data-i18n="prod_filas_title">Gestão de Filas</strong>
-              <span>Totens, Guichê & Painel TV</span>
+              <div class="dropdown-item-icon" style="color: var(--primary, #06b6d4);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+              </div>
+              <div>
+                <strong data-i18n="prod_filas_title">Gestão de Filas</strong>
+                <div style="font-size: 0.75rem; color: var(--text-dim);" data-i18n="prod_filas_sub">Controle de senhas e guichês</div>
+              </div>
             </a>
             <a href="etiquetas-varejo.html" class="dropdown-item">
-              <strong>Etiquetas de Gôndola</strong>
-              <span>Impressão ZPL & Automação</span>
+              <div class="dropdown-item-icon" style="color: #38bdf8;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 7h10"/><path d="M7 12h10"/><path d="M7 17h6"/></svg>
+              </div>
+              <div>
+                <strong data-i18n="prod_etiquetas_title">Etiquetas & Varejo</strong>
+                <div style="font-size: 0.75rem; color: var(--text-dim);" data-i18n="prod_etiquetas_sub">Gôndolas e código de barras</div>
+              </div>
             </a>
             <a href="gestao-a-vista.html" class="dropdown-item">
-              <strong data-i18n="prod_gestao_title">Gestão à Vista</strong>
-              <span>Dashboards & Andon TV</span>
+              <div class="dropdown-item-icon" style="color: #10b981;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+              </div>
+              <div>
+                <strong data-i18n="prod_gestao_title">Gestão à Vista</strong>
+                <div style="font-size: 0.75rem; color: var(--text-dim);" data-i18n="prod_gestao_sub">Dashboards, Andon e indicadores</div>
+              </div>
             </a>
             <a href="contagem-hemacias.html" class="dropdown-item">
-              <strong>Contador de Hemácias <span style="font-size:0.7rem; color:var(--accent-amber); font-weight:700;">(Protótipo)</span></strong>
-              <span>Visão Computacional & P&D</span>
+              <div class="dropdown-item-icon" style="color: var(--accent-amber);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="4"></circle><line x1="4.93" y1="4.93" x2="9.17" y2="9.17"></line><line x1="14.83" y1="14.83" x2="19.07" y2="19.07"></line><line x1="14.83" y1="9.17" x2="19.07" y2="4.93"></line><line x1="4.93" y1="19.07" x2="9.17" y2="14.83"></line></svg>
+              </div>
+              <div>
+                <strong data-i18n="prod_hemacias_title">Contador de Hemácias</strong>
+                <div style="font-size: 0.75rem; color: var(--text-dim);" data-i18n="prod_hemacias_sub">Microscopia óptica & visão computacional</div>
+              </div>
             </a>
-              <a href="https://maurinsoft.com.br/cockpit/" class="dropdown-item" target="_blank" rel="noopener">
+            <a href="https://maurinsoft.com.br/cockpit/" class="dropdown-item" target="_blank" rel="noopener">
+              <div class="dropdown-item-icon" style="color: var(--primary, #06b6d4);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/>
+                  <path d="M6 6L9 9M18 6l-3 3M6 18l3-3M18 18l-3-3"/>
+                  <circle cx="4" cy="4" r="2"/>
+                  <circle cx="20" cy="4" r="2"/>
+                  <circle cx="4" cy="20" r="2"/>
+                  <circle cx="20" cy="20" r="2"/>
+                </svg>
+              </div>
+              <div>
                 <strong data-i18n="prod_cockpit_title">Cockpit Drone</strong>
-                <span>Telemetria, Simulador 3D & Multiplayer</span>
-              </a>
-              <a href="../multicnc/index.html" class="dropdown-item">
+                <div style="font-size: 0.75rem; color: var(--text-dim);" data-i18n="prod_cockpit_sub">Telemetria, simulador 3D & multiplayer</div>
+              </div>
+            </a>
+            <a href="../multicnc/index.html" class="dropdown-item">
+              <div class="dropdown-item-icon" style="color: #22d3ee;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                  <polyline points="2 17 12 22 22 17"></polyline>
+                  <polyline points="2 12 12 17 22 12"></polyline>
+                </svg>
+              </div>
+              <div>
                 <strong style="color: #22d3ee;"><span data-i18n="prod_multicnc_title">MultiCNC • Suíte Maker</span></strong>
-                <span>Router, Laser, 3D, CAD & PCB</span>
-              </a>
+                <div style="font-size: 0.75rem; color: var(--text-dim);" data-i18n="prod_multicnc_sub">Router, Laser, 3D, CAD & PCB</div>
+              </div>
+            </a>
             <a href="../engenharia-arquitetura/index.html" class="dropdown-item">
               <div class="dropdown-item-icon" style="color: #38bdf8;">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -63,7 +103,7 @@
               </div>
               <div>
                 <strong style="color: #38bdf8;"><span data-i18n="prod_eng_title">Engenharia & Arquitetura</span></strong>
-                <div style="font-size: 0.75rem; color: var(--text-dim);">CAD 2D, Maquete 3D, Elétrica & BIM</div>
+                <div style="font-size: 0.75rem; color: var(--text-dim);" data-i18n="prod_eng_sub">CAD 2D, Maquete 3D, Elétrica & BIM</div>
               </div>
             </a>
             <a href="../mnote2/index.html" class="dropdown-item">
@@ -89,17 +129,20 @@
                 <div style="font-size: 0.75rem; color: var(--text-dim);" data-i18n="prod_doctor_sub">Melhor TCC 2025 • Hardware & Software</div>
               </div>
             </a>
-
-
           </div>
         </div>
 
-        <a href="../restrita/index.html" class="nav-link" style="color: var(--primary-light);"><span data-i18n="nav_restricted">Área Restrita</span></a>
-        <a href="contato.html" class="nav-link" data-i18n="nav_contact">Contato</a>
+        <a href="../servicos.html" class="nav-link" data-i18n="nav_services">Serviços & Prototipagem</a>
+        <a href="../sobre.html" class="nav-link" data-i18n="nav_about">Sobre</a>
+        <a href="../contato.html" class="nav-link" data-i18n="nav_contact">Contato</a>
+        <a href="../restrita/login.html" class="nav-link" style="color: var(--primary); display: inline-flex; align-items: center; gap: 6px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+          <span data-i18n="nav_restricted">Área Restrita</span>
+        </a>
       </nav>
 
-      <div class="header-actions">
-                <div class="lang-picker">
+      <div class="nav-cta">
+        <div class="lang-picker">
           <label for="lang-select" title="Idioma / Language">🌐</label>
           <select id="lang-select" class="lang-select" onchange="changeLanguage(this.value)" aria-label="Selecione o idioma">
             <option value="pt-BR" selected>Português</option>
@@ -114,10 +157,17 @@
             <option value="hi">हिन्दी</option>
           </select>
         </div>
-        <a href="../restrita/login.html" class="btn btn-secondary btn-sm" style="margin-right: 8px;"><span data-i18n="nav_restricted">Área Restrita</span></a>
-        <a href="../contato.html" class="btn btn-primary btn-sm nav-cta">Fale com Engenharia</a>
-        <button class="hamburger" aria-label="Abrir Menu">
-          <span></span><span></span><span></span>
+        <a href="../restrita/login.html" class="btn btn-secondary btn-sm" style="display: inline-flex; align-items: center; gap: 6px;">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+          <span data-i18n="nav_restricted">Área Restrita</span>
+        </a>
+        <a href="../contato.html" class="btn btn-primary btn-sm"><span data-i18n="nav_quote">Solicitar Orçamento</span></a>
+        <button class="hamburger" aria-label="Abrir menu mobile">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
         </button>
       </div>
     </div>
@@ -424,67 +474,47 @@
   <!-- Site Footer -->
   <footer class="site-footer">
     <div class="container footer-grid">
-      <div class="footer-col footer-about">
-        <a href="../index.html" class="brand-logo" aria-label="Maurinsoft Home" style="margin-bottom: 1rem; display: inline-block;">
-          <img src="../assets/img/logo-maurinsoft.svg" alt="Maurinsoft" class="brand-img">
+      <div class="footer-brand">
+        <a href="../index.html" class="footer-logo">
+          <img src="../assets/img/logo-maurinsoft.svg" alt="Maurinsoft" class="footer-logo-img">
         </a>
-        <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; margin-bottom: 1.25rem;">
-          Engenharia de software especializada em prototipagem de equipamentos, sistemas biomédicos e automação comercial para o varejo.
+        <p class="footer-desc" data-i18n="footer_desc">
+          Engenharia de software especializada em prototipagem de equipamentos, sistemas biomédicos e automação industrial de missão crítica.
         </p>
-        <div style="color: var(--text-dim); font-size: 0.85rem;">
-          Jardinópolis - SP • Atendimento em todo o Brasil
-        </div>
       </div>
 
-      <div class="footer-col">
-        <h4 class="footer-title">Soluções & Produtos</h4>
-        <ul class="footer-links">
-          <li><a href="gestao-filas.html">Sistema de Gestão de Filas</a></li>
-          <li><a href="etiquetas-varejo.html">Etiquetas de Gôndola & Varejo</a></li>
-          <li>
-            </li>
-          <li><a href="gestao-a-vista.html">Gestão à Vista & Andon TV</a></li>
-          <li><a href="contagem-hemacias.html" style="color: var(--accent-amber);">Contador de Hemácias (Protótipo)</a></li>
-                    <li><a href="https://maurinsoft.com.br/cockpit/" target="_blank" rel="noopener" style="color: var(--primary);">Cockpit Drone (Simulador 3D)</a></li>
-            <li><a href="../multicnc/index.html" style="color: #22d3ee; font-weight: 600;">MultiCNC • Suíte Maker</a>
-            <a href="../engenharia-arquitetura/index.html" style="color: #38bdf8; font-weight: 600;">Engenharia & Arquitetura &rarr;</a></li>
-</ul>
+      <div class="footer-links">
+        <h4 data-i18n="footer_products_title">Produtos</h4>
+        <a href="gestao-filas.html" data-i18n="prod_filas_title">Gestão de Filas</a>
+        <a href="etiquetas-varejo.html" data-i18n="prod_etiquetas_title">Etiquetas & Varejo</a>
+        <a href="gestao-a-vista.html" data-i18n="prod_gestao_title">Gestão à Vista</a>
+        <a href="contagem-hemacias.html" data-i18n="prod_hemacias_title">Contador de Hemácias</a>
+        <a href="https://maurinsoft.com.br/cockpit/" target="_blank" rel="noopener" data-i18n="prod_cockpit_title">Cockpit Drone</a>
+        <a href="../multicnc/index.html" data-i18n="prod_multicnc_title">MultiCNC • Suíte Maker</a>
+        <a href="../engenharia-arquitetura/index.html" data-i18n="prod_eng_title">Engenharia & Arquitetura</a>
+        <a href="../mnote2/index.html" data-i18n="prod_mnote2_title">MNote2 • IDE com IA</a>
+        <a href="../doctor/index.html" data-i18n="prod_doctor_title">Doctor • Automação Biomédica</a>
       </div>
 
-      <div class="footer-col">
-        <h4 class="footer-title">Institucional</h4>
-        <ul class="footer-links">
-          <li><a href="../sobre.html">Sobre a Maurinsoft</a></li>
-          <li><a href="../servicos.html">Metodologia de Prototipagem</a></li>
-          <li><a href="../restrita/index.html" style="color: var(--primary-light);">Área Restrita (Serviços)</a></li>
-          <li><a href="../contato.html">Contato & Orçamentos</a></li>
-          <li><a href="https://github.com/marcelomaurin" target="_blank" rel="noopener noreferrer">GitHub Oficial</a></li>
-        </ul>
+      <div class="footer-links">
+        <h4 data-i18n="footer_links_title">Links Rápidos</h4>
+        <a href="../servicos.html" data-i18n="nav_services">Serviços & Prototipagem</a>
+        <a href="../sobre.html" data-i18n="nav_about">Sobre</a>
+        <a href="../contato.html" data-i18n="nav_contact">Contato</a>
+        <a href="../restrita/login.html" data-i18n="nav_restricted">Área Restrita</a>
       </div>
 
-      <div class="footer-col">
-        <h4 class="footer-title">Contato Direto</h4>
-        <ul class="footer-contact">
-          <li>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-            <a href="https://wa.me/5516981434112" target="_blank">(16) 98143-4112</a>
-          </li>
-          <li>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            <a href="mailto:marcelomaurinmartins@gmail.com">marcelomaurinmartins@gmail.com</a>
-          </li>
-          <li>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            <span>Seg - Sex: 08:00 às 18:00</span>
-          </li>
-        </ul>
+      <div class="footer-contact">
+        <h4 data-i18n="footer_contact_title">Contato</h4>
+        <p>Jardinópolis - SP • Brasil</p>
+        <p>E-mail: marcelomaurinmartins@gmail.com</p>
+        <p>WhatsApp: (16) 98143-4112</p>
       </div>
     </div>
 
     <div class="footer-bottom">
-      <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
-        <p style="margin: 0;">&copy; 2026 Maurinsoft - Todos os direitos reservados. Jardinópolis - SP.</p>
-        <p style="margin: 0; color: var(--text-dim);">Tecnologia Acessível • Prototipagem & Software</p>
+      <div class="container" style="text-align: center;">
+        <p data-i18n="footer_copy">&copy; 2026 Maurinsoft Soluções em Tecnologia. Todos os direitos reservados.</p>
       </div>
     </div>
   </footer>
