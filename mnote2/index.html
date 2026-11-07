@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MNote2 • IDE Desktop com IA Integrada, SQL e Tarefas | Maurinsoft</title>
+  <meta name="description" content="MNote2 é uma IDE desktop leve escrita em Lazarus/Free Pascal com editor em abas, autocomplete local, gestão de tarefas com Gantt, cliente de banco de dados MQuery2 e assistência multi-IA por texto ou voz.">
+  <link rel="stylesheet" href="../assets/css/main.css">
+  <style>
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 24px;
+      margin-top: 2.5rem;
+    }
+    .feature-card {
+      background: var(--bg-card, #131c2e);
+      border: 1px solid var(--border-color, #22324d);
+      border-radius: var(--radius-md, 12px);
+      padding: 1.75rem;
+      transition: all 0.25s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .feature-card:hover {
+      border-color: #38bdf8;
+      transform: translateY(-4px);
+      box-shadow: 0 10px 28px rgba(56, 189, 248, 0.15);
+    }
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      background: rgba(56, 189, 248, 0.12);
+      color: #38bdf8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.25rem;
+    }
+    .feature-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text-heading, #fff);
+      margin-bottom: 0.5rem;
+    }
+    .feature-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted, #94a3b8);
+      line-height: 1.6;
+      flex-grow: 1;
+      margin-bottom: 1.25rem;
+    }
+    .feature-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 0.85rem;
+      color: #cbd5e1;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 1rem;
+    }
+    .feature-list li {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .feature-list li::before {
+      content: "▹";
+      color: #38bdf8;
+      font-weight: bold;
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 20px;
+      margin-top: 2rem;
+    }
+    .gallery-item {
+      background: #091220;
+      border: 1px solid var(--border-color, #22324d);
+      border-radius: 10px;
+      overflow: hidden;
+      transition: all 0.25s ease;
+    }
+    .gallery-item:hover {
+      border-color: #38bdf8;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      display: block;
+      background: #020617;
+    }
+    .gallery-caption {
+      padding: 12px 16px;
+      font-size: 0.85rem;
+      color: var(--text-muted, #94a3b8);
+      line-height: 1.4;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    .download-card {
+      background: #0b1526;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      border-radius: 12px;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="../index.html" class="brand-logo" aria-label="Maurinsoft Início">
+        <img src="../assets/img/logo-maurinsoft.svg" alt="Maurinsoft" class="site-logo-img">
+      </a>
+
+      <nav class="nav-menu">
+        <a href="../index.html" class="nav-link" data-i18n="nav_home">Home</a>
+        
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-btn" aria-haspopup="true" data-i18n="nav_products">
+            Produtos
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+          <div class="dropdown-menu">
+            <a href="../produtos/gestao-filas.html" class="dropdown-item">
+              <div class="dropdown-item-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+              </div>
+              <div>
+                <strong data-i18n="prod_filas_title">Gestão de Filas</strong>
+                <div style="font-size: 0.75rem; color: var(--text-dim);">Controle de senhas e guichês</div>
+              </div>
+            </a>
+            <a href="../produtos/etiquetas-varejo.html" class="dropdown-item">
+              <div class="dropdown-item-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 7h10"/><path d="M7 12h10"/><path d="M7 17h6"/></svg>
+              </div>
+              <div>
+                <strong data-i18n="prod_etiquetas_title">Etiquetas & Varejo</strong>
+                <div style="font-size: 0.75rem; color: var(--text-dim);">Gôndolas e código de barras</div>
+              </div>
+            </a>
+            <a href="../produtos/gestao-a-vista.html" class="dropdown-item">
+              <div class="dropdown-item-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+              </div>
+              <div>
+                <strong data-i18n="prod_gestao_title">Gestão à Vista</strong>
+                <div style="font-size: 0.75rem; color: var(--text-dim);">Dashboards e painel Andon</div>
+              </div>
+            </a>
+            <a href="../produtos/contagem-hemacias.html" class="dropdown-item">
+              <div class="dropdown-item-icon" style="color: var(--accent-amber);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="4"></circle><line x1="4.93" y1="4.93" x2="9.17" y2="9.17"></line><line x1="14.83" y1="14.83" x2="19.07" y2="19.07"></line><line x1="14.83" y1="9.17" x2="19.07" y2="4.93"></line><line x1="4.93" y1="19.07" x2="9.17" y2="14.83"></line></svg>
+              </div>
+              <div>
+                <strong data-i18n="prod_hemacias_title">Contador de Hemácias</strong>
+                <div style="font-size: 0.75rem; color: var(--text-dim);">Microscopia óptica & visão IA</div>
+              </div>
+            </a>
+            <a href="https://maurinsoft.com.br/cockpit/" class="dropdown-item" target="_blank" rel="noopener">
+              <div class="dropdown-item-icon" style="color: var(--primary, #06b6d4);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/>
+                  <path d="M6 6L9 9M18 6l-3 3M6 18l3-3M18 18l-3-3"/>
+                  <circle cx="4" cy="4" r="2"/>
+                  <circle cx="20" cy="4" r="2"/>
+                  <circle cx="4" cy="20" r="2"/>
+                  <circle cx="20" cy="20" r="2"/>
+                </svg>
+              </div>
+              <div>
+                <strong data-i18n="prod_cockpit_title">Cockpit Drone</strong>
+                <div style="font-size: 0.75rem; color: var(--text-dim);">Telemetria, simulador 3D & multiplayer</div>
+              </div>
+            </a>
+            <a href="../multicnc/index.html" class="dropdown-item">
+              <div class="dropdown-item-icon" style="color: #22d3ee;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                  <polyline points="2 17 12 22 22 17"></polyline>
+                  <polyline points="2 12 12 17 22 12"></polyline>
+                </svg>
+              </div>
+              <div>
+                <strong style="color: #22d3ee;"><span data-i18n="prod_multicnc_title">MultiCNC • Suíte Maker</span></strong>
+                <div style="font-size: 0.75rem; color: var(--text-dim);">Router, Laser, 3D, CAD & PCB</div>
+              </div>
+            </a>
+            <a href="../engenharia-arquitetura/index.html" class="dropdown-item">
+              <div class="dropdown-item-icon" style="color: #38bdf8;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                  <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg>
+              </div>
+              <div>
+                <strong style="color: #38bdf8;"><span data-i18n="prod_eng_title">Engenharia & Arquitetura</span></strong>
+                <div style="font-size: 0.75rem; color: var(--text-dim);">CAD 2D, Maquete 3D, Elétrica & BIM</div>
+              </div>
+            </a>
+            <a href="index.html" class="dropdown-item" style="border-top: 1px solid rgba(255, 255, 255, 0.08); background: rgba(56, 189, 248, 0.05);">
+              <div class="dropdown-item-icon" style="color: #a855f7;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="16 18 22 12 16 6"></polyline>
+                  <polyline points="8 6 2 12 8 18"></polyline>
+                </svg>
+              </div>
+              <div>
+                <strong style="color: #c084fc;">MNote2 • IDE com IA</strong>
+                <div style="font-size: 0.75rem; color: var(--text-dim);">Lazarus, FPC, SQL & Voz "OK MNote"</div>
+              </div>
+            </a>
+            <a href="../doctor/index.html" class="dropdown-item">
+              <div class="dropdown-item-icon" style="color: #10b981;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                </svg>
+              </div>
+              <div>
+                <strong style="color: #34d399;">Doctor • Automação Biomédica</strong>
+                <div style="font-size: 0.75rem; color: var(--text-dim);">Melhor TCC 2025 • Hardware & Software</div>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <a href="../servicos.html" class="nav-link" data-i18n="nav_services">Serviços & Prototipagem</a>
+        <a href="../sobre.html" class="nav-link" data-i18n="nav_about">Sobre</a>
+        <a href="../contato.html" class="nav-link" data-i18n="nav_contact">Contato</a>
+      </nav>
+
+      <div class="nav-cta">
+        <div class="lang-picker">
+          <label for="lang-select" title="Idioma / Language">🌐</label>
+          <select id="lang-select" class="lang-select" onchange="changeLanguage(this.value)" aria-label="Selecione o idioma">
+            <option value="pt-BR" selected>Português</option>
+            <option value="en">English</option>
+            <option value="es">Español</option>
+            <option value="fr">Français</option>
+            <option value="de">Deutsch</option>
+            <option value="ru">Русский</option>
+            <option value="zh-CN">简体中文</option>
+            <option value="ja">日本語</option>
+            <option value="ar">العربية</option>
+            <option value="hi">हिन्दी</option>
+          </select>
+        </div>
+        <a href="../restrita/login.html" class="btn btn-secondary btn-sm" style="display: inline-flex; align-items: center; gap: 6px;">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+          <span data-i18n="nav_restricted">Área Restrita</span>
+        </a>
+        <a href="../contato.html" class="btn btn-primary btn-sm"><span data-i18n="nav_quote">Solicitar Orçamento</span></a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="section hero" style="padding-top: 4rem; padding-bottom: 3rem;">
+    <div class="container">
+      <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1.25rem;">
+        <span class="badge" style="background: rgba(168, 85, 247, 0.2); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.4); padding: 4px 10px; border-radius: 6px; font-weight: 700; font-size: 0.78rem;">
+          VERSÃO 2.72 ATUAL
+        </span>
+        <span class="badge" style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); padding: 4px 10px; border-radius: 6px; font-weight: 600; font-size: 0.78rem;">
+          LAZARUS & FREE PASCAL
+        </span>
+        <span class="badge" style="background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); padding: 4px 10px; border-radius: 6px; font-weight: 600; font-size: 0.78rem;">
+          OPEN SOURCE • GITHUB
+        </span>
+      </div>
+
+      <h1 style="font-size: 2.6rem; font-weight: 800; line-height: 1.2; margin-bottom: 1rem; color: #fff;">
+        MNote2: IDE Desktop com <span style="background: linear-gradient(135deg, #c084fc, #38bdf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Assistência de IA por Texto e Voz</span>
+      </h1>
+
+      <p style="font-size: 1.15rem; color: var(--text-muted, #94a3b8); max-width: 860px; line-height: 1.65; margin-bottom: 2rem;">
+        Ambiente de desenvolvimento integrado (IDE) ultraleve e responsivo, desenvolvido em Free Pascal e Lazarus. Reúne editor em abas com busca avançada UTF-8/Regex, gerenciador de banco de dados SQL MQuery2, módulo completo de gestão de projetos e tarefas com Gráfico de Gantt, e assistência multi-IA de última geração com ativação por comando de voz <strong>"OK MNote"</strong>.
+      </p>
+
+      <div style="display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 3rem;">
+        <a href="https://github.com/marcelomaurin/MNote2" target="_blank" rel="noopener" class="btn btn-primary btn-lg" style="background: #a855f7; border-color: #a855f7;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 6px;"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          Código Fonte no GitHub
+        </a>
+        <a href="#downloads" class="btn btn-secondary btn-lg">
+          Baixar Executáveis (Windows / Linux) &darr;
+        </a>
+      </div>
+
+      <!-- Hero Screenshot -->
+      <div style="background: #060b13; border: 1px solid rgba(168, 85, 247, 0.4); border-radius: 14px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.8), 0 0 35px rgba(168, 85, 247, 0.2);">
+        <img src="imgs/MNote2_IDE_IA_2_63.png" alt="MNote2 IDE Desktop com Inteligência Artificial" style="width: 100%; height: auto; display: block;">
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 Pilares de Engenharia do MNote2 -->
+  <section class="section" style="background: rgba(255, 255, 255, 0.015); border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
+    <div class="container">
+      <div class="text-center" style="max-width: 800px; margin: 0 auto;">
+        <span class="section-tag" style="color: #c084fc;">Arquitetura & Recursos</span>
+        <h2 class="section-title">Engenharia de Software sem Excesso de Peso</h2>
+        <p class="section-desc">
+          Projetada para desenvolvedores que buscam alta performance, inicialização instantânea e controle total do código sem a sobrecarga de memória das IDEs baseadas em Electron ou navegadores embutidos.
+        </p>
+      </div>
+
+      <div class="feature-grid">
+        <!-- Feature 1: Workspace & Editor -->
+        <div class="feature-card">
+          <div class="feature-icon" style="background: rgba(168, 85, 247, 0.15); color: #c084fc;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+          </div>
+          <h3 class="feature-title">Editor em Abas & Alta Performance</h3>
+          <p class="feature-desc">
+            Área de trabalho com abas configuráveis, realce de sintaxe com perfis de temas customizáveis, Search & Replace UTF-8 com suporte completo a Regex, histórico de busca, backup atômico e rollback automático de edições.
+          </p>
+          <ul class="feature-list">
+            <li>Paleta de comandos rápida (<code>Ctrl+Shift+P</code> / <code>Ctrl+Q</code>)</li>
+            <li>Navegação direta para definição com <code>F12</code> e referências cruzadas</li>
+            <li>Autocomplete local e expansão inteligente de snippets de código</li>
+            <li>Layout com docking persistente entre sessões de trabalho</li>
+          </ul>
+        </div>
+
+        <!-- Feature 2: Assistência Multi-IA com Voz -->
+        <div class="feature-card">
+          <div class="feature-icon" style="background: rgba(56, 189, 248, 0.15); color: #38bdf8;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
+          </div>
+          <h3 class="feature-title">IA Multimodal & Ativação por Voz</h3>
+          <p class="feature-desc">
+            Motor de inteligência artificial com 6 papéis especializados e roteador determinístico. Suporta entrada digitada e comando de voz contínuo via <em>"OK MNote"</em> com retorno falado por síntese e registro de texto no chat.
+          </p>
+          <ul class="feature-list">
+            <li>AI Monitor integrado para auditoria de tokens e custos de chamada</li>
+            <li>Propostas de alteração de código em JSON estruturado com diff por hunk</li>
+            <li>Aplicação atômica de patches com confirmação e rollback de segurança</li>
+            <li>Verificação e download automático de modelos via <code>neural-api</code></li>
+          </ul>
+        </div>
+
+        <!-- Feature 3: MQuery2 Banco de Dados -->
+        <div class="feature-card">
+          <div class="feature-icon" style="background: rgba(16, 185, 129, 0.15); color: #34d399;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>
+          </div>
+          <h3 class="feature-title">MQuery2: SQL & Dicionário de Dados</h3>
+          <p class="feature-desc">
+            Conexão nativa e simultânea com bancos de dados SQLite e PostgreSQL. Árvore de navegação por bancos, esquemas e tabelas com editor SQL dedicado, execução de scripts e visualização de conjuntos de dados.
+          </p>
+          <ul class="feature-list">
+            <li>Dicionário de dados interativo com chaves primárias e estrangeiras</li>
+            <li>Autocomplete contextual de tabelas, campos e cláusulas SQL</li>
+            <li>Visualização em grid de dados com ordenação e paginação rápida</li>
+            <li>Exportação de esquemas e dados para relatórios e migrações</li>
+          </ul>
+        </div>
+
+        <!-- Feature 4: Gestão de Projetos e Gantt -->
+        <div class="feature-card">
+          <div class="feature-icon" style="background: rgba(245, 158, 11, 0.15); color: #fbbf24;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+          </div>
+          <h3 class="feature-title">Tarefas, Gantt & Matriz de Riscos</h3>
+          <p class="feature-desc">
+            Gerenciamento de desenvolvimento integrado ao código. O desenvolvedor planeja seus sprints, prioridades e riscos sem precisar de ferramentas web externas que desconectam o programador do fonte.
+          </p>
+          <ul class="feature-list">
+            <li>Gráfico de Gantt interativo com cálculo de dependências e prazos</li>
+            <li>Task List persistente com status, prioridade e estimativa de esforço</li>
+            <li>Linha do tempo (Timeline) e Matriz de Riscos técnicos</li>
+            <li>Associação direta de tarefas aos commits e arquivos modificados</li>
+          </ul>
+        </div>
+
+        <!-- Feature 5: Build, Terminal & CI -->
+        <div class="feature-card">
+          <div class="feature-icon" style="background: rgba(239, 68, 68, 0.15); color: #f87171;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>
+          </div>
+          <h3 class="feature-title">Build, Terminal & Validação</h3>
+          <p class="feature-desc">
+            Painel inferior com abas de Problems para salto direto à linha de erro, Output separado por canais de processo, Terminal de linha de comando embutido e esteira de testes contínuos automatizados.
+          </p>
+          <ul class="feature-list">
+            <li>Disparo de Build e Rebuild diretamente pela IDE com teclas de atalho</li>
+            <li>Salto com clique duplo nos erros de compilação apontados no Problems</li>
+            <li>Terminal de execução compatível com PowerShell, Bash e scripts locais</li>
+            <li>Suíte de testes em CI validada em Windows e Linux x64</li>
+          </ul>
+        </div>
+
+        <!-- Feature 6: Segurança e Governança -->
+        <div class="feature-card">
+          <div class="feature-icon" style="background: rgba(99, 102, 241, 0.15); color: #818cf8;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+          </div>
+          <h3 class="feature-title">Segurança de Código por Design</h3>
+          <p class="feature-desc">
+            A IA nunca executa comandos diretamente na máquina do desenvolvedor. Leitura de arquivos, compilação e alteração de código fonte exigem permissões explícitas com visualização prévia de diffs.
+          </p>
+          <ul class="feature-list">
+            <li>Permissões distintas para leitura, escrita e execução de processos</li>
+            <li>Credenciais protegidas em arquivo de configuração local seguro (<code>mnote.cfg</code>)</li>
+            <li>Sem telemetria oculta: seus dados e códigos pertencem a você</li>
+            <li>Execução 100% nativa sem embutir servidores Node.js ou Electron</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Galeria de Imagens da IDE -->
+  <section class="section">
+    <div class="container">
+      <div class="text-center" style="max-width: 800px; margin: 0 auto;">
+        <span class="section-tag" style="color: #c084fc;">Galeria de Capturas Reais</span>
+        <h2 class="section-title">A Interface do MNote2 em Ação</h2>
+        <p class="section-desc">
+          Conheça as telas reais de operação do MNote2 em projetos de engenharia de software e análise de banco de dados.
+        </p>
+      </div>
+
+      <div class="gallery-grid">
+        <div class="gallery-item">
+          <img src="imgs/MNote2_IDE_IA_2_63.png" alt="Tela Principal MNote2 com Abas e Painéis">
+          <div class="gallery-caption">
+            <strong>Tela Principal da IDE:</strong> Editor em abas, explorador de soluções e painéis de ferramentas acopláveis.
+          </div>
+        </div>
+
+        <div class="gallery-item">
+          <img src="imgs/Editor_com_IA_integrada.jpg" alt="Editor de Código com IA Integrada">
+          <div class="gallery-caption">
+            <strong>Editor com IA Integrada:</strong> Diálogo contextual com sugestões de código, geração de funções e refatoração.
+          </div>
+        </div>
+
+        <div class="gallery-item">
+          <img src="imgs/MNote2_AI_Monitor_2_63.png" alt="AI Monitor e Auditoria de Tokens">
+          <div class="gallery-caption">
+            <strong>AI Monitor:</strong> Acompanhamento de papéis de inteligência artificial, latência de resposta e consumo de tokens.
+          </div>
+        </div>
+
+        <div class="gallery-item">
+          <img src="imgs/MQUERY.jpg" alt="Gerenciador MQuery2 de Banco de Dados">
+          <div class="gallery-caption">
+            <strong>MQuery2 Integrado:</strong> Exploração de tabelas, chaves de relacionamento e execução de queries SQL.
+          </div>
+        </div>
+
+        <div class="gallery-item">
+          <img src="imgs/Gestao_de_Arquivos.jpg" alt="Gestor de Arquivos e Soluções">
+          <div class="gallery-caption">
+            <strong>Gestão de Arquivos:</strong> Varredura assíncrona do projeto sem travamento da interface.
+          </div>
+        </div>
+
+        <div class="gallery-item">
+          <img src="imgs/IA.jpg" alt="Painel Interativo de Inteligência Artificial">
+          <div class="gallery-caption">
+            <strong>Console de IA:</strong> Histórico de conversas, propostas atômicas de patches e controle de voz.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Downloads & Repositório -->
+  <section id="downloads" class="section" style="background: rgba(255, 255, 255, 0.015); border-top: 1px solid var(--border-color);">
+    <div class="container">
+      <div class="text-center" style="max-width: 800px; margin: 0 auto; margin-bottom: 2.5rem;">
+        <span class="section-tag" style="color: #c084fc;">Distribuição & Instalação</span>
+        <h2 class="section-title">Baixe o MNote2 para Sua Estação de Trabalho</h2>
+        <p class="section-desc">
+          Executáveis compilados nativamente para Windows 64 bits e pacotes Debian/Ubuntu para arquiteturas x86_64 e ARM64.
+        </p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; max-width: 1000px; margin: 0 auto;">
+        
+        <!-- Windows Card -->
+        <div class="download-card">
+          <div style="font-size: 2.2rem; margin-bottom: 12px;">🪟</div>
+          <h3 style="color: #fff; font-size: 1.3rem; margin-bottom: 6px;">Windows (x64)</h3>
+          <p style="color: var(--text-muted, #94a3b8); font-size: 0.88rem; margin-bottom: 1.5rem;">
+            Instalador completo gerado com InnoSetup contendo executável binário, bibliotecas SQLite e temas.
+          </p>
+          <a href="https://github.com/marcelomaurin/MNote2/tree/main/bin" target="_blank" rel="noopener" class="btn btn-primary" style="width: 100%; background: #a855f7; border-color: #a855f7;">
+            Acessar Instalador Windows &rarr;
+          </a>
+        </div>
+
+        <!-- Linux Deb Card -->
+        <div class="download-card">
+          <div style="font-size: 2.2rem; margin-bottom: 12px;">🐧</div>
+          <h3 style="color: #fff; font-size: 1.3rem; margin-bottom: 6px;">Linux Debian / Ubuntu</h3>
+          <p style="color: var(--text-muted, #94a3b8); font-size: 0.88rem; margin-bottom: 1.5rem;">
+            Pacotes <code>.deb</code> prontos para instalação em sistemas Debian, Ubuntu, Mint (x86_64 e ARM64).
+          </p>
+          <a href="https://github.com/marcelomaurin/MNote2/releases" target="_blank" rel="noopener" class="btn btn-secondary" style="width: 100%;">
+            Baixar Pacotes .deb no GitHub &rarr;
+          </a>
+        </div>
+
+        <!-- Source Code Card -->
+        <div class="download-card">
+          <div style="font-size: 2.2rem; margin-bottom: 12px;">📦</div>
+          <h3 style="color: #fff; font-size: 1.3rem; margin-bottom: 6px;">Código Fonte Completo</h3>
+          <p style="color: var(--text-muted, #94a3b8); font-size: 0.88rem; margin-bottom: 1.5rem;">
+            Repositório oficial no GitHub com código Pascal/Lazarus, documentação técnica, testes e scripts de build.
+          </p>
+          <a href="https://github.com/marcelomaurin/MNote2" target="_blank" rel="noopener" class="btn btn-secondary" style="width: 100%;">
+            Repositório marcelomaurin/MNote2 &rarr;
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-col footer-brand">
+        <a href="../index.html" class="footer-logo">
+          <img src="../assets/img/logo-maurinsoft.svg" alt="Maurinsoft" style="height: 38px;">
+        </a>
+        <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; margin-bottom: 1.25rem;">
+          Engenharia de software especializada em prototipagem de equipamentos, sistemas biomédicos e automação comercial para o varejo.
+        </p>
+        <div style="color: var(--text-dim); font-size: 0.85rem;">
+          Jardinópolis - SP • Atendimento em todo o Brasil
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Soluções & Produtos</h4>
+        <div class="footer-links">
+          <a href="../produtos/gestao-filas.html">Sistema de Gestão de Fila</a>
+          <a href="../produtos/etiquetas-varejo.html">Etiquetas de Gôndola & Varejo</a>
+          <a href="../produtos/gestao-a-vista.html">Gestão à Vista & Dashboards</a>
+          <a href="../produtos/contagem-hemacias.html" style="color: var(--accent-amber);">Contador de Hemácias (Protótipo)</a>
+          <a href="https://maurinsoft.com.br/cockpit/" target="_blank" rel="noopener" style="color: var(--primary);">Cockpit Drone (Simulador 3D) &rarr;</a>
+          <a href="../multicnc/index.html" style="color: #22d3ee; font-weight: 600;">MultiCNC • Suíte Maker &rarr;</a>
+          <a href="../engenharia-arquitetura/index.html" style="color: #38bdf8; font-weight: 600;">Engenharia & Arquitetura &rarr;</a>
+          <a href="index.html" style="color: #c084fc; font-weight: 600;">MNote2 • IDE com IA &rarr;</a>
+          <a href="../doctor/index.html" style="color: #34d399; font-weight: 600;">Doctor • Automação Biomédica &rarr;</a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Institucional</h4>
+        <div class="footer-links">
+          <a href="../sobre.html">Sobre a Maurinsoft</a>
+          <a href="../servicos.html">Metodologia de Prototipagem</a>
+          <a href="../restrita/login.html" style="color: var(--primary-light);">Área Restrita (Serviços)</a>
+          <a href="../contato.html">Contato & Orçamentos</a>
+          <a href="https://github.com/marcelomaurin" target="_blank" rel="noopener noreferrer">GitHub Oficial</a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Contato Direto</h4>
+        <div class="footer-links">
+          <span style="color: var(--text-muted); font-size: 0.9rem;">WhatsApp: (16) 98143-4112</span>
+          <span style="color: var(--text-muted); font-size: 0.9rem;">marcelomaurin@gmail.com</span>
+          <a href="../contato.html" class="btn btn-primary btn-sm" style="margin-top: 10px; display: inline-block;">Fale com a Engenharia</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom text-center">
+      <div class="container">
+        <p>&copy; 2026 Maurinsoft Soluções em Tecnologia. Todos os direitos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/i18n.js"></script>
+</body>
+</html>

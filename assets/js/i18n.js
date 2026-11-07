@@ -83,7 +83,11 @@
     "footer_col_services": "Especialidades",
     "footer_col_institutional": "Institucional",
     "footer_col_contact": "Contato Direto",
-    "footer_rights": "Todos os direitos reservados. Maurinsoft Soluções em Tecnologia."
+    "footer_rights": "Todos os direitos reservados. Maurinsoft Soluções em Tecnologia.",
+    "prod_mnote2_title": "MNote2 • IDE com IA",
+    "prod_mnote2_sub": "Lazarus, FPC, SQL & Voz \"OK MNote\"",
+    "prod_doctor_title": "Doctor • Automação Biomédica",
+    "prod_doctor_sub": "Melhor TCC 2025 • Hardware & Software"
   },
   "en": {
     "lang_name": "English",
@@ -159,7 +163,11 @@
     "footer_col_services": "Specialties",
     "footer_col_institutional": "Company",
     "footer_col_contact": "Direct Contact",
-    "footer_rights": "All rights reserved. Maurinsoft Technology Solutions."
+    "footer_rights": "All rights reserved. Maurinsoft Technology Solutions.",
+    "prod_mnote2_title": "MNote2 • AI Desktop IDE",
+    "prod_mnote2_sub": "Lazarus, FPC, SQL & Voice \"OK MNote\"",
+    "prod_doctor_title": "Doctor • Biomedical Automation",
+    "prod_doctor_sub": "Best Thesis Award 2025 • Hardware & Software"
   },
   "es": {
     "lang_name": "Español",
@@ -235,7 +243,11 @@
     "footer_col_services": "Especialidades",
     "footer_col_institutional": "Institucional",
     "footer_col_contact": "Contacto Directo",
-    "footer_rights": "Todos los derechos reservados. Maurinsoft Soluciones Tecnológicas."
+    "footer_rights": "Todos los derechos reservados. Maurinsoft Soluciones Tecnológicas.",
+    "prod_mnote2_title": "MNote2 • IDE con IA",
+    "prod_mnote2_sub": "Lazarus, FPC, SQL y Voz \"OK MNote\"",
+    "prod_doctor_title": "Doctor • Automatización Biomédica",
+    "prod_doctor_sub": "Mejor TCC 2025 • Hardware y Software"
   },
   "fr": {
     "lang_name": "Français",
@@ -311,7 +323,11 @@
     "footer_col_services": "Spécialités",
     "footer_col_institutional": "Société",
     "footer_col_contact": "Contact Direct",
-    "footer_rights": "Tous droits réservés. Maurinsoft Solutions Technologiques."
+    "footer_rights": "Tous droits réservés. Maurinsoft Solutions Technologiques.",
+    "prod_mnote2_title": "MNote2 • IDE avec IA",
+    "prod_mnote2_sub": "Lazarus, FPC, SQL & Commande Vocale",
+    "prod_doctor_title": "Doctor • Automatisation Biomédicale",
+    "prod_doctor_sub": "Prix Meilleur TCC 2025 • Hardware & Software"
   },
   "de": {
     "lang_name": "Deutsch",
@@ -387,7 +403,11 @@
     "footer_col_services": "Fachbereiche",
     "footer_col_institutional": "Unternehmen",
     "footer_col_contact": "Direktkontakt",
-    "footer_rights": "Alle Rechte vorbehalten. Maurinsoft Technologielösungen."
+    "footer_rights": "Alle Rechte vorbehalten. Maurinsoft Technologielösungen.",
+    "prod_mnote2_title": "MNote2 • KI-Desktop-IDE",
+    "prod_mnote2_sub": "Lazarus, FPC, SQL & Sprachsteuerung",
+    "prod_doctor_title": "Doctor • Biomedizinische Automation",
+    "prod_doctor_sub": "Auszeichnung Beste Abschlussarbeit 2025"
   },
   "ru": {
     "lang_name": "Русский",
@@ -463,7 +483,11 @@
     "footer_col_services": "Специализация",
     "footer_col_institutional": "О компании",
     "footer_col_contact": "Контакты",
-    "footer_rights": "Все права защищены. Maurinsoft Soluções em Tecnologia."
+    "footer_rights": "Все права защищены. Maurinsoft Soluções em Tecnologia.",
+    "prod_mnote2_title": "MNote2 • IDE с ИИ",
+    "prod_mnote2_sub": "Lazarus, FPC, SQL и Голос \"OK MNote\"",
+    "prod_doctor_title": "Doctor • Биомедицинская автоматизация",
+    "prod_doctor_sub": "Лучший дипломный проект 2025 года"
   },
   "zh-CN": {
     "lang_name": "简体中文",
@@ -539,7 +563,11 @@
     "footer_col_services": "专业领域",
     "footer_col_institutional": "企业介绍",
     "footer_col_contact": "直接联络",
-    "footer_rights": "版权所有。Maurinsoft 技术解决方案。"
+    "footer_rights": "版权所有。Maurinsoft 技术解决方案。",
+    "prod_mnote2_title": "MNote2 • 智能桌面IDE",
+    "prod_mnote2_sub": "Lazarus/FPC、SQL及语音交互",
+    "prod_doctor_title": "Doctor • 生物医学自动化",
+    "prod_doctor_sub": "2025年度最佳毕业设计奖 • 软硬件开源"
   },
   "ja": {
     "lang_name": "日本語",
@@ -615,7 +643,11 @@
     "footer_col_services": "専門分野",
     "footer_col_institutional": "企業情報",
     "footer_col_contact": "お問い合わせ",
-    "footer_rights": "All rights reserved. Maurinsoft Technology Solutions."
+    "footer_rights": "All rights reserved. Maurinsoft Technology Solutions.",
+    "prod_mnote2_title": "MNote2 • AI搭載IDE",
+    "prod_mnote2_sub": "Lazarus・FPC・SQL・音声コマンド",
+    "prod_doctor_title": "Doctor • 生体医工学オートメーション",
+    "prod_doctor_sub": "2025年最優秀卒業研究賞受賞"
   },
   "ar": {
     "lang_name": "العربية",
@@ -691,7 +723,11 @@
     "footer_col_services": "التخصصات",
     "footer_col_institutional": "عن الشركة",
     "footer_col_contact": "اتصال مباشر",
-    "footer_rights": "جميع الحقوق محفوظة. Maurinsoft للحلول التكنولوجية."
+    "footer_rights": "جميع الحقوق محفوظة. Maurinsoft للحلول التكنولوجية.",
+    "prod_mnote2_title": "MNote2 • بيئة تطوير ذكية",
+    "prod_mnote2_sub": "Lazarus و FPC و SQL والتحكم الصوتي",
+    "prod_doctor_title": "Doctor • الأتمتة الطبية الحيوية",
+    "prod_doctor_sub": "جائزة أفضل مشروع تخرج 2025"
   },
   "hi": {
     "lang_name": "हिन्दी",
@@ -767,7 +803,11 @@
     "footer_col_services": "विशेषज्ञता",
     "footer_col_institutional": "कंपनी के बारे में",
     "footer_col_contact": "सीधा संपर्क",
-    "footer_rights": "सर्वाधिकार सुरक्षित। Maurinsoft टेक्नोलॉजी सॉल्यूशंस।"
+    "footer_rights": "सर्वाधिकार सुरक्षित। Maurinsoft टेक्नोलॉजी सॉल्यूशंस।",
+    "prod_mnote2_title": "MNote2 • एआई डेस्कटॉप आईडीई",
+    "prod_mnote2_sub": "Lazarus, FPC, SQL और वॉयस कमांड",
+    "prod_doctor_title": "Doctor • बायोमेडिकल स्वचालन",
+    "prod_doctor_sub": "सर्वश्रेष्ठ थीसिस पुरस्कार 2025"
   }
 };
 
