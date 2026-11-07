@@ -34,7 +34,7 @@ if (!defined('DB_USER')) {
     define('DB_USER', envValue('DB_USER', 'u820932905_mmm'));
 }
 if (!defined('DB_PASS')) {
-    define('DB_PASS', envValue('DB_PASS', ''));
+    define('DB_PASS', envValue('DB_PASS', 'Marcella@12345'));
 }
 
 function dbConfigurado(): bool
