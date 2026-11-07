@@ -4,15 +4,30 @@ declare(strict_types=1);
 /*
  * Configuração de Banco de Dados e Ambiente - Espaço Restrito Maurinsoft
  * 
- * Ordem de prioridade:
- * 1. Arquivo local protegido: restrita/config.local.php (não versionado no Git)
- * 2. Variáveis de ambiente: DB_HOST, DB_NAME, DB_USER, DB_PASS, DB_PORT
- * 3. Valores padrão de fallback
+ * Ordem de prioridade para configuração:
+ * 1. Arquivo config.php da raiz do site (/public_html/config.php)
+ * 2. Arquivo variaveis.php da raiz do site (/public_html/variaveis.php)
+ * 3. Arquivo local protegido de restrita: restrita/config.local.php
+ * 4. Variáveis de ambiente: DB_HOST, DB_NAME, DB_USER, DB_PASS, DB_PORT
+ * 5. Valores padrão de fallback do servidor de produção
  */
 
+// 1. Tenta carregar o config.php da raiz do site (public_html/config.php)
+$rootConfigFile = dirname(__DIR__) . '/config.php';
+if (is_file($rootConfigFile) && realpath($rootConfigFile) !== realpath(__FILE__)) {
+    @include_once $rootConfigFile;
+}
+
+// 2. Tenta carregar variaveis.php da raiz do site (se existir)
+$rootVariaveisFile = dirname(__DIR__) . '/variaveis.php';
+if (is_file($rootVariaveisFile)) {
+    @include_once $rootVariaveisFile;
+}
+
+// 3. Tenta carregar config.local.php específico de restrita (se existir)
 $localConfigFile = __DIR__ . '/config.local.php';
 if (is_file($localConfigFile)) {
-    require_once $localConfigFile;
+    @include_once $localConfigFile;
 }
 
 function envValue(string $name, string $default = ''): string
@@ -21,20 +36,26 @@ function envValue(string $name, string $default = ''): string
     return $v === false ? $default : trim((string)$v);
 }
 
+// Mapeia variáveis legadas da raiz ($host, $dbname, $user, $password, etc.) caso definidas na raiz
 if (!defined('DB_HOST')) {
-    define('DB_HOST', envValue('DB_HOST', 'localhost'));
+    $val = $host ?? $db_host ?? envValue('DB_HOST', 'localhost');
+    define('DB_HOST', (string)$val);
 }
 if (!defined('DB_PORT')) {
-    define('DB_PORT', envValue('DB_PORT', '3306'));
+    $val = $port ?? $db_port ?? envValue('DB_PORT', '3306');
+    define('DB_PORT', (string)$val);
 }
 if (!defined('DB_NAME')) {
-    define('DB_NAME', envValue('DB_NAME', 'u820932905_maurinsoftdb'));
+    $val = $dbname ?? $db_name ?? envValue('DB_NAME', 'u820932905_maurinsoftdb');
+    define('DB_NAME', (string)$val);
 }
 if (!defined('DB_USER')) {
-    define('DB_USER', envValue('DB_USER', 'u820932905_mmm'));
+    $val = $user ?? $db_user ?? envValue('DB_USER', 'u820932905_mmm');
+    define('DB_USER', (string)$val);
 }
 if (!defined('DB_PASS')) {
-    define('DB_PASS', envValue('DB_PASS', 'Marcella@12345'));
+    $val = $password ?? $db_pass ?? $pass ?? envValue('DB_PASS', 'Marcella@12345');
+    define('DB_PASS', (string)$val);
 }
 
 function dbConfigurado(): bool
@@ -44,24 +65,27 @@ function dbConfigurado(): bool
 
 /*
  * OAuth Google
- * Configure no servidor ou em config.local.php:
+ * Configure no servidor, no config.php da raiz ou em config.local.php:
  *   GOOGLE_CLIENT_ID
  *   GOOGLE_CLIENT_SECRET
  *   GOOGLE_REDIRECT_URI
  */
 function googleClientId(): string
 {
-    return envValue('GOOGLE_CLIENT_ID');
+    global $google_client_id;
+    return defined('GOOGLE_CLIENT_ID') ? (string)GOOGLE_CLIENT_ID : ($google_client_id ?? envValue('GOOGLE_CLIENT_ID'));
 }
 
 function googleClientSecret(): string
 {
-    return envValue('GOOGLE_CLIENT_SECRET');
+    global $google_client_secret;
+    return defined('GOOGLE_CLIENT_SECRET') ? (string)GOOGLE_CLIENT_SECRET : ($google_client_secret ?? envValue('GOOGLE_CLIENT_SECRET'));
 }
 
 function googleRedirectUri(): string
 {
-    return envValue('GOOGLE_REDIRECT_URI', 'https://maurinsoft.com.br/restrita/google-callback.php');
+    global $google_redirect_uri;
+    return defined('GOOGLE_REDIRECT_URI') ? (string)GOOGLE_REDIRECT_URI : ($google_redirect_uri ?? envValue('GOOGLE_REDIRECT_URI', 'https://maurinsoft.com.br/restrita/google-callback.php'));
 }
 
 function googleOAuthConfigurado(): bool
@@ -91,8 +115,19 @@ function db(): PDO
         return $pdo;
     }
 
+    // Se o config da raiz já criou uma instância PDO reutilizável
+    global $pdoRoot, $conn;
+    if (isset($pdoRoot) && $pdoRoot instanceof PDO) {
+        $pdo = $pdoRoot;
+        return $pdo;
+    }
+    if (isset($conn) && $conn instanceof PDO) {
+        $pdo = $conn;
+        return $pdo;
+    }
+
     if (!dbConfigurado()) {
-        throw new PDOException('Credenciais do banco de dados não configuradas. Configure restrita/config.local.php no servidor.');
+        throw new PDOException('Credenciais do banco de dados não configuradas. Verifique o arquivo config.php da raiz ou restrita/config.local.php.');
     }
 
     $dsn = 'mysql:host=' . DB_HOST . ';port=' . DB_PORT . ';dbname=' . DB_NAME . ';charset=utf8mb4';

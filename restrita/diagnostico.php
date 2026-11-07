@@ -140,6 +140,8 @@ if ($acao === 'inicializar_tabelas') {
 }
 
 // Checagens de ambiente
+$rootConfigExiste = is_file(dirname(__DIR__) . '/config.php');
+$rootVariaveisExiste = is_file(dirname(__DIR__) . '/variaveis.php');
 $localConfigExiste = is_file(__DIR__ . '/config.local.php');
 $extPdo = extension_loaded('pdo');
 $extPdoMysql = extension_loaded('pdo_mysql');
@@ -234,9 +236,14 @@ if (dbConfigurado()) {
         <td><span class="status-badge <?= $extPdoMysql ? 'ok' : 'bad' ?>"><?= $extPdoMysql ? 'OK' : 'Erro' ?></span></td>
       </tr>
       <tr>
-        <td>Arquivo config.local.php</td>
-        <td><?= $localConfigExiste ? 'Presente no servidor' : 'Ausente (usando defaults)' ?></td>
-        <td><span class="status-badge <?= $localConfigExiste ? 'ok' : 'warn' ?>"><?= $localConfigExiste ? 'OK' : 'Pendente' ?></span></td>
+        <td>Arquivo config.php (Raiz)</td>
+        <td><?= $rootConfigExiste ? 'Presente na raiz do site' : ($rootVariaveisExiste ? 'variaveis.php presente na raiz' : 'Ausente na raiz') ?></td>
+        <td><span class="status-badge <?= ($rootConfigExiste || $rootVariaveisExiste) ? 'ok' : 'warn' ?>"><?= ($rootConfigExiste || $rootVariaveisExiste) ? 'OK' : 'Opcional' ?></span></td>
+      </tr>
+      <tr>
+        <td>Arquivo config.local.php (Restrita)</td>
+        <td><?= $localConfigExiste ? 'Presente no servidor' : 'Ausente (usando raiz/defaults)' ?></td>
+        <td><span class="status-badge <?= $localConfigExiste ? 'ok' : 'warn' ?>"><?= $localConfigExiste ? 'OK' : 'Opcional' ?></span></td>
       </tr>
     </table>
 
