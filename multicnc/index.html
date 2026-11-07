@@ -700,10 +700,8 @@
     <section class="hero" style="padding-top: 2rem;">
       <div class="container hero-grid">
         <div class="hero-content">
-          <span class="badge" style="background: rgba(6, 182, 212, 0.15); color: #22d3ee; border: 1px solid rgba(6, 182, 212, 0.35); padding: 5px 12px; border-radius: 6px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; display: inline-block; margin-bottom: 1rem;">
-            SUÍTE DE FABRICAÇÃO DIGITAL • 14 APPS INTEGRADOS
-          </span>
-          <h1 class="hero-title" style="font-size: clamp(2.2rem, 4vw, 3.2rem); line-height: 1.15; margin-bottom: 1.25rem;">
+          <span class="badge" style="background: rgba(6, 182, 212, 0.15); color: #22d3ee; border: 1px solid rgba(6, 182, 212, 0.35); padding: 5px 12px; border-radius: 6px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; display: inline-block; margin-bottom: 1rem;" data-i18n="mc_hero_badge">SUÍTE DE FABRICAÇÃO DIGITAL • 14 APPS INTEGRADOS</span>
+          <h1 class="hero-title" style="font-size: clamp(2.2rem, 4vw, 3.2rem); line-height: 1.15; margin-bottom: 1.25rem;" data-i18n="mc_hero_title">
             MultiCNC: Da Ideia à Fabricação em um Único Ecossistema
           </h1>
           <p class="hero-subtitle" style="font-size: 1.05rem; line-height: 1.65; color: var(--text-muted); margin-bottom: 1.75rem;">
@@ -743,40 +741,38 @@
     <!-- Flow Section -->
     <section class="section section-alt">
       <div class="container text-center">
-        <span class="section-tag">Fluxo Contínuo de Fabricação</span>
-        <h2 class="section-title">Uma ideia, vários processos, um único ambiente</h2>
-        <p class="section-desc" style="max-width: 820px; margin: 0 auto;">
-          O MultiCNC reduz a fragmentação no ciclo de fabricação digital. Em vez de depender de ferramentas isoladas com formatos incompatíveis, a suíte reúne aplicações que se comunicam perfeitamente do conceito inicial até o corte final.
-        </p>
+        <span class="section-tag" data-i18n="mc_flow_tag">Fluxo Contínuo de Fabricação</span>
+        <h2 class="section-title" data-i18n="mc_flow_title">Uma ideia, vários processos, um único ambiente</h2>
+        <p class="section-desc" style="max-width: 820px; margin: 0 auto;" data-i18n="mc_flow_desc">O MultiCNC reduz a fragmentação no ciclo de fabricação digital. Em vez de depender de ferramentas isoladas com formatos incompatíveis, a suíte reúne aplicações que se comunicam perfeitamente do conceito inicial até o corte final.</p>
 
         <div class="flow-steps">
           <button type="button" class="flow-step-btn" onclick="openStageModal(0)" title="Clique para explorar a etapa Ideia">
-            <span>1. Ideia</span>
+            <span data-i18n="mc_step1_name">1. Ideia</span>
             <span class="step-badge">MultiProject</span>
           </button>
           <span class="flow-arrow">&rarr;</span>
           <button type="button" class="flow-step-btn" onclick="openStageModal(1)" title="Clique para explorar o Projeto CAD">
-            <span>2. Projeto (CAD)</span>
+            <span data-i18n="mc_step2_name">2. Projeto (CAD)</span>
             <span class="step-badge">MultiCAD</span>
           </button>
           <span class="flow-arrow">&rarr;</span>
           <button type="button" class="flow-step-btn" onclick="openStageModal(2)" title="Clique para explorar a Simulação Física">
-            <span>3. Simulação Física</span>
+            <span data-i18n="mc_step3_name">3. Simulação Física</span>
             <span class="step-badge">MultiPhysics</span>
           </button>
           <span class="flow-arrow">&rarr;</span>
           <button type="button" class="flow-step-btn" onclick="openStageModal(3)" title="Clique para explorar o CAM">
-            <span>4. Preparação (CAM)</span>
+            <span data-i18n="mc_step4_name">4. Preparação (CAM)</span>
             <span class="step-badge">MultiSlicer / CNC</span>
           </button>
           <span class="flow-arrow">&rarr;</span>
           <button type="button" class="flow-step-btn" onclick="openStageModal(4)" title="Clique para explorar a Validação 3D">
-            <span>5. Validação 3D</span>
+            <span data-i18n="mc_step5_name">5. Validação 3D</span>
             <span class="step-badge">SimuCNC</span>
           </button>
           <span class="flow-arrow">&rarr;</span>
           <button type="button" class="flow-step-btn highlight" onclick="openStageModal(5)" title="Clique para explorar a Fabricação Real">
-            <span>6. Fabricação Real</span>
+            <span data-i18n="mc_step6_name">6. Fabricação Real</span>
             <span class="step-badge" style="background: rgba(34,211,238,0.25); color: #22d3ee;">MultiCNC</span>
           </button>
         </div>
@@ -790,9 +786,9 @@
     <section class="section">
       <div class="container">
         <div class="section-header text-center">
-          <span class="section-tag">Ecossistema MultiSuite</span>
-          <h2 class="section-title">14 Aplicações Especializadas Trabalhando em Conjunto</h2>
-          <p class="section-desc" style="max-width: 800px; margin: 0 auto;">
+          <span class="section-tag" data-i18n="mc_apps_tag">Ecossistema MultiSuite</span>
+          <h2 class="section-title" data-i18n="mc_apps_title">14 Aplicações Especializadas Trabalhando em Conjunto</h2>
+          <p class="section-desc" style="max-width: 800px; margin: 0 auto;" data-i18n="mc_apps_desc">
             Cada módulo foi desenvolvido para desempenhar um papel específico de excelência na esteira maker, com total reaproveitamento de parâmetros, componentes e configurações.
           </p>
         </div>
@@ -1655,6 +1651,15 @@
     let carouselTimer = null;
     const CAROUSEL_INTERVAL = 4000; // Rotaciona a cada 4 segundos
 
+    
+    // Re-renderiza modal ao mudar idioma se estiver aberto
+    window.addEventListener('languageChanged', function(e) {
+      var modal = document.getElementById('flow-modal');
+      if (modal && modal.classList.contains('active')) {
+        openStageModal(currentStageIdx);
+      }
+    });
+
     function openStageModal(stageIdx) {
       currentStageIdx = stageIdx;
       currentSlideIdx = 0;
@@ -1662,11 +1667,18 @@
       const stage = PIPELINE_STAGES[stageIdx];
       if (!stage) return;
 
-      // Popula dados do modal
-      document.getElementById('modal-stage-badge').innerText = stage.badge;
+      // Popula dados do modal com i18n reativo
+      var bKey = 'mc_stage_' + (stageIdx + 1) + '_badge';
+      var tKey = 'mc_stage_' + (stageIdx + 1) + '_title';
+      var stKey = 'mc_stage_' + (stageIdx + 1) + '_subtitle';
+      var bVal = (window.t && window.t(bKey) !== bKey) ? window.t(bKey) : stage.badge;
+      var tVal = (window.t && window.t(tKey) !== tKey) ? window.t(tKey) : stage.title;
+      var stVal = (window.t && window.t(stKey) !== stKey) ? window.t(stKey) : stage.subtitle;
+
+      document.getElementById('modal-stage-badge').innerText = bVal;
       document.getElementById('modal-stage-app').innerText = stage.app.toUpperCase();
-      document.getElementById('modal-stage-title').innerText = stage.title;
-      document.getElementById('modal-stage-subtitle').innerText = stage.subtitle;
+      document.getElementById('modal-stage-title').innerText = tVal;
+      document.getElementById('modal-stage-subtitle').innerText = stVal;
       document.getElementById('modal-stage-desc').innerHTML = stage.desc;
       document.getElementById('modal-stage-tools').innerHTML = stage.tools;
 

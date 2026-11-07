@@ -201,9 +201,9 @@
   <section class="section" style="padding-top: 4rem;">
     <div class="container">
       <div class="section-header" style="max-width: 800px;">
-        <span class="section-tag">Canais de Atendimento</span>
-        <h1 class="section-title" style="font-size: 3rem;">Fale Diretamente Conosco</h1>
-        <p class="section-desc">
+        <span class="section-tag" data-i18n="contato_hero_tag">Canais de Atendimento</span>
+        <h1 class="section-title" style="font-size: 3rem;" data-i18n="contato_hero_title">Fale Diretamente Conosco</h1>
+        <p class="section-desc" data-i18n="contato_hero_desc">
           Tem um desafio de engenharia, precisa de um protótipo físico ou quer implementar nossas soluções de software? Estamos prontos para te atender.
         </p>
       </div>
@@ -218,8 +218,8 @@
               </svg>
             </div>
             <div class="contact-details">
-              <h4>WhatsApp Oficial</h4>
-              <p style="margin-bottom: 6px;">Atendimento ágil direto com a equipe de engenharia.</p>
+              <h4 data-i18n="contato_card_wpp_title">WhatsApp Oficial</h4>
+              <p style="margin-bottom: 6px;" data-i18n="contato_card_wpp_desc">Atendimento ágil direto com a equipe de engenharia.</p>
               <a href="https://wa.me/5516981434112" target="_blank" style="font-weight: 700; color: #25d366; font-size: 1.05rem;">
                 +55 (16) 98143-4112 &rarr;
               </a>
@@ -234,8 +234,8 @@
               </svg>
             </div>
             <div class="contact-details">
-              <h4>E-mail de Contato</h4>
-              <p style="margin-bottom: 6px;">Envio de especificações técnicas, editais e propostas formais.</p>
+              <h4 data-i18n="contato_card_mail_title">E-mail de Contato</h4>
+              <p style="margin-bottom: 6px;" data-i18n="contato_card_mail_desc">Envio de especificações técnicas, editais e propostas formais.</p>
               <a href="mailto:marcelomaurinmartins@gmail.com" style="color: var(--primary); font-weight: 600;">
                 marcelomaurinmartins@gmail.com
               </a>
@@ -250,7 +250,7 @@
               </svg>
             </div>
             <div class="contact-details">
-              <h4>Localização</h4>
+              <h4 data-i18n="contato_card_loc_title">Localização</h4>
               <p>Jardinópolis - SP • CEP: 14680-000</p>
               <p style="color: var(--text-dim); font-size: 0.85rem;">Atendimento presencial e remoto para todo o território nacional.</p>
             </div>
@@ -264,7 +264,7 @@
               </svg>
             </div>
             <div class="contact-details">
-              <h4>Horário de Atendimento</h4>
+              <h4 data-i18n="contato_card_time_title">Horário de Atendimento</h4>
               <p>Segunda a Sexta-feira: 08:00 às 18:00</p>
               <p style="color: var(--text-dim); font-size: 0.85rem;">Suporte a plantões para clientes de missão crítica.</p>
             </div>
@@ -282,23 +282,23 @@
 
           <form id="portal-contact-form">
             <div class="form-group">
-              <label for="form-name" class="form-label">Nome Completo *</label>
+              <label for="form-name" class="form-label" data-i18n="contato_lbl_name">Nome Completo *</label>
               <input type="text" id="form-name" class="form-control" placeholder="Seu nome" required>
             </div>
 
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
               <div class="form-group">
-                <label for="form-email" class="form-label">E-mail Corporativo *</label>
+                <label for="form-email" class="form-label" data-i18n="contato_lbl_email">E-mail Corporativo *</label>
                 <input type="email" id="form-email" class="form-control" placeholder="seu@email.com" required>
               </div>
               <div class="form-group">
-                <label for="form-phone" class="form-label">Telefone / WhatsApp com DDD *</label>
+                <label for="form-phone" class="form-label" data-i18n="contato_lbl_phone">Telefone / WhatsApp com DDD *</label>
                 <input type="text" id="form-phone" class="form-control" placeholder="(16) 99999-9999" required>
               </div>
             </div>
 
             <div class="form-group">
-              <label for="form-interest" class="form-label">Solução de Maior Interesse *</label>
+              <label for="form-interest" class="form-label" data-i18n="contato_lbl_sol">Solução de Maior Interesse *</label>
               <select id="form-interest" class="form-control" style="cursor: pointer;">
                 <option value="Sistema de Gestão de Filas">Sistema de Gestão de Filas</option>
                 <option value="Etiquetas de Gôndola e Varejo">Etiquetas de Gôndola & Varejo</option>
@@ -313,11 +313,11 @@
             </div>
 
             <div class="form-group">
-              <label for="form-message" class="form-label">Descreva brevemente a necessidade do seu projeto *</label>
+              <label for="form-message" class="form-label" data-i18n="contato_lbl_msg">Descreva brevemente a necessidade do seu projeto *</label>
               <textarea id="form-message" class="form-control" placeholder="Conte-nos quantos equipamentos ou unidades precisa, tipo de ambiente ou objetivo principal..." required></textarea>
             </div>
 
-            <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;">
+            <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;" data-i18n="contato_btn_submit">
               Enviar Mensagem para os Engenheiros
             </button>
           </form>
@@ -330,27 +330,27 @@
   <section class="section section-alt">
     <div class="container">
       <div class="section-header">
-        <span class="section-tag">Dúvidas Frequentes</span>
-        <h2 class="section-title">Perguntas Comuns</h2>
+        <span class="section-tag" data-i18n="contato_faq_tag">Dúvidas Frequentes</span>
+        <h2 class="section-title" data-i18n="contato_faq_title">Perguntas Comuns</h2>
       </div>
 
       <div style="max-width: 860px; margin: 0 auto; display: flex; flex-direction: column; gap: 1.25rem;">
         <div style="background: var(--bg-card); padding: 1.5rem; border-radius: var(--radius-md); border: 1px solid var(--border-glass);">
-          <h4 style="color: #fff; font-size: 1.1rem; margin-bottom: 0.5rem;">Como funciona o processo de prototipagem de equipamentos?</h4>
+          <h4 style="color: #fff; font-size: 1.1rem; margin-bottom: 0.5rem;" data-i18n="contato_faq_q1">Como funciona o processo de prototipagem de equipamentos?</h4>
           <p style="color: var(--text-muted); font-size: 0.95rem;">
             Iniciamos com uma reunião técnica para entender os requisitos. Em seguida, montamos uma prova de conceito (PoC) em bancada com os microcontroladores e sensores escolhidos. Após a validação lógica, desenhamos a placa de circuito impresso (PCB) definitiva, o gabinete 3D e o software de integração.
           </p>
         </div>
 
         <div style="background: var(--bg-card); padding: 1.5rem; border-radius: var(--radius-md); border: 1px solid var(--border-glass);">
-          <h4 style="color: #fff; font-size: 1.1rem; margin-bottom: 0.5rem;">Os softwares da Maurinsoft exigem mensalidade obrigatória?</h4>
+          <h4 style="color: #fff; font-size: 1.1rem; margin-bottom: 0.5rem;" data-i18n="contato_faq_q2">Os softwares da Maurinsoft exigem mensalidade obrigatória?</h4>
           <p style="color: var(--text-muted); font-size: 0.95rem;">
             Trabalhamos com modelos flexíveis e transparentes. Soluções como o Sistema de Filas podem ser adquiridas com licença definitiva ou suporte técnico continuado, de acordo com o que for mais econômico e vantajoso para o seu negócio.
           </p>
         </div>
 
         <div style="background: var(--bg-card); padding: 1.5rem; border-radius: var(--radius-md); border: 1px solid var(--border-glass);">
-          <h4 style="color: #fff; font-size: 1.1rem; margin-bottom: 0.5rem;">Vocês atendem clientes e empresas fora de São Paulo?</h4>
+          <h4 style="color: #fff; font-size: 1.1rem; margin-bottom: 0.5rem;" data-i18n="contato_faq_q3">Vocês atendem clientes e empresas fora de São Paulo?</h4>
           <p style="color: var(--text-muted); font-size: 0.95rem;">
             Sim! Nossas soluções de software são entregues digitalmente para todo o Brasil e o mundo. Para equipamentos físicos, realizamos o envio seguro por transportadora ou Correios com acompanhamento e homologação remota.
           </p>
