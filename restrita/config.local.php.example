@@ -1,0 +1,33 @@
+<?php
+declare(strict_types=1);
+
+/*
+ * Maurinsoft - Configuração Local Protegida de Banco de Dados
+ *
+ * INSTRUÇÕES:
+ * 1. No servidor da Maurinsoft (Hostinger / cPanel), crie ou copie este arquivo para:
+ *    restrita/config.local.php
+ * 2. Configure os acessos do MySQL gerados no painel hPanel:
+ *    - Host: 'localhost'
+ *    - Porta: '3306'
+ *    - Banco: 'u820932905_maurinsoftdb' (ou o nome do seu banco no painel)
+ *    - Usuário: 'u820932905_mmm' (ou seu usuário MySQL)
+ *    - Senha: 'sua_senha_do_banco'
+ *
+ * NOTA DE SEGURANÇA:
+ * Este arquivo está listado no .gitignore e JAMAIS será enviado ou sobrescrito pelo Git.
+ */
+
+const DB_HOST = 'localhost';
+const DB_PORT = '3306';
+const DB_NAME = 'u820932905_maurinsoftdb';
+const DB_USER = 'u820932905_mmm';
+const DB_PASS = 'SUA_SENHA_AQUI';
+
+/*
+ * Opcional: OAuth Google (Login Social)
+ * Se configurado no Google Cloud Console:
+ */
+// putenv('GOOGLE_CLIENT_ID=seu_client_id.apps.googleusercontent.com');
+// putenv('GOOGLE_CLIENT_SECRET=seu_client_secret');
+// putenv('GOOGLE_REDIRECT_URI=https://maurinsoft.com.br/restrita/google-callback.php');

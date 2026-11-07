@@ -8,21 +8,26 @@ function usuarioAtual(): ?array
         return null;
     }
 
-    $st = db()->prepare(
-        'SELECT u.id,u.nome,u.email,u.papel,u.ativo,u.plano_id,
-                p.codigo AS plano_codigo,p.nome AS plano_nome,p.tipo AS plano_tipo
-           FROM usuarios u
-      LEFT JOIN planos p ON p.id=u.plano_id
-          WHERE u.id=? LIMIT 1'
-    );
-    $st->execute([(int)$_SESSION['usuario_id']]);
-    $u = $st->fetch();
+    try {
+        $st = db()->prepare(
+            'SELECT u.id,u.nome,u.email,u.papel,u.ativo,u.plano_id,
+                    p.codigo AS plano_codigo,p.nome AS plano_nome,p.tipo AS plano_tipo
+               FROM usuarios u
+          LEFT JOIN planos p ON p.id=u.plano_id
+              WHERE u.id=? LIMIT 1'
+        );
+        $st->execute([(int)$_SESSION['usuario_id']]);
+        $u = $st->fetch();
 
-    if (!$u || !(int)$u['ativo']) {
-        logoutLocal();
+        if (!$u || !(int)$u['ativo']) {
+            logoutLocal();
+            return null;
+        }
+        return $u;
+    } catch (Throwable $e) {
+        error_log('Erro ao obter usuarioAtual: ' . $e->getMessage());
         return null;
     }
-    return $u;
 }
 
 function exigirLogin(): array
@@ -71,17 +76,21 @@ function logoutLocal(): void
 
 function registrarAuditoria(?int $usuarioId, string $acao, ?string $recurso, ?array $detalhe): void
 {
-    $st = db()->prepare(
-        'INSERT INTO auditoria(usuario_id,acao,recurso,detalhe_json,ip)
-         VALUES(?,?,?,?,?)'
-    );
-    $st->execute([
-        $usuarioId,
-        $acao,
-        $recurso,
-        $detalhe ? json_encode($detalhe, JSON_UNESCAPED_UNICODE) : null,
-        $_SERVER['REMOTE_ADDR'] ?? null,
-    ]);
+    try {
+        $st = db()->prepare(
+            'INSERT INTO auditoria(usuario_id,acao,recurso,detalhe_json,ip)
+             VALUES(?,?,?,?,?)'
+        );
+        $st->execute([
+            $usuarioId,
+            $acao,
+            $recurso,
+            $detalhe ? json_encode($detalhe, JSON_UNESCAPED_UNICODE) : null,
+            $_SERVER['REMOTE_ADDR'] ?? null,
+        ]);
+    } catch (Throwable $e) {
+        error_log('Falha ao registrar auditoria: ' . $e->getMessage());
+    }
 }
 
 function inicioPeriodo(string $periodo): string

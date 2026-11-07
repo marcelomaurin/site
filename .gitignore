@@ -1,0 +1,11 @@
+# Configurações locais sensíveis (não versionar senhas no GitHub)
+restrita/config.local.php
+*.local.php
+.env
+.env.*
+!.env.example
+
+# Logs e arquivos temporários
+*.log
+.DS_Store
+Thumbs.db

@@ -22,6 +22,8 @@ CREATE TABLE usuarios (
   id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   nome VARCHAR(150) NOT NULL,
   email VARCHAR(190) NOT NULL UNIQUE,
+  google_sub VARCHAR(255) NULL,
+  avatar_url VARCHAR(500) NULL,
   senha_hash VARCHAR(255) NOT NULL,
   papel ENUM('admin','usuario') NOT NULL DEFAULT 'usuario',
   plano_id INT UNSIGNED NULL,
@@ -30,6 +32,8 @@ CREATE TABLE usuarios (
   ultimo_login DATETIME NULL,
   criado_em DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   atualizado_em DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  UNIQUE KEY uq_usuarios_google_sub (google_sub),
+  INDEX ix_usuarios_plano (plano_id),
   CONSTRAINT fk_usuario_plano FOREIGN KEY (plano_id) REFERENCES planos(id)
 ) ENGINE=InnoDB;
 

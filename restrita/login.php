@@ -2,22 +2,38 @@
 declare(strict_types=1);
 require_once __DIR__ . '/auth.php';
 
-if ($u = usuarioAtual()) {
-    header('Location: ' . ($u['papel'] === 'admin' ? 'admin/index.php' : 'index.php'));
-    exit;
+try {
+    if ($u = usuarioAtual()) {
+        header('Location: ' . ($u['papel'] === 'admin' ? 'admin/index.php' : 'index.php'));
+        exit;
+    }
+} catch (Throwable $e) {
+    error_log('Erro ao verificar sessão do usuário: ' . $e->getMessage());
 }
 
 $erro = trim((string)($_GET['erro'] ?? ''));
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = trim($_POST['email'] ?? '');
     $senha = (string)($_POST['senha'] ?? '');
 
-    if (loginUsuario($email, $senha)) {
-        $u = usuarioAtual();
-        header('Location: ' . ($u && $u['papel'] === 'admin' ? 'admin/index.php' : 'index.php'));
-        exit;
+    try {
+        if (!dbConfigurado()) {
+            $erro = 'Acesso ao banco de dados não configurado. Crie o arquivo restrita/config.local.php no servidor com os acessos do MySQL.';
+        } elseif (loginUsuario($email, $senha)) {
+            $u = usuarioAtual();
+            header('Location: ' . ($u && $u['papel'] === 'admin' ? 'admin/index.php' : 'index.php'));
+            exit;
+        } else {
+            $erro = 'Usuário/e-mail ou senha inválidos.';
+        }
+    } catch (PDOException $e) {
+        error_log('Erro de banco no login: ' . $e->getMessage());
+        $erro = 'Não foi possível conectar ao banco de dados MySQL (' . e(defined('DB_NAME') ? DB_NAME : 'indefinido') . '). Verifique o arquivo restrita/config.local.php no servidor.';
+    } catch (Throwable $e) {
+        error_log('Erro geral no login: ' . $e->getMessage());
+        $erro = 'Falha ao autenticar no servidor: ' . $e->getMessage();
     }
-    $erro = 'Usuário/e-mail ou senha inválidos.';
 }
 ?>
 <!DOCTYPE html>
@@ -37,6 +53,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     .google-btn{width:100%;display:flex;align-items:center;justify-content:center;gap:.7rem;background:#fff;color:#1f1f1f;border:1px solid #dadce0;border-radius:8px;padding:.8rem 1rem;font-weight:600;text-decoration:none}
     .google-btn:hover{background:#f8f9fa}
     .google-g{font-weight:800;font-size:1.1rem;color:#4285f4}
+    .alert-banner{padding:12px 14px;margin-bottom:1.25rem;border-radius:8px;font-size:.85rem;line-height:1.5}
+    .alert-banner.error{background:rgba(239,68,68,.15);border:1px solid #ef4444;color:#fca5a5}
+    .alert-banner.warn{background:rgba(234,179,8,.12);border:1px solid rgba(234,179,8,.45);color:#fde047}
+    .alert-banner code{background:rgba(0,0,0,.3);padding:2px 5px;border-radius:4px;color:#fff}
   </style>
 </head>
 <body>
@@ -48,9 +68,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <section class="login-card">
     <div class="login-badge">🔒 AMBIENTE SEGURO • PRESTAÇÃO DE SERVIÇOS</div>
     <h1 style="text-align:center;color:#fff;margin-bottom:.5rem">Espaço Restrito</h1>
-    <p style="text-align:center;color:var(--text-muted);margin-bottom:2rem">Entre com sua conta. Seu perfil, plano, serviços e limites são identificados automaticamente.</p>
+    <p style="text-align:center;color:var(--text-muted);margin-bottom:1.75rem">Entre com sua conta. Seu perfil, plano, serviços e limites são identificados automaticamente.</p>
 
-    <?php if ($erro): ?><div style="padding:10px;margin-bottom:1rem;border-radius:6px;background:rgba(239,68,68,.15);border:1px solid #ef4444;color:#fca5a5"><?=e($erro)?></div><?php endif; ?>
+    <?php if ($erro): ?>
+      <div class="alert-banner error"><?=e($erro)?></div>
+    <?php endif; ?>
+
+    <?php if (!dbConfigurado()): ?>
+      <div class="alert-banner warn">
+        <strong>⚠️ Banco de Dados Não Configurado</strong><br>
+        O arquivo de acesso ao MySQL ainda não foi criado no servidor.<br>
+        Para ativar, crie <code>restrita/config.local.php</code> a partir de <code>config.local.php.example</code>.
+      </div>
+    <?php endif; ?>
 
     <?php if (googleOAuthConfigurado()): ?>
       <a class="google-btn" href="google-login.php"><span class="google-g">G</span> Continuar com Google</a>
@@ -72,7 +102,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       </div>
       <button class="btn btn-primary btn-lg" style="width:100%" type="submit">Entrar no Espaço Restrito</button>
     </form>
-    <div class="login-note">Contas Google novas entram como usuário gratuito. Privilégios administrativos nunca são concedidos automaticamente.</div>
+    <div class="login-note">
+      Contas Google novas entram como usuário gratuito. Privilégios administrativos nunca são concedidos automaticamente.
+      <div style="margin-top: 10px; text-align: center;">
+        <a href="diagnostico.php" style="color: var(--text-dim); text-decoration: underline; font-size: 0.78rem;">Verificar Status do Banco (Diagnóstico)</a>
+      </div>
+    </div>
   </section>
 </main>
 </body>
