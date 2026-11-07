@@ -29,7 +29,7 @@ function envValue(string $name, string $default = ''): string
     return $v === false ? $default : trim((string)$v);
 }
 
-// Mapeia configurações da raiz ($host, $dbname, $user, $password, etc.) ou fallback de produção
+// Mapeia configurações da raiz ($host, $dbname, $user, $password, etc.) ou variáveis de ambiente
 if (!defined('DB_HOST')) {
     $val = $host ?? $db_host ?? envValue('DB_HOST', 'localhost');
     define('DB_HOST', (string)$val);
@@ -39,21 +39,21 @@ if (!defined('DB_PORT')) {
     define('DB_PORT', (string)$val);
 }
 if (!defined('DB_NAME')) {
-    $val = $dbname ?? $db_name ?? envValue('DB_NAME', 'u820932905_maurinsoftdb');
+    $val = $dbname ?? $db_name ?? envValue('DB_NAME', '');
     define('DB_NAME', (string)$val);
 }
 if (!defined('DB_USER')) {
-    $val = $user ?? $db_user ?? envValue('DB_USER', 'u820932905_mmm');
+    $val = $user ?? $db_user ?? envValue('DB_USER', '');
     define('DB_USER', (string)$val);
 }
 if (!defined('DB_PASS')) {
-    $val = $password ?? $db_pass ?? $pass ?? envValue('DB_PASS', 'Marcella@12345');
+    $val = $password ?? $db_pass ?? $pass ?? envValue('DB_PASS', '');
     define('DB_PASS', (string)$val);
 }
 
 function dbConfigurado(): bool
 {
-    return defined('DB_PASS') && DB_PASS !== '' && DB_PASS !== 'ALTERE_AQUI';
+    return defined('DB_PASS') && DB_PASS !== '' && defined('DB_NAME') && DB_NAME !== '' && defined('DB_USER') && DB_USER !== '';
 }
 
 /*

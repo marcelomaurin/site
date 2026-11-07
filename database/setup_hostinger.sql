@@ -1,5 +1,5 @@
 -- Maurinsoft - Script de Inicialização para Hospedagem Hostinger / cPanel
--- Importe este arquivo diretamente na aba SQL do phpMyAdmin selecionando seu banco de dados (ex: u820932905_maurinsoftdb).
+-- Importe este arquivo diretamente na aba SQL do phpMyAdmin selecionando seu banco de dados.
 -- NÃO requer privilégios de ROOT ou CREATE DATABASE.
 
 CREATE TABLE IF NOT EXISTS planos (

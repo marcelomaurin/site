@@ -249,11 +249,11 @@ if (dbConfigurado()) {
       </tr>
       <tr>
         <td>Banco de Dados (DB_NAME)</td>
-        <td><strong><?=e(defined('DB_NAME') ? DB_NAME : 'u820932905_maurinsoftdb')?></strong></td>
+        <td><strong><?=e(defined('DB_NAME') && DB_NAME !== '' ? DB_NAME : '(não definido)')?></strong></td>
       </tr>
       <tr>
         <td>Usuário (DB_USER)</td>
-        <td><strong><?=e(defined('DB_USER') ? DB_USER : 'u820932905_mmm')?></strong></td>
+        <td><strong><?=e(defined('DB_USER') && DB_USER !== '' ? DB_USER : '(não definido)')?></strong></td>
       </tr>
       <tr>
         <td>Senha (DB_PASS)</td>
