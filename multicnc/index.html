@@ -165,6 +165,368 @@
       color: var(--text-muted, #94a3b8);
       line-height: 1.45;
     }
+  
+    /* --- Interactive Pipeline Boxes & Floating Modal --- */
+    .flow-steps {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin: 2rem 0 1.5rem 0;
+    }
+    .flow-step-btn {
+      background: var(--bg-card, #131c2e);
+      border: 1px solid var(--border-color, #22324d);
+      border-radius: 10px;
+      padding: 14px 22px;
+      font-weight: 700;
+      color: var(--text-heading, #fff);
+      font-size: 0.95rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      position: relative;
+      user-select: none;
+    }
+    .flow-step-btn:hover {
+      border-color: #38bdf8;
+      background: #19273f;
+      color: #38bdf8;
+      transform: translateY(-4px) scale(1.03);
+      box-shadow: 0 10px 25px rgba(56, 189, 248, 0.25);
+    }
+    .flow-step-btn:focus-visible {
+      outline: 2px solid #38bdf8;
+      outline-offset: 3px;
+    }
+    .flow-step-btn .step-badge {
+      font-size: 0.65rem;
+      background: rgba(56, 189, 248, 0.15);
+      color: #38bdf8;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      padding: 2px 6px;
+      border-radius: 4px;
+      letter-spacing: normal;
+      text-transform: none;
+      font-weight: 600;
+    }
+    .flow-step-btn.highlight {
+      border-color: rgba(34, 211, 238, 0.5);
+      color: #22d3ee;
+    }
+
+    /* Modal Backdrop */
+    .flow-modal-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(5, 11, 20, 0.88);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 99999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      opacity: 0;
+      transition: opacity 0.25s ease-out;
+    }
+    .flow-modal-backdrop.active {
+      display: flex;
+      opacity: 1;
+    }
+
+    /* Modal Dialog Container */
+    .flow-modal-dialog {
+      background: #0d1726;
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      border-radius: 16px;
+      width: 100%;
+      max-width: 1060px;
+      max-height: 92vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 25px 60px -10px rgba(0, 0, 0, 0.85), 0 0 35px rgba(56, 189, 248, 0.2);
+      animation: modalSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      overflow: hidden;
+    }
+    @keyframes modalSlideUp {
+      from { transform: translateY(24px) scale(0.97); opacity: 0; }
+      to { transform: translateY(0) scale(1); opacity: 1; }
+    }
+
+    /* Modal Header */
+    .flow-modal-header {
+      padding: 1.25rem 1.75rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      background: #091220;
+    }
+    .flow-modal-title-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .flow-modal-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #38bdf8;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .flow-modal-title {
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: #fff;
+      margin: 0;
+      line-height: 1.25;
+    }
+    .flow-modal-subtitle {
+      font-size: 0.9rem;
+      color: var(--text-muted, #94a3b8);
+      margin: 0;
+    }
+    .flow-modal-close-btn {
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #94a3b8;
+      border-radius: 8px;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.25rem;
+      transition: all 0.2s ease;
+      flex-shrink: 0;
+    }
+    .flow-modal-close-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      border-color: rgba(255, 255, 255, 0.3);
+      transform: scale(1.05);
+    }
+
+    /* Modal Body (Scrollable) */
+    .flow-modal-body {
+      padding: 1.5rem 1.75rem;
+      overflow-y: auto;
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+    @media (max-width: 860px) {
+      .flow-modal-body {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Concept & Technical Column */
+    .flow-modal-content {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      font-size: 0.92rem;
+      line-height: 1.6;
+      color: #cbd5e1;
+    }
+    .flow-tech-box {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+    }
+    .flow-tech-box h4 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #38bdf8;
+      margin: 0 0 8px 0;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .flow-tech-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 0.88rem;
+    }
+    .flow-tech-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    .flow-tech-list li::before {
+      content: "▹";
+      color: #38bdf8;
+      font-weight: bold;
+    }
+
+    /* Rotating Photos Carousel Column */
+    .flow-carousel-container {
+      background: #060b13;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+      position: sticky;
+      top: 0;
+    }
+    .flow-carousel-viewport {
+      position: relative;
+      width: 100%;
+      height: 320px;
+      background: #020617;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .flow-carousel-img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      transition: opacity 0.35s ease, transform 0.35s ease;
+      opacity: 1;
+    }
+    .flow-carousel-counter {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(0, 0, 0, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(4px);
+      color: #38bdf8;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 6px;
+      z-index: 2;
+    }
+    .flow-carousel-nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(13, 23, 38, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #fff;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      z-index: 2;
+      font-size: 1.1rem;
+    }
+    .flow-carousel-nav-btn:hover {
+      background: #38bdf8;
+      color: #020617;
+      border-color: #38bdf8;
+      transform: translateY(-50%) scale(1.1);
+    }
+    .flow-carousel-nav-btn.prev { left: 10px; }
+    .flow-carousel-nav-btn.next { right: 10px; }
+
+    .flow-carousel-caption {
+      padding: 10px 14px;
+      background: #091220;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 0.82rem;
+      color: #94a3b8;
+      line-height: 1.4;
+      min-height: 52px;
+      display: flex;
+      align-items: center;
+    }
+    .flow-carousel-dots {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 8px 12px;
+      background: #060b13;
+    }
+    .flow-carousel-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .flow-carousel-dot.active {
+      background: #38bdf8;
+      width: 22px;
+      border-radius: 4px;
+    }
+
+    /* Modal Footer */
+    .flow-modal-footer {
+      padding: 1rem 1.75rem;
+      background: #091220;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .flow-modal-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.88rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+    .flow-modal-btn.secondary {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #cbd5e1;
+    }
+    .flow-modal-btn.secondary:hover {
+      background: rgba(255, 255, 255, 0.12);
+      color: #fff;
+    }
+    .flow-modal-btn.primary {
+      background: #38bdf8;
+      border: 1px solid #38bdf8;
+      color: #020617;
+    }
+    .flow-modal-btn.primary:hover {
+      background: #7dd3fc;
+      transform: translateY(-1px);
+    }
+
   </style>
 </head>
 <body>
@@ -352,18 +714,39 @@
         </p>
 
         <div class="flow-steps">
-          <div class="flow-step-box">1. Ideia</div>
+          <button type="button" class="flow-step-btn" onclick="openStageModal(0)" title="Clique para explorar a etapa Ideia">
+            <span>1. Ideia</span>
+            <span class="step-badge">MultiProject</span>
+          </button>
           <span class="flow-arrow">&rarr;</span>
-          <div class="flow-step-box">2. Projeto (CAD)</div>
+          <button type="button" class="flow-step-btn" onclick="openStageModal(1)" title="Clique para explorar o Projeto CAD">
+            <span>2. Projeto (CAD)</span>
+            <span class="step-badge">MultiCAD</span>
+          </button>
           <span class="flow-arrow">&rarr;</span>
-          <div class="flow-step-box">3. Simulação Física</div>
+          <button type="button" class="flow-step-btn" onclick="openStageModal(2)" title="Clique para explorar a Simulação Física">
+            <span>3. Simulação Física</span>
+            <span class="step-badge">MultiPhysics</span>
+          </button>
           <span class="flow-arrow">&rarr;</span>
-          <div class="flow-step-box">4. Preparação (CAM)</div>
+          <button type="button" class="flow-step-btn" onclick="openStageModal(3)" title="Clique para explorar o CAM">
+            <span>4. Preparação (CAM)</span>
+            <span class="step-badge">MultiSlicer / CNC</span>
+          </button>
           <span class="flow-arrow">&rarr;</span>
-          <div class="flow-step-box">5. Validação 3D</div>
+          <button type="button" class="flow-step-btn" onclick="openStageModal(4)" title="Clique para explorar a Validação 3D">
+            <span>5. Validação 3D</span>
+            <span class="step-badge">SimuCNC</span>
+          </button>
           <span class="flow-arrow">&rarr;</span>
-          <div class="flow-step-box" style="border-color: var(--primary); color: #22d3ee;">6. Fabricação Real</div>
+          <button type="button" class="flow-step-btn highlight" onclick="openStageModal(5)" title="Clique para explorar a Fabricação Real">
+            <span>6. Fabricação Real</span>
+            <span class="step-badge" style="background: rgba(34,211,238,0.25); color: #22d3ee;">MultiCNC</span>
+          </button>
         </div>
+        <p style="font-size: 0.88rem; color: #38bdf8; margin: 0.5rem 0 0 0; display: inline-flex; align-items: center; gap: 6px;">
+          <span>💡</span> <strong>Dica:</strong> Clique em qualquer uma das etapas acima para abrir o formulário detalhado com conceitos dos manuais e fotos rotativas.
+        </p>
       </div>
     </section>
 
@@ -906,5 +1289,543 @@
   </footer>
 
   <script src="../assets/js/main.js"></script>
+
+  <!-- Floating Modal (Formulário Flutuante da Esteira de Fabricação MultiCNC) -->
+  <div id="flow-modal" class="flow-modal-backdrop" onclick="handleBackdropClick(event)">
+    <div class="flow-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modal-stage-title">
+      
+      <!-- Modal Header -->
+      <div class="flow-modal-header">
+        <div class="flow-modal-title-group">
+          <div class="flow-modal-tag">
+            <span id="modal-stage-badge">ETAPA 1 DE 6</span> &bull; <span id="modal-stage-app">MULTIPROJECT</span>
+          </div>
+          <h3 id="modal-stage-title" class="flow-modal-title">1. Definição do Objetivo & Planejamento</h3>
+          <p id="modal-stage-subtitle" class="flow-modal-subtitle">Gestão visual com PERT/CPM, cálculo de caminho crítico e geração de tarefas orientadas por regras.</p>
+        </div>
+        <button type="button" class="flow-modal-close-btn" onclick="closeStageModal()" title="Fechar formulário (ESC)">&times;</button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="flow-modal-body">
+        
+        <!-- Technical details column -->
+        <div class="flow-modal-content">
+          <div id="modal-stage-desc">
+            <!-- Populated dynamically -->
+          </div>
+
+          <div class="flow-tech-box">
+            <h4>⚙️ Módulos & Ferramentas Envolvidas</h4>
+            <div id="modal-stage-tools" style="font-size: 0.88rem; color: #e2e8f0;">
+              <!-- Populated dynamically -->
+            </div>
+          </div>
+
+          <div class="flow-tech-box">
+            <h4>📐 Especificações & Regras de Engenharia</h4>
+            <ul id="modal-stage-specs" class="flow-tech-list">
+              <!-- Populated dynamically -->
+            </ul>
+          </div>
+
+          <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+            <a id="modal-manual-link" href="#" target="_blank" rel="noopener" class="flow-modal-btn primary" style="font-size: 0.82rem;">
+              <span>📖</span> <span id="modal-manual-text">Abrir Manual Técnico</span>
+            </a>
+            <a id="modal-git-link" href="https://github.com/marcelomaurin/multicnc" target="_blank" rel="noopener" class="flow-modal-btn secondary" style="font-size: 0.82rem;">
+              <span>📁</span> <span>Repositório GitHub</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Rotating Carousel Column -->
+        <div class="flow-carousel-container" onmouseenter="pauseCarousel()" onmouseleave="resumeCarousel()">
+          <div class="flow-carousel-viewport">
+            <span id="carousel-counter" class="flow-carousel-counter">Foto 1 de 3</span>
+            <button type="button" class="flow-carousel-nav-btn prev" onclick="prevSlide()" title="Foto anterior">&#10094;</button>
+            <img id="carousel-img" class="flow-carousel-img" src="" alt="Captura da etapa">
+            <button type="button" class="flow-carousel-nav-btn next" onclick="nextSlide()" title="Próxima foto">&#10095;</button>
+          </div>
+          <div id="carousel-caption" class="flow-carousel-caption">
+            <!-- Caption -->
+          </div>
+          <div id="carousel-dots" class="flow-carousel-dots">
+            <!-- Dots -->
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="flow-modal-footer">
+        <button type="button" id="modal-prev-stage-btn" class="flow-modal-btn secondary" onclick="prevStage()">
+          &larr; Etapa Anterior
+        </button>
+
+        <div style="font-size: 0.82rem; color: #64748b; font-weight: 600;">
+          Use as setas &larr; &rarr; para navegar nas fotos ou etapas
+        </div>
+
+        <div style="display: flex; gap: 8px;">
+          <button type="button" class="flow-modal-btn secondary" onclick="closeStageModal()">
+            Fechar
+          </button>
+          <button type="button" id="modal-next-stage-btn" class="flow-modal-btn primary" onclick="nextStage()">
+            Próxima Etapa &rarr;
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    // --- Dados Técnicos Oficiais das 6 Etapas Extraídos do Git e Manuais ---
+    const PIPELINE_STAGES = [
+      {
+        stepNum: 1,
+        app: "MultiProject",
+        badge: "ETAPA 1 DE 6 • PLANEJAMENTO",
+        title: "1. Ideia: Objetivo, Escopo & Caminho Crítico",
+        subtitle: "Decomposição em tarefas, lista de materiais (BOM), método PERT/CPM e cronograma visual em Gantt.",
+        desc: "<p>O <strong>MultiProject</strong> é a porta de entrada para qualquer fabricação digital na suíte. O desenvolvimento não começa desenhando sem rumo: inicia-se pela formalização do <strong>Objetivo</strong>, delimitando o escopo e os critérios mensuráveis de sucesso.</p><p>A partir dos modelos integrados (<em>Peça Impressa</em>, <em>Placa Eletrônica</em> e <em>Motor DC</em>), o motor de inferência analisa parâmetros de engenharia como carga mecânica, temperatura máxima de trabalho, rotação e limites elétricos, sugerindo automaticamente as tarefas técnicas necessárias.</p>",
+        tools: "<strong>MultiProject</strong> (<code>bin/multiproject.exe</code>) &bull; Formato de arquivo do projeto: <code>.mproj</code> e <code>.msuite</code>.",
+        specs: [
+          "Cálculo matemático de folgas livres e dependências pelo método do Caminho Crítico (PERT/CPM).",
+          "Visualização bidirecional: Diagrama de Rede de Tarefas e Gráfico de Gantt interativo.",
+          "Campos técnicos inteligentes: <code>gravacao</code>, <code>bom</code>, <code>carga</code>, <code>temperatura</code>, <code>rotacao</code> e <code>revisar_tarefa</code>.",
+          "Histórico de decisões e controle de revisão com cancelamento ou aceitação de sugestões automáticas."
+        ],
+        manualLink: "https://github.com/marcelomaurin/multicnc/blob/main/docs/Manuals/MultiProject_Guia_Rapido.md",
+        manualText: "Guia Rápido do MultiProject (GitHub)",
+        gitFolder: "https://github.com/marcelomaurin/multicnc/tree/main/multiproject",
+        images: [
+          {
+            src: "imgs/multiproject_motor_gantt.png",
+            caption: "Gráfico de Gantt do MultiProject: visualização temporal das tarefas de fabricação com identificação do caminho crítico para montagem de Motor DC."
+          },
+          {
+            src: "imgs/multiproject_motor_rede.png",
+            caption: "Diagrama de Rede PERT/CPM: dependências entre fabricação mecânica, circuito impresso e montagem final com cálculo de folgas."
+          },
+          {
+            src: "imgs/multiproject_sugestoes.png",
+            caption: "Motor de Sugestões Técnicas: análise de regras e proposta de tarefas de validação estrutural e térmica antes de iniciar o CAD."
+          }
+        ]
+      },
+      {
+        stepNum: 2,
+        app: "MultiCAD & MultiAssembly",
+        badge: "ETAPA 2 DE 6 • MODELAGEM 3D",
+        title: "2. Projeto: CAD Paramétrico & Montagens Mecânicas",
+        subtitle: "Esboços 2D com restrições geométricas, modelagem baseada em operações (features) e mates de montagem.",
+        desc: "<p>O <strong>MultiCAD</strong> é o modelador paramétrico de peças mecânicas da suíte. Inspirado nas melhores práticas de engenharia (como a árvore de operações do SolidWorks), ele permite desenhar sketches com restrições exatas (paralelo, tangente, concêntrico, horizontal) e cotas dinâmicas acionadas por equações matemáticas (ex: <code>35-10mm</code>, <code>Cubo.aresta*2</code>).</p><p>Possui biblioteca nativa de <strong>engrenagens de dentes retos, helicoidais e espinha de peixe</strong>, geração de <strong>roscas reais em hélice</strong>, padrões lineares/circulares e corte por revolução. O <strong>MultiAssembly</strong> une as peças em conjuntos mecânicos com restrições cinemáticas antes de fabricar.</p>",
+        tools: "<strong>MultiCAD</strong> (<code>bin/multicad.exe</code>) &bull; <strong>MultiAssembly</strong> (<code>bin/multiassembly.exe</code>) &bull; Formatos: <code>.mcad</code>, <code>.masm</code>, exportação para STL e DXF.",
+        specs: [
+          "Modelagem orientada a sketches: restrições de tangência, paralelismo, ponto médio e coincidência.",
+          "Features avançadas: ressalto e corte extrudado/revolucionado, chanfro, filete, casca e rosca em hélice.",
+          "Gerador nativo de engrenagens externas, internas e cremalheiras de precisão micrométrica.",
+          "Exportação direta de malhas STL perfeitamente orientadas para o MultiSlicer e perfis DXF para laser."
+        ],
+        manualLink: "https://github.com/marcelomaurin/multicnc/blob/main/docs/Manuals/Manual_do_Usuario_MultiCAD_0.0.8.4_PT-BR.pdf",
+        manualText: "Manual Ilustrado do MultiCAD (PDF 34 págs)",
+        gitFolder: "https://github.com/marcelomaurin/multicnc/tree/main/multicad",
+        images: [
+          {
+            src: "imgs/Multicad01.png",
+            caption: "Interface paramétrica do MultiCAD: visualização sombreada com arestas, árvore de operações FeatureManager e barra de ferramentas."
+          },
+          {
+            src: "imgs/Multicad02.png",
+            caption: "Corte e modelagem de sólidos 3D com precisão dimensional milimétrica e medição de vértices."
+          },
+          {
+            src: "imgs/Multicad03.png",
+            caption: "Esboço 2D dinâmico: posicionamento de restrições geométricas, arcos, círculos e cotas de projeto."
+          },
+          {
+            src: "imgs/Multicad04.png",
+            caption: "Geração de rosca real em hélice e engrenagens mecânicas com ângulo de pressão e módulo customizados."
+          },
+          {
+            src: "imgs/Multicad05.png",
+            caption: "Definição de materiais na peça com densidade real e cálculo de massa volumétrica."
+          },
+          {
+            src: "imgs/Multicad06.png",
+            caption: "Exportação direta da malha STL pronta para fatiamento FDM no MultiSlicer."
+          }
+        ]
+      },
+      {
+        stepNum: 3,
+        app: "MultiPhysics",
+        badge: "ETAPA 3 DE 6 • ANÁLISE FÍSICA",
+        title: "3. Simulação Física Multidomínio (FEM & Térmica)",
+        subtitle: "Elementos Finitos (FEM TET4/TET10), tensões de Von Mises, fluxo térmico, modos de vibração e circuitos SPICE.",
+        desc: "<p>Antes de gastar matéria-prima, o <strong>MultiPhysics</strong> valida a integridade física do projeto. Ele importa a geometria do MultiCAD/MultiAssembly e gera automaticamente malhas tetraédricas de alta fidelidade (TET4 e TET10 quadrático).</p><p>Executa simulação <strong>estrutural estática linear</strong> (com fixações, forças concentradas, pressão e gravidade com convergência &lt; 5%), <strong>estudos térmicos e termomecânicos</strong> (dilatação e gradiente de temperatura), além de <strong>análise modal</strong> por iteração em subespaço para evitar frequências de ressonância mecânica durante o trabalho da máquina.</p>",
+        tools: "<strong>MultiPhysics</strong> (<code>bin/multiphysics.exe</code>) &bull; Formato: <code>.mphys</code> &bull; Solvers: FEM próprio de alta velocidade e integração CalculiX (<code>.inp</code>/<code>.frd</code>).",
+        specs: [
+          "Matrizes esparsas com métodos Cholesky e Gradiente Conjugado Pré-condicionado (PCG).",
+          "Mapas térmicos permanentes com condução, convecção e potência dissipada.",
+          "Análise de tensões de Von Mises e deslocamentos com escala de cores gradiente.",
+          "Simulação de sistemas eletromecânicos acoplados (motor DC com carga, indutância, PWM e controle PI)."
+        ],
+        manualLink: "https://github.com/marcelomaurin/multicnc/blob/main/docs/Manuals/Manual_do_Usuario_MultiPhysics_0.2.0.0_PT-BR.pdf",
+        manualText: "Manual Ilustrado do MultiPhysics (PDF 28 págs)",
+        gitFolder: "https://github.com/marcelomaurin/multicnc/tree/main/multiphysics",
+        images: [
+          {
+            src: "imgs/multiphysics01.png",
+            caption: "Geração de malha de elementos finitos tetraédricos (TET4/TET10) sobre os componentes da montagem mecânica."
+          },
+          {
+            src: "imgs/multiphysics02.png",
+            caption: "Gradiente de tensões de Von Mises destacando concentração de esforços e deformação elástica."
+          },
+          {
+            src: "imgs/multiphysics03.png",
+            caption: "Simulação térmica e transitória com cálculo de elevação de temperatura e equilíbrio térmico."
+          }
+        ]
+      },
+      {
+        stepNum: 4,
+        app: "MultiSlicer, LaserArt & MakePCB",
+        badge: "ETAPA 4 DE 6 • FABRICAÇÃO CAM",
+        title: "4. Preparação (CAM): Fatiamento & Trajetórias",
+        subtitle: "Geração de código G otimizado para Impressão 3D (FDM), Corte Laser, Fresamento de PCB e Routers CNC.",
+        desc: "<p>A etapa CAM transforma a geometria tridimensional ou vetorial em trajetórias de máquinas reais (G-code). Em vez de uma ferramenta genérica, a suíte conta com <strong>aplicações especializadas para cada processo de fabricação</strong>:</p><p>O <strong>MultiSlicer</strong> realiza fatiamento FDM com preenchimentos avançados e suportes; o <strong>LaserArt</strong> cuida do nesting e corte/gravação a laser; o <strong>MakePCB</strong> e <strong>RouterPCB</strong> isolam trilhas de circuitos eletrônicos a partir de arquivos Gerber/Excellon; e o <strong>MakeRouter</strong> calcula desbastes, bolsões e pontes de sustentação (tabs) para madeira e alumínio.</p>",
+        tools: "<strong>MultiSlicer</strong>, <strong>LaserArt</strong>, <strong>MakePCB</strong>, <strong>MakeRouter</strong>, <strong>LaserPCB</strong> e <strong>RouterPCB</strong> &bull; Saída: Código G (ISO 6983 / GRBL / Marlin).",
+        specs: [
+          "MultiSlicer: controle de perímetros, infill retilíneo/colmeia/giroide, suportes e perfis PLA/ABS/PETG.",
+          "LaserArt: ordenação automática de corte para menor curso ocioso e gravação raster com dithering.",
+          "MakePCB: isolamento de pistas com compensação de fresa cônica (V-bit) e nivelamento de superfície.",
+          "MakeRouter: fresamento 2.5D com geração de tabs de fixação, rampa de entrada e bolsões inteligentes."
+        ],
+        manualLink: "https://github.com/marcelomaurin/multicnc/blob/main/docs/Manuals/Manual_do_Usuario_MultiSlicer_0.1.0.0_PT-BR.pdf",
+        manualText: "Manual do MultiSlicer (PDF) & Manuais CAM",
+        gitFolder: "https://github.com/marcelomaurin/multicnc/tree/main/multislicer",
+        images: [
+          {
+            src: "imgs/multislicer_projeto.png",
+            caption: "MultiSlicer: configuração de projeto, orientação da peça e parâmetros de camadas."
+          },
+          {
+            src: "imgs/multislicer_material.png",
+            caption: "MultiSlicer: catálogo de filamentos com parâmetros térmicos de fusão, retração e resfriamento."
+          },
+          {
+            src: "imgs/multislicer_qualidade.png",
+            caption: "MultiSlicer: ajuste fino de qualidade superficial, densidade de preenchimento e perímetro."
+          },
+          {
+            src: "imgs/multislicer_previa.png",
+            caption: "MultiSlicer: inspeção visual camada a camada do código G com simulação do bico extrusor."
+          },
+          {
+            src: "imgs/Laserart01.png",
+            caption: "LaserArt: importação vetorial e mapa de corte e gravação por potência laser."
+          },
+          {
+            src: "imgs/Makepcb01.png",
+            caption: "MakePCB: conversão de arquivos Gerber para trajetórias de isolamento de circuitos impressos."
+          },
+          {
+            src: "imgs/Makerouter01.png",
+            caption: "MakeRouter: estratégias de fresamento em desbaste, canais e furação para chapas."
+          }
+        ]
+      },
+      {
+        stepNum: 5,
+        app: "SimuCNC 3D",
+        badge: "ETAPA 5 DE 6 • GÊMEO DIGITAL",
+        title: "5. Validação 3D: Gêmeo Digital & Emulação de Firmware",
+        subtitle: "Simulador físico tridimensional em tempo real com servidores TCP e emulação completa de GRBL e Marlin.",
+        desc: "<p>O <strong>SimuCNC</strong> é o gêmeo digital tridimensional da oficina mecânica. Em vez de testar um código G desconhecido direto na máquina — correndo o risco de quebrar fresas caras, colidir cabeçotes ou perfurar a mesa —, o operador conecta o MultiCNC ao SimuCNC.</p><p>O SimuCNC atua como um <strong>servidor de hardware virtual</strong>: responde aos comandos seriais ou por soquetes de rede TCP exatamente como uma placa controladora física (GRBL 1.1 ou Marlin). Na tela 3D com controles orbitais, o usuário vê o movimento dos 3 eixos e a remoção de material ou deposição de filamento em tempo real.</p>",
+        tools: "<strong>SimuCNC</strong> (<code>bin/SimuCNC.exe</code>) &bull; Protocolos: Emulação de portas COM virtuais (com0com) e Servidor TCP nativo (sem drivers adicionais).",
+        specs: [
+          "Ambiente 3D interativo com suporte para 3 equipamentos: CNC Router, CNC Laser e Impressora 3D.",
+          "Detecção visual de violação de fim de curso (soft limits) e percursos fora da área útil.",
+          "Emulação Marlin completa via TCP (respostas instantâneas M115 de identificação e M105 de temperatura).",
+          "Zero desperdício de material bruto durante a fase de validação e treinamento de operadores."
+        ],
+        manualLink: "https://github.com/marcelomaurin/multicnc/blob/main/docs/SIMUCNC_TCP.md",
+        manualText: "Documentação SimuCNC TCP & Redes (GitHub)",
+        gitFolder: "https://github.com/marcelomaurin/multicnc/tree/main/src",
+        images: [
+          {
+            src: "imgs/tres_maquinas_3d.png",
+            caption: "Gêmeo digital 3D do SimuCNC: modelos cinemáticos para CNC Router, CNC Laser e Impressora 3D."
+          },
+          {
+            src: "imgs/simucnc_router_ao_vivo.png",
+            caption: "Simulação ao vivo de CNC Router com cabeçote em movimento e monitoramento em tempo real."
+          },
+          {
+            src: "imgs/ms_preview3d.png",
+            caption: "Inspeção visual espacial da trajetória de corte antes do envio para a máquina física."
+          },
+          {
+            src: "imgs/ms_preview3d_layer.png",
+            caption: "Análise 3D por camadas garantindo integridade das alturas Z e segurança na furação."
+          }
+        ]
+      },
+      {
+        stepNum: 6,
+        app: "MultiCNC",
+        badge: "ETAPA 6 DE 6 • PRODUÇÃO FINAL",
+        title: "6. Fabricação Real: Controle de Máquinas & Produção",
+        subtitle: "Comunicação serial robusta, zeramento por bloco de contato (Probe Z), frame laser e controle por joystick.",
+        desc: "<p>A etapa final é a execução física no chão de fábrica através do <strong>MultiCNC</strong>. Ele conecta sua CNC Router, gravadora Laser ou Impressora 3D via porta serial USB ou rede TCP, oferecendo controle industrial milimétrico.</p><p>Possui rotina de <strong>Zeramento por Bloco (Probe Z)</strong> com bloqueio de segurança matemático (impede iniciar se o corte for mais profundo que o bloco menos a folga), funções <strong>Frame e Outline</strong> para conferir a área de trabalho do laser sobre o material bruto, controle térmico PID de bicos/mesa e suporte total a <strong>joysticks analógicos e digitais</strong> com travas contra acionamento involuntário.</p>",
+        tools: "<strong>MultiCNC</strong> (<code>bin/multicnc.exe</code>) &bull; Controladoras: GRBL (Arduino, ESP32, CNC Shield) e Marlin (RAMPS, SKR, Makerbase).",
+        specs: [
+          "Streaming contínuo de G-code com buffer seguro e recuperação de interrupções/pausa.",
+          "Zero da peça por bloco de contato: verificação do bloco e trava contra perfuração de mesa.",
+          "Controle manual via Joystick (jogging dos eixos X, Y, Z com acelerações suaves).",
+          "Função Frame/Outline de laser para alinhamento rápido do material antes do disparo."
+        ],
+        manualLink: "https://github.com/marcelomaurin/multicnc/blob/main/docs/Manuals/Manual_do_Usuario_MultiCNC_0.1.0.3_PT-BR.pdf",
+        manualText: "Manual Ilustrado do MultiCNC (PDF 60 págs)",
+        gitFolder: "https://github.com/marcelomaurin/multicnc",
+        images: [
+          {
+            src: "imgs/multicnc_novo_layout.png",
+            caption: "Interface operacional do MultiCNC: coordenadas DRO digitais, gráfico de percurso 2D e painel de comando."
+          },
+          {
+            src: "imgs/multicnc ajuste.webp",
+            caption: "Painel de calibração de passos por milímetro, acelerações e limites de curso dos eixos."
+          },
+          {
+            src: "imgs/multicnc ajuste2.webp",
+            caption: "Ajuste avançado de rotação do spindle, perfis de laser e parâmetros de comunicação."
+          },
+          {
+            src: "imgs/both.png",
+            caption: "Operação integrada: MultiCNC enviando dados de corte sincronizados com a resposta do simulador."
+          }
+        ]
+      }
+    ];
+
+    // --- Estado do Modal e do Carrossel Rotativo ---
+    let currentStageIdx = 0;
+    let currentSlideIdx = 0;
+    let carouselTimer = null;
+    const CAROUSEL_INTERVAL = 4000; // Rotaciona a cada 4 segundos
+
+    function openStageModal(stageIdx) {
+      currentStageIdx = stageIdx;
+      currentSlideIdx = 0;
+
+      const stage = PIPELINE_STAGES[stageIdx];
+      if (!stage) return;
+
+      // Popula dados do modal
+      document.getElementById('modal-stage-badge').innerText = stage.badge;
+      document.getElementById('modal-stage-app').innerText = stage.app.toUpperCase();
+      document.getElementById('modal-stage-title').innerText = stage.title;
+      document.getElementById('modal-stage-subtitle').innerText = stage.subtitle;
+      document.getElementById('modal-stage-desc').innerHTML = stage.desc;
+      document.getElementById('modal-stage-tools').innerHTML = stage.tools;
+
+      // Popula especificações
+      const specsList = document.getElementById('modal-stage-specs');
+      specsList.innerHTML = '';
+      stage.specs.forEach(spec => {
+        const li = document.createElement('li');
+        li.innerText = spec;
+        specsList.appendChild(li);
+      });
+
+      // Links do manual e git
+      const manualLink = document.getElementById('modal-manual-link');
+      manualLink.href = stage.manualLink;
+      document.getElementById('modal-manual-text').innerText = stage.manualText;
+      document.getElementById('modal-git-link').href = stage.gitFolder;
+
+      // Configura botões de navegação entre etapas
+      const prevBtn = document.getElementById('modal-prev-stage-btn');
+      const nextBtn = document.getElementById('modal-next-stage-btn');
+
+      if (stageIdx === 0) {
+        prevBtn.disabled = true;
+        prevBtn.style.opacity = '0.4';
+      } else {
+        prevBtn.disabled = false;
+        prevBtn.style.opacity = '1';
+        prevBtn.innerHTML = `&larr; Etapa ${stageIdx}: ${PIPELINE_STAGES[stageIdx - 1].app}`;
+      }
+
+      if (stageIdx === PIPELINE_STAGES.length - 1) {
+        nextBtn.innerHTML = `Fechar &check;`;
+      } else {
+        nextBtn.innerHTML = `Próxima: ${PIPELINE_STAGES[stageIdx + 1].app} &rarr;`;
+      }
+
+      // Inicializa Carrossel com fotos da etapa
+      renderCarouselDots();
+      updateCarouselSlide();
+      startCarouselTimer();
+
+      // Exibe Modal
+      const modal = document.getElementById('flow-modal');
+      modal.style.display = 'flex';
+      setTimeout(() => {
+        modal.classList.add('active');
+      }, 10);
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeStageModal() {
+      const modal = document.getElementById('flow-modal');
+      modal.classList.remove('active');
+      stopCarouselTimer();
+      setTimeout(() => {
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+      }, 250);
+    }
+
+    function handleBackdropClick(event) {
+      if (event.target.id === 'flow-modal') {
+        closeStageModal();
+      }
+    }
+
+    function nextStage() {
+      if (currentStageIdx < PIPELINE_STAGES.length - 1) {
+        openStageModal(currentStageIdx + 1);
+      } else {
+        closeStageModal();
+      }
+    }
+
+    function prevStage() {
+      if (currentStageIdx > 0) {
+        openStageModal(currentStageIdx - 1);
+      }
+    }
+
+    // --- Lógica do Carrossel Rotativo ---
+    function renderCarouselDots() {
+      const dotsContainer = document.getElementById('carousel-dots');
+      dotsContainer.innerHTML = '';
+      const stage = PIPELINE_STAGES[currentStageIdx];
+      stage.images.forEach((_, idx) => {
+        const dot = document.createElement('div');
+        dot.className = 'flow-carousel-dot' + (idx === 0 ? ' active' : '');
+        dot.title = `Ir para foto ${idx + 1}`;
+        dot.onclick = () => {
+          currentSlideIdx = idx;
+          updateCarouselSlide();
+          resetCarouselTimer();
+        };
+        dotsContainer.appendChild(dot);
+      });
+    }
+
+    function updateCarouselSlide() {
+      const stage = PIPELINE_STAGES[currentStageIdx];
+      const images = stage.images;
+      if (!images || images.length === 0) return;
+
+      if (currentSlideIdx >= images.length) currentSlideIdx = 0;
+      if (currentSlideIdx < 0) currentSlideIdx = images.length - 1;
+
+      const imgElem = document.getElementById('carousel-img');
+      const counterElem = document.getElementById('carousel-counter');
+      const captionElem = document.getElementById('carousel-caption');
+
+      // Efeito de transição suave
+      imgElem.style.opacity = '0';
+      imgElem.style.transform = 'scale(0.96)';
+
+      setTimeout(() => {
+        imgElem.src = images[currentSlideIdx].src;
+        imgElem.alt = images[currentSlideIdx].caption;
+        captionElem.innerHTML = `<strong>Foto ${currentSlideIdx + 1}/${images.length}:</strong> ${images[currentSlideIdx].caption}`;
+        counterElem.innerText = `Foto ${currentSlideIdx + 1} de ${images.length}`;
+
+        imgElem.style.opacity = '1';
+        imgElem.style.transform = 'scale(1)';
+      }, 150);
+
+      // Atualiza dots
+      const dots = document.querySelectorAll('.flow-carousel-dot');
+      dots.forEach((dot, idx) => {
+        if (idx === currentSlideIdx) {
+          dot.classList.add('active');
+        } else {
+          dot.classList.remove('active');
+        }
+      });
+    }
+
+    function nextSlide() {
+      const stage = PIPELINE_STAGES[currentStageIdx];
+      currentSlideIdx = (currentSlideIdx + 1) % stage.images.length;
+      updateCarouselSlide();
+      resetCarouselTimer();
+    }
+
+    function prevSlide() {
+      const stage = PIPELINE_STAGES[currentStageIdx];
+      currentSlideIdx = (currentSlideIdx - 1 + stage.images.length) % stage.images.length;
+      updateCarouselSlide();
+      resetCarouselTimer();
+    }
+
+    function startCarouselTimer() {
+      stopCarouselTimer();
+      carouselTimer = setInterval(() => {
+        const stage = PIPELINE_STAGES[currentStageIdx];
+        if (stage && stage.images.length > 1) {
+          currentSlideIdx = (currentSlideIdx + 1) % stage.images.length;
+          updateCarouselSlide();
+        }
+      }, CAROUSEL_INTERVAL);
+    }
+
+    function stopCarouselTimer() {
+      if (carouselTimer) {
+        clearInterval(carouselTimer);
+        carouselTimer = null;
+      }
+    }
+
+    function pauseCarousel() {
+      stopCarouselTimer();
+    }
+
+    function resumeCarousel() {
+      startCarouselTimer();
+    }
+
+    function resetCarouselTimer() {
+      stopCarouselTimer();
+      startCarouselTimer();
+    }
+
+    // Teclado: ESC para fechar, setas para navegar
+    document.addEventListener('keydown', (e) => {
+      const modal = document.getElementById('flow-modal');
+      if (modal && modal.classList.contains('active')) {
+        if (e.key === 'Escape') {
+          closeStageModal();
+        } else if (e.key === 'ArrowRight') {
+          nextSlide();
+        } else if (e.key === 'ArrowLeft') {
+          prevSlide();
+        }
+      }
+    });
+  </script>
+
 </body>
 </html>
