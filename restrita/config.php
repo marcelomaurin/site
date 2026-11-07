@@ -7,27 +7,20 @@ declare(strict_types=1);
  * Ordem de prioridade para configuração:
  * 1. Arquivo config.php da raiz do site (/public_html/config.php)
  * 2. Arquivo variaveis.php da raiz do site (/public_html/variaveis.php)
- * 3. Arquivo local protegido de restrita: restrita/config.local.php
- * 4. Variáveis de ambiente: DB_HOST, DB_NAME, DB_USER, DB_PASS, DB_PORT
- * 5. Valores padrão de fallback do servidor de produção
+ * 3. Variáveis de ambiente: DB_HOST, DB_NAME, DB_USER, DB_PASS, DB_PORT
+ * 4. Valores padrão de produção do servidor
  */
 
-// 1. Tenta carregar o config.php da raiz do site (public_html/config.php)
+// 1. Carrega o config.php da raiz do site (public_html/config.php)
 $rootConfigFile = dirname(__DIR__) . '/config.php';
 if (is_file($rootConfigFile) && realpath($rootConfigFile) !== realpath(__FILE__)) {
     @include_once $rootConfigFile;
 }
 
-// 2. Tenta carregar variaveis.php da raiz do site (se existir)
+// 2. Carrega variaveis.php da raiz do site (se existir)
 $rootVariaveisFile = dirname(__DIR__) . '/variaveis.php';
 if (is_file($rootVariaveisFile)) {
     @include_once $rootVariaveisFile;
-}
-
-// 3. Tenta carregar config.local.php específico de restrita (se existir)
-$localConfigFile = __DIR__ . '/config.local.php';
-if (is_file($localConfigFile)) {
-    @include_once $localConfigFile;
 }
 
 function envValue(string $name, string $default = ''): string
@@ -36,7 +29,7 @@ function envValue(string $name, string $default = ''): string
     return $v === false ? $default : trim((string)$v);
 }
 
-// Mapeia variáveis legadas da raiz ($host, $dbname, $user, $password, etc.) caso definidas na raiz
+// Mapeia configurações da raiz ($host, $dbname, $user, $password, etc.) ou fallback de produção
 if (!defined('DB_HOST')) {
     $val = $host ?? $db_host ?? envValue('DB_HOST', 'localhost');
     define('DB_HOST', (string)$val);
@@ -65,7 +58,7 @@ function dbConfigurado(): bool
 
 /*
  * OAuth Google
- * Configure no servidor, no config.php da raiz ou em config.local.php:
+ * Configure no config.php da raiz ou no ambiente do servidor:
  *   GOOGLE_CLIENT_ID
  *   GOOGLE_CLIENT_SECRET
  *   GOOGLE_REDIRECT_URI
@@ -127,7 +120,7 @@ function db(): PDO
     }
 
     if (!dbConfigurado()) {
-        throw new PDOException('Credenciais do banco de dados não configuradas. Verifique o arquivo config.php da raiz ou restrita/config.local.php.');
+        throw new PDOException('Credenciais do banco de dados não configuradas. Verifique o arquivo config.php da raiz.');
     }
 
     $dsn = 'mysql:host=' . DB_HOST . ';port=' . DB_PORT . ';dbname=' . DB_NAME . ';charset=utf8mb4';

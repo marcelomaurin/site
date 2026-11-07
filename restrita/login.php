@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     try {
         if (!dbConfigurado()) {
-            $erro = 'Acesso ao banco de dados não configurado. Verifique o arquivo config.php na raiz do site ou restrita/config.local.php.';
+            $erro = 'Acesso ao banco de dados não configurado. Verifique o arquivo config.php na raiz do site.';
         } elseif (loginUsuario($email, $senha)) {
             $u = usuarioAtual();
             header('Location: ' . ($u && $u['papel'] === 'admin' ? 'admin/index.php' : 'index.php'));
@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     } catch (PDOException $e) {
         error_log('Erro de banco no login: ' . $e->getMessage());
-        $erro = 'Não foi possível conectar ao banco de dados MySQL (' . e(defined('DB_NAME') ? DB_NAME : 'indefinido') . '). Verifique o arquivo config.php na raiz ou restrita/config.local.php.';
+        $erro = 'Não foi possível conectar ao banco de dados MySQL (' . e(defined('DB_NAME') ? DB_NAME : 'indefinido') . '). Verifique o arquivo config.php na raiz do site.';
     } catch (Throwable $e) {
         error_log('Erro geral no login: ' . $e->getMessage());
         $erro = 'Falha ao autenticar no servidor: ' . $e->getMessage();
@@ -78,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <div class="alert-banner warn">
         <strong>⚠️ Banco de Dados Não Configurado</strong><br>
         O arquivo de acesso ao MySQL ainda não foi detectado.<br>
-        Configure as credenciais em <code>config.php</code> na raiz do site ou em <code>restrita/config.local.php</code>.
+        Configure as credenciais em <code>config.php</code> na raiz do site.
       </div>
     <?php endif; ?>
 

@@ -142,7 +142,6 @@ if ($acao === 'inicializar_tabelas') {
 // Checagens de ambiente
 $rootConfigExiste = is_file(dirname(__DIR__) . '/config.php');
 $rootVariaveisExiste = is_file(dirname(__DIR__) . '/variaveis.php');
-$localConfigExiste = is_file(__DIR__ . '/config.local.php');
 $extPdo = extension_loaded('pdo');
 $extPdoMysql = extension_loaded('pdo_mysql');
 $phpVersao = PHP_VERSION;
@@ -171,7 +170,7 @@ if (dbConfigurado()) {
         $dbErro = $e->getMessage();
     }
 } else {
-    $dbErro = 'Credenciais não configuradas (DB_PASS vazio ou ausente). Crie restrita/config.local.php.';
+    $dbErro = 'Credenciais não configuradas (DB_PASS vazio ou ausente). Verifique config.php na raiz do site.';
 }
 ?>
 <!DOCTYPE html>
@@ -237,13 +236,8 @@ if (dbConfigurado()) {
       </tr>
       <tr>
         <td>Arquivo config.php (Raiz)</td>
-        <td><?= $rootConfigExiste ? 'Presente na raiz do site' : ($rootVariaveisExiste ? 'variaveis.php presente na raiz' : 'Ausente na raiz') ?></td>
-        <td><span class="status-badge <?= ($rootConfigExiste || $rootVariaveisExiste) ? 'ok' : 'warn' ?>"><?= ($rootConfigExiste || $rootVariaveisExiste) ? 'OK' : 'Opcional' ?></span></td>
-      </tr>
-      <tr>
-        <td>Arquivo config.local.php (Restrita)</td>
-        <td><?= $localConfigExiste ? 'Presente no servidor' : 'Ausente (usando raiz/defaults)' ?></td>
-        <td><span class="status-badge <?= $localConfigExiste ? 'ok' : 'warn' ?>"><?= $localConfigExiste ? 'OK' : 'Opcional' ?></span></td>
+        <td><?= $rootConfigExiste ? 'Presente na raiz do site' : ($rootVariaveisExiste ? 'variaveis.php presente na raiz' : 'Usando credenciais padrão de produção') ?></td>
+        <td><span class="status-badge <?= ($rootConfigExiste || $rootVariaveisExiste) ? 'ok' : 'ok' ?>">OK</span></td>
       </tr>
     </table>
 
@@ -322,19 +316,8 @@ if (dbConfigurado()) {
     <?php else: ?>
       <div style="padding:14px; border-radius:6px; background:rgba(239,68,68,.1); border:1px solid rgba(239,68,68,.3); color:#fca5a5; font-size:0.9rem; line-height:1.6;">
         <strong>Como resolver a falha de conexão:</strong><br>
-        1. No gerenciador de arquivos da Hostinger (ou via FTP/SSH), acesse a pasta <code>restrita/</code>.<br>
-        2. Crie ou edite o arquivo <code>config.local.php</code> com suas credenciais do MySQL:<br>
-        <div class="code-box">
-&lt;?php<br>
-declare(strict_types=1);<br>
-<br>
-const DB_HOST = 'localhost';<br>
-const DB_PORT = '3306';<br>
-const DB_NAME = 'u820932905_maurinsoftdb'; // Seu banco no painel da Hostinger<br>
-const DB_USER = 'u820932905_mmm';          // Seu usuário MySQL no painel<br>
-const DB_PASS = 'SuaSenhaAqui';             // Senha configurada para o usuário MySQL<br>
-        </div>
-        3. Recarregue esta página para validar o status.
+        1. Certifique-se de que o arquivo <code>config.php</code> ou <code>variaveis.php</code> na raiz do site está configurado com o MySQL.<br>
+        2. Recarregue esta página para validar o status.
       </div>
     <?php endif; ?>
 
