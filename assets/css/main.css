@@ -1305,3 +1305,53 @@ textarea.form-control {
     text-align: center;
   }
 }
+
+/* --- Internationalization (i18n) & Language Picker (Cockpit Drone Pattern) --- */
+.lang-picker {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--bg-card, #131c2e);
+  border: 1px solid var(--border-color, #22324d);
+  padding: 4px 10px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+.lang-picker:hover {
+  border-color: #38bdf8;
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.25);
+}
+.lang-picker label {
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+  color: #38bdf8;
+}
+.lang-picker select {
+  background: transparent;
+  color: var(--text-heading, #fff);
+  border: none;
+  outline: none;
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.lang-picker select option {
+  background: #0f172a;
+  color: #fff;
+  padding: 6px 10px;
+}
+
+html[dir="rtl"] {
+  direction: rtl;
+  text-align: right;
+}
+html[dir="rtl"] .dropdown-menu {
+  left: auto;
+  right: 0;
+}
+html[dir="rtl"] .flow-arrow {
+  transform: rotate(180deg);
+}

@@ -22,7 +22,7 @@
       <nav class="nav-menu" aria-label="Navegação Principal">
         <a href="../index.html" class="nav-link">Início</a>
         <a href="../sobre.html" class="nav-link">Sobre Nós</a>
-        <a href="../servicos.html" class="nav-link">Serviços & Prototipagem</a>
+        <a href="servicos.html" class="nav-link" data-i18n="nav_services">Serviços & Prototipagem</a>
         
         <div class="nav-dropdown">
           <button class="nav-link nav-dropdown-btn active">
@@ -31,7 +31,7 @@
           </button>
           <div class="dropdown-content">
             <a href="gestao-filas.html" class="dropdown-item">
-              <strong>Gestão de Filas</strong>
+              <strong data-i18n="prod_filas_title">Gestão de Filas</strong>
               <span>Totens, Guichê & Painel TV</span>
             </a>
             <a href="etiquetas-varejo.html" class="dropdown-item">
@@ -39,7 +39,7 @@
               <span>Impressão ZPL & Automação</span>
             </a>
             <a href="gestao-a-vista.html" class="dropdown-item">
-              <strong>Gestão à Vista</strong>
+              <strong data-i18n="prod_gestao_title">Gestão à Vista</strong>
               <span>Dashboards & Andon TV</span>
             </a>
             <a href="contagem-hemacias.html" class="dropdown-item">
@@ -47,11 +47,11 @@
               <span>Visão Computacional & P&D</span>
             </a>
               <a href="https://maurinsoft.com.br/cockpit/" class="dropdown-item" target="_blank" rel="noopener">
-                <strong>Cockpit Drone</strong>
+                <strong data-i18n="prod_cockpit_title">Cockpit Drone</strong>
                 <span>Telemetria, Simulador 3D & Multiplayer</span>
               </a>
               <a href="../multicnc/index.html" class="dropdown-item">
-                <strong style="color: #22d3ee;">MultiCNC • Suíte Maker</strong>
+                <strong style="color: #22d3ee;"><span data-i18n="prod_multicnc_title">MultiCNC • Suíte Maker</span></strong>
                 <span>Router, Laser, 3D, CAD & PCB</span>
               </a>
             <a href="../engenharia-arquitetura/index.html" class="dropdown-item">
@@ -62,7 +62,7 @@
                 </svg>
               </div>
               <div>
-                <strong style="color: #38bdf8;">Engenharia & Arquitetura</strong>
+                <strong style="color: #38bdf8;"><span data-i18n="prod_eng_title">Engenharia & Arquitetura</span></strong>
                 <div style="font-size: 0.75rem; color: var(--text-dim);">CAD 2D, Maquete 3D, Elétrica & BIM</div>
               </div>
             </a>
@@ -71,12 +71,27 @@
           </div>
         </div>
 
-        <a href="../restrita/index.html" class="nav-link" style="color: var(--primary-light);">Área Restrita</a>
-        <a href="../contato.html" class="nav-link">Contato</a>
+        <a href="../restrita/index.html" class="nav-link" style="color: var(--primary-light);"><span data-i18n="nav_restricted">Área Restrita</span></a>
+        <a href="contato.html" class="nav-link" data-i18n="nav_contact">Contato</a>
       </nav>
 
       <div class="header-actions">
-        <a href="../restrita/login.html" class="btn btn-secondary btn-sm" style="margin-right: 8px;">Área Restrita</a>
+                <div class="lang-picker">
+          <label for="lang-select" title="Idioma / Language">🌐</label>
+          <select id="lang-select" class="lang-select" onchange="changeLanguage(this.value)" aria-label="Selecione o idioma">
+            <option value="pt-BR" selected>Português</option>
+            <option value="en">English</option>
+            <option value="es">Español</option>
+            <option value="fr">Français</option>
+            <option value="de">Deutsch</option>
+            <option value="ru">Русский</option>
+            <option value="zh-CN">简体中文</option>
+            <option value="ja">日本語</option>
+            <option value="ar">العربية</option>
+            <option value="hi">हिन्दी</option>
+          </select>
+        </div>
+        <a href="../restrita/login.html" class="btn btn-secondary btn-sm" style="margin-right: 8px;"><span data-i18n="nav_restricted">Área Restrita</span></a>
         <a href="../contato.html" class="btn btn-primary btn-sm nav-cta">Fale com Engenharia</a>
         <button class="hamburger" aria-label="Abrir Menu">
           <span></span><span></span><span></span>
@@ -452,5 +467,6 @@
   </footer>
 
   <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/i18n.js"></script>
 </body>
 </html>
