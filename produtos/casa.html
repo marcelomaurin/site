@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CASA • JARVIS Residential AI & IoT Platform | Maurinsoft</title>
+  <meta name="description" content="Plataforma distribuída de automação residencial inteligente, IoT e IA com assistente JARVIS, aplicativo Android, relógio LILYGO, ESP32 e nós Raspberry Pi.">
+  <link rel="stylesheet" href="../assets/css/main.css">
+  <style>
+    .casa-hero {
+      background: radial-gradient(circle at 50% 10%, rgba(16, 185, 129, 0.15) 0%, rgba(13, 20, 36, 0.95) 70%);
+      padding: 4rem 0 3rem;
+      border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+    }
+    .badge-casa {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      color: #34d399;
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 1.25rem;
+    }
+    .stats-grid-casa {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.25rem;
+      margin-top: 2.5rem;
+    }
+    .stat-card-casa {
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-md, 10px);
+      padding: 1.25rem;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+    .stat-card-casa:hover {
+      border-color: rgba(16, 185, 129, 0.4);
+      transform: translateY(-3px);
+      background: rgba(15, 23, 42, 0.9);
+    }
+    .stat-number-casa {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #34d399;
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+    .stat-label-casa {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .objective-card {
+      background: rgba(15, 23, 42, 0.65);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: var(--radius-md, 10px);
+      padding: 1.75rem;
+      transition: all 0.3s ease;
+      height: 100%;
+    }
+    .objective-card:hover {
+      border-color: rgba(16, 185, 129, 0.5);
+      transform: translateY(-4px);
+      background: rgba(15, 23, 42, 0.85);
+      box-shadow: 0 10px 30px rgba(16, 185, 129, 0.12);
+    }
+    .objective-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: #34d399;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.25rem;
+    }
+
+    /* Diagrama da Arquitetura */
+    .arch-diagram {
+      background: rgba(13, 20, 36, 0.85);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      border-radius: 14px;
+      padding: 2rem;
+      margin: 2.5rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .diagram-layer {
+      margin-bottom: 2rem;
+      position: relative;
+    }
+    .diagram-layer:last-child {
+      margin-bottom: 0;
+    }
+    .layer-title {
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #34d399;
+      margin-bottom: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .layer-title::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: rgba(16, 185, 129, 0.2);
+    }
+    .layer-nodes {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+    .node-box {
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      border-radius: 8px;
+      padding: 1.15rem;
+      transition: all 0.25s ease;
+      position: relative;
+    }
+    .node-box:hover {
+      border-color: #34d399;
+      box-shadow: 0 6px 20px rgba(16, 185, 129, 0.18);
+      transform: translateY(-2px);
+    }
+    .node-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 0.5rem;
+    }
+    .node-badge {
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      text-transform: uppercase;
+    }
+    .node-name {
+      color: #fff;
+      font-weight: 700;
+      font-size: 1rem;
+    }
+    .node-desc {
+      color: var(--text-muted);
+      font-size: 0.84rem;
+      line-height: 1.45;
+    }
+    .flow-connector {
+      text-align: center;
+      color: rgba(16, 185, 129, 0.5);
+      font-size: 1.25rem;
+      margin: -0.75rem 0 1.25rem;
+      user-select: none;
+    }
+
+    /* Steps / Como Funciona */
+    .step-item {
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 10px;
+      padding: 1.5rem;
+    }
+    .step-number {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: #34d399;
+      font-weight: 800;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .step-content h4 {
+      color: #fff;
+      font-size: 1.15rem;
+      margin: 0 0 0.5rem 0;
+    }
+    .step-content p {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      line-height: 1.6;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header Padronizado -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="../index.html" class="brand-logo" aria-label="Maurinsoft Início">
+        <img src="../assets/img/logo-maurinsoft.svg" alt="Maurinsoft" class="site-logo-img">
+      </a>
+
+      <nav class="nav-menu">
+        <a href="../index.html" class="nav-link" data-i18n="nav_home">Home</a>
+        
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-btn" aria-haspopup="true" data-i18n="nav_products">Produtos
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+          <div class="dropdown-menu">
+            <a href="casa.html" class="dropdown-item" style="background: rgba(16, 185, 129, 0.08);">
+              <div class="dropdown-item-icon" style="color: #34d399;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+              </div>
+              <div>
+                <strong style="color: #34d399;"><span data-i18n="prod_casa_title">CASA • JARVIS Residencial</span></strong>
+                <div style="font-size: 0.75rem; color: var(--text-dim);" data-i18n="prod_casa_sub">Plataforma IoT, IA & Domótica</div>
+              </div>
+            </a>
+            <a href="chatgpt.html" class="dropdown-item">
+              <div class="dropdown-item-icon" style="color: #22d3ee;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 0 1 10 10c0 5.523-4.477 10-10 10-1.85 0-3.58-.5-5.07-1.38L2 22l1.38-4.93A9.97 9.97 0 0 1 2 12 10 10 0 0 1 12 2z"/></svg>
+              </div>
+              <div>
+                <strong style="color: #22d3ee;"><span data-i18n="prod_chatgpt_title">TCHATGPT • Suíte IA</span></strong>
+                <div style="font-size: 0.75rem; color: var(--text-dim);" data-i18n="prod_chatgpt_sub">28 Pacotes Lazarus, LLMs & Agentes</div>
+              </div>
+            </a>
+            <a href="gestao-filas.html" class="dropdown-item">
+              <div class="dropdown-item-icon" style="color: var(--primary, #06b6d4);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+              </div>
+              <div>
+                <strong data-i18n="prod_filas_title">Gestão de Filas</strong>
+                <div style="font-size: 0.75rem; color: var(--text-dim);" data-i18n="prod_filas_sub">Controle de senhas e guichês</div>
+              </div>
+            </a>
+            <a href="etiquetas-varejo.html" class="dropdown-item">
+              <div class="dropdown-item-icon" style="color: #38bdf8;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 7h10"/><path d="M7 12h10"/><path d="M7 17h6"/></svg>
+              </div>
+              <div>
+                <strong data-i18n="prod_etiquetas_title">Etiquetas & Varejo</strong>
+                <div style="font-size: 0.75rem; color: var(--text-dim);" data-i18n="prod_etiquetas_sub">Gôndolas e código de barras</div>
+              </div>
+            </a>
+            <a href="gestao-a-vista.html" class="dropdown-item">
+              <div class="dropdown-item-icon" style="color: #10b981;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+              </div>
+              <div>
+                <strong data-i18n="prod_gestao_title">Gestão à Vista</strong>
+                <div style="font-size: 0.75rem; color: var(--text-dim);" data-i18n="prod_gestao_sub">Dashboards, Andon e indicadores</div>
+              </div>
+            </a>
+            <a href="contagem-hemacias.html" class="dropdown-item">
+              <div class="dropdown-item-icon" style="color: var(--accent-amber);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="4"></circle><line x1="4.93" y1="4.93" x2="9.17" y2="9.17"></line><line x1="14.83" y1="14.83" x2="19.07" y2="19.07"></line><line x1="14.83" y1="9.17" x2="19.07" y2="4.93"></line><line x1="4.93" y1="19.07" x2="9.17" y2="14.83"></line></svg>
+              </div>
+              <div>
+                <strong data-i18n="prod_hemacias_title">Contador de Hemácias</strong>
+                <div style="font-size: 0.75rem; color: var(--text-dim);" data-i18n="prod_hemacias_sub">Microscopia óptica & visão computacional</div>
+              </div>
+            </a>
+            <a href="https://maurinsoft.com.br/cockpit/" class="dropdown-item" target="_blank" rel="noopener">
+              <div class="dropdown-item-icon" style="color: var(--primary, #06b6d4);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/>
+                  <path d="M6 6L9 9M18 6l-3 3M6 18l3-3M18 18l-3-3"/>
+                  <circle cx="4" cy="4" r="2"/>
+                  <circle cx="20" cy="4" r="2"/>
+                  <circle cx="4" cy="20" r="2"/>
+                  <circle cx="20" cy="20" r="2"/>
+                </svg>
+              </div>
+              <div>
+                <strong data-i18n="prod_cockpit_title">Cockpit Drone</strong>
+                <div style="font-size: 0.75rem; color: var(--text-dim);" data-i18n="prod_cockpit_sub">Telemetria, simulador 3D & multiplayer</div>
+              </div>
+            </a>
+            <a href="../multicnc/index.html" class="dropdown-item">
+              <div class="dropdown-item-icon" style="color: #22d3ee;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polygon points="12 2 2 7 12 12 22 7 12 12 22 7 12 2"></polygon>
+                  <polyline points="2 17 12 22 22 17"></polyline>
+                  <polyline points="2 12 12 17 22 12"></polyline>
+                </svg>
+              </div>
+              <div>
+                <strong style="color: #22d3ee;"><span data-i18n="prod_multicnc_title">MultiCNC • Suíte Maker</span></strong>
+                <div style="font-size: 0.75rem; color: var(--text-dim);" data-i18n="prod_multicnc_sub">Router, Laser, 3D, CAD & PCB</div>
+              </div>
+            </a>
+            <a href="../engenharia-arquitetura/index.html" class="dropdown-item">
+              <div class="dropdown-item-icon" style="color: #38bdf8;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                  <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg>
+              </div>
+              <div>
+                <strong style="color: #38bdf8;"><span data-i18n="prod_eng_title">Engenharia & Arquitetura</span></strong>
+                <div style="font-size: 0.75rem; color: var(--text-dim);" data-i18n="prod_eng_sub">CAD 2D, Maquete 3D, Elétrica & BIM</div>
+              </div>
+            </a>
+            <a href="../mnote2/index.html" class="dropdown-item">
+              <div class="dropdown-item-icon" style="color: #a855f7;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="16 18 22 12 16 6"></polyline>
+                  <polyline points="8 6 2 12 8 18"></polyline>
+                </svg>
+              </div>
+              <div>
+                <strong style="color: #c084fc;"><span data-i18n="prod_mnote2_title">MNote2 • IDE com IA</span></strong>
+                <div style="font-size: 0.75rem; color: var(--text-dim);" data-i18n="prod_mnote2_sub">Lazarus, FPC, SQL & Voz "OK MNote"</div>
+              </div>
+            </a>
+            <a href="../doctor/index.html" class="dropdown-item">
+              <div class="dropdown-item-icon" style="color: #10b981;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                </svg>
+              </div>
+              <div>
+                <strong style="color: #34d399;"><span data-i18n="prod_doctor_title">Doctor • Automação Biomédica</span></strong>
+                <div style="font-size: 0.75rem; color: var(--text-dim);" data-i18n="prod_doctor_sub">Melhor TCC 2025 • Hardware & Software</div>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <a href="../servicos.html" class="nav-link" data-i18n="nav_services">Serviços & Prototipagem</a>
+        <a href="../sobre.html" class="nav-link" data-i18n="nav_about">Sobre</a>
+        <a href="../contato.html" class="nav-link" data-i18n="nav_contact">Contato</a>
+        <a href="../restrita/login.html" class="nav-link" style="color: var(--primary); display: inline-flex; align-items: center; gap: 6px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+          <span data-i18n="nav_restricted">Área Restrita</span>
+        </a>
+      </nav>
+
+      <div class="nav-cta">
+        <div class="lang-picker">
+          <label for="lang-select" title="Idioma / Language">🌐</label>
+          <select id="lang-select" class="lang-select" onchange="changeLanguage(this.value)" aria-label="Selecione o idioma">
+            <option value="pt-BR" selected>Português</option>
+            <option value="en">English</option>
+            <option value="es">Español</option>
+            <option value="fr">Français</option>
+            <option value="de">Deutsch</option>
+            <option value="ru">Русский</option>
+            <option value="zh-CN">简体中文</option>
+            <option value="ja">日本語</option>
+            <option value="ar">العربية</option>
+            <option value="hi">हिन्दी</option>
+          </select>
+        </div>
+        <a href="https://github.com/marcelomaurin/casa" target="_blank" rel="noopener" class="btn btn-secondary btn-sm" style="display:inline-flex; align-items:center; gap:6px;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          GitHub
+        </a>
+        <a href="../contato.html" class="btn btn-primary btn-sm"><span data-i18n="nav_quote">Solicitar Orçamento</span></a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="casa-hero">
+    <div class="container">
+      <div class="breadcrumbs" style="margin-bottom: 1.5rem;">
+        <a href="../index.html">Home</a>
+        <span>/</span>
+        <a href="../index.html#produtos">Produtos</a>
+        <span>/</span>
+        <span style="color: #34d399;">CASA • JARVIS Residencial</span>
+      </div>
+
+      <div style="max-width: 920px;">
+        <div class="badge-casa">
+          <span style="width:8px; height:8px; border-radius:50%; background:#34d399; display:inline-block;"></span>
+          PLATAFORMA DISTRIBUÍDA DE AUTOMAÇÃO RESIDENCIAL & IA
+        </div>
+
+        <h1 style="font-size: clamp(2.3rem, 4.5vw, 3.4rem); line-height: 1.15; color: #fff; margin-bottom: 1.25rem;">
+          CASA: Plataforma Residencial Inteligente com Assistente JARVIS & IoT Distribuído
+        </h1>
+
+        <p style="font-size: 1.15rem; line-height: 1.7; color: var(--text-muted); margin-bottom: 2rem;">
+          O <strong>CASA / JARVIS</strong> é um ecossistema experimental de domótica soberana desenvolvido pela <strong>Maurinsoft</strong>. Integra servidores Linux, Control Plane em nuvem, nós de borda com <strong>Raspberry Pi, ESP32 e ESP8266</strong>, aplicativo móvel Android (Jetpack Compose), smartwatch <strong>LILYGO</strong>, câmeras, sensores ambientais e agentes de IA conversacionais em uma arquitetura única, segura e desacoplada.
+        </p>
+
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+          <a href="https://github.com/marcelomaurin/casa" target="_blank" rel="noopener" class="btn btn-primary btn-lg" style="background:#10b981; border-color:#10b981; display:inline-flex; align-items:center; gap:8px;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+            Repositório Oficial no GitHub
+          </a>
+          <a href="#diagrama" class="btn btn-secondary btn-lg">Ver Diagrama da Arquitetura</a>
+          <a href="#funcionamento" class="btn btn-secondary btn-lg">Como Funciona</a>
+        </div>
+      </div>
+
+      <!-- Métricas / Indicadores da Plataforma -->
+      <div class="stats-grid-casa">
+        <div class="stat-card-casa">
+          <div class="stat-number-casa">2.8.3</div>
+          <div class="stat-label-casa">Casa Mobile (Kotlin)</div>
+        </div>
+        <div class="stat-card-casa">
+          <div class="stat-number-casa">Edge+Cloud</div>
+          <div class="stat-label-casa">Arquitetura Híbrida</div>
+        </div>
+        <div class="stat-card-casa">
+          <div class="stat-number-casa">Offline Queue</div>
+          <div class="stat-label-casa">Resiliência à Conexão</div>
+        </div>
+        <div class="stat-card-casa">
+          <div class="stat-number-casa">Multi-Device</div>
+          <div class="stat-label-casa">App, TV, Watch & ESP</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Objetivos do Projeto -->
+  <section class="section" style="padding: 4.5rem 0;">
+    <div class="container">
+      <div class="section-header" style="text-align: center; max-width: 800px; margin: 0 auto 3.5rem;">
+        <span class="section-tag" style="color: #34d399; border-color: rgba(16, 185, 129, 0.4);">Propósito & Missão</span>
+        <h2 class="section-title">Objetivos Centrais do Projeto CASA</h2>
+        <p class="section-desc">
+          O projeto CASA foi concebido para resolver os gargalos das soluções comerciais proprietárias, oferecendo controle residencial inteligente, privado e sem dependência de ecossistemas fechados.
+        </p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.75rem;">
+        <div class="objective-card">
+          <div class="objective-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 0 1 10 10c0 5.523-4.477 10-10 10-1.85 0-3.58-.5-5.07-1.38L2 22l1.38-4.93A9.97 9.97 0 0 1 2 12 10 10 0 0 1 12 2z"/></svg>
+          </div>
+          <h3 style="color:#fff; font-size:1.25rem; margin-bottom:0.75rem;">1. Interação por Voz com Assistente JARVIS</h3>
+          <p style="color:var(--text-muted); font-size:0.95rem; line-height:1.6;">
+            Interpretar solicitações em linguagem natural, responder dúvidas, consultar métricas da residência e acionar cenas através de síntese de voz (TTS) e reconhecimento contínuo de fala (STT), via celular, TV ou relógio.
+          </p>
+        </div>
+
+        <div class="objective-card">
+          <div class="objective-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path></svg>
+          </div>
+          <h3 style="color:#fff; font-size:1.25rem; margin-bottom:0.75rem;">2. Arquitetura Híbrida Descentralizada</h3>
+          <p style="color:var(--text-muted); font-size:0.95rem; line-height:1.6;">
+            Nenhum nó depende de um mestre local com IP fixo sujeito a quedas. O Control Plane em nuvem coordena identidades, filas e segurança, enquanto nós Raspberry Pi e microcontroladores executam ações físicas na borda (Edge).
+          </p>
+        </div>
+
+        <div class="objective-card">
+          <div class="objective-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
+          </div>
+          <h3 style="color:#fff; font-size:1.25rem; margin-bottom:0.75rem;">3. Resiliência Offline & Fila Local de Ações</h3>
+          <p style="color:var(--text-muted); font-size:0.95rem; line-height:1.6;">
+            O aplicativo Android mantém uma fila local de comandos durante períodos de indisponibilidade da rede ou internet, sincronizando e reconciliando os estados automaticamente no momento da reconexão.
+          </p>
+        </div>
+
+        <div class="objective-card">
+          <div class="objective-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+          </div>
+          <h3 style="color:#fff; font-size:1.25rem; margin-bottom:0.75rem;">4. Segurança Zero-Trust & Tokens Únicos</h3>
+          <p style="color:var(--text-muted); font-size:0.95rem; line-height:1.6;">
+            Cada cliente, relógio, câmera ou sensor possui seu próprio token individual com escopos mínimos estritos, rate limiting por IP/token, bloqueio de abuso e barramento desacoplado sem expor drivers à internet.
+          </p>
+        </div>
+
+        <div class="objective-card">
+          <div class="objective-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="7"></circle><polyline points="12 9 12 12 13.5 13.5"></polyline><path d="M16.51 17.35l-.35 3.83a2 2 0 0 1-2 1.82H9.83a2 2 0 0 1-2-1.82l-.35-3.83m.01-10.7l.35-3.83A2 2 0 0 1 9.83 1h4.35a2 2 0 0 1 2 1.82l.35 3.83"></path></svg>
+          </div>
+          <h3 style="color:#fff; font-size:1.25rem; margin-bottom:0.75rem;">5. Provisionamento BLE de Vestíveis</h3>
+          <p style="color:var(--text-muted); font-size:0.95rem; line-height:1.6;">
+            Provisionamento simplificado via Bluetooth Low Energy (BLE) para smartwatch LILYGO e módulos de câmera ESP32-CAM, permitindo configurar credenciais Wi-Fi e tokens sem interfaces seriais complexas.
+          </p>
+        </div>
+
+        <div class="objective-card">
+          <div class="objective-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+          </div>
+          <h3 style="color:#fff; font-size:1.25rem; margin-bottom:0.75rem;">6. Planejador de Tarefas & Automação Inteligente</h3>
+          <p style="color:var(--text-muted); font-size:0.95rem; line-height:1.6;">
+            Motor de regras, rotinas e subtarefas imediatas, agendadas ou condicionais (ex: 'Se a temperatura ultrapassar 28°C e houver presença, ligar climatização e notificar no relógio').
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Diagrama Interativo da Arquitetura -->
+  <section class="section" id="diagrama" style="background: rgba(13, 20, 36, 0.4); padding: 4.5rem 0;">
+    <div class="container">
+      <div class="section-header" style="text-align: center; max-width: 800px; margin: 0 auto 2rem;">
+        <span class="section-tag" style="color: #34d399; border-color: rgba(16, 185, 129, 0.4);">Visão Estrutural</span>
+        <h2 class="section-title">Diagrama dos Principais Pontos do Projeto</h2>
+        <p class="section-desc">
+          O diagrama abaixo ilustra o fluxo completo do ecossistema CASA: desde as interfaces de usuário até os atuadores e sensores de campo, passando pelo Control Plane e motor de IA:
+        </p>
+      </div>
+
+      <div class="arch-diagram">
+        <!-- Camada 1: Interfaces de Usuário -->
+        <div class="diagram-layer">
+          <div class="layer-title">Camada 1: Interfaces com o Usuário (Clients & Wearables)</div>
+          <div class="layer-nodes">
+            <div class="node-box">
+              <div class="node-header">
+                <span class="node-badge">Android</span>
+                <span class="node-name">Casa Mobile</span>
+              </div>
+              <div class="node-desc">App nativo Kotlin / Jetpack Compose com comandos manuais, voz, fila offline e gateway BLE.</div>
+            </div>
+            <div class="node-box">
+              <div class="node-header">
+                <span class="node-badge">Android TV</span>
+                <span class="node-name">JARVIS TV</span>
+              </div>
+              <div class="node-desc">Cliente para TV com overlay lateral, controle de automação e integração de voz para salas.</div>
+            </div>
+            <div class="node-box">
+              <div class="node-header">
+                <span class="node-badge">Vestível</span>
+                <span class="node-name">LILYGO Watch</span>
+              </div>
+              <div class="node-desc">Smartwatch ESP32 com display E-Paper/Touch, provisionamento BLE e operação Wi-Fi/HTTPS.</div>
+            </div>
+            <div class="node-box">
+              <div class="node-header">
+                <span class="node-badge">Web</span>
+                <span class="node-name">Painel LCARS</span>
+              </div>
+              <div class="node-desc">Dashboard responsivo com estética futurista Star Trek LCARS para gestão de dispositivos e logs.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flow-connector">⬇ HTTPS Autenticado (API v1 / Bearer Token Individual) ⬇</div>
+
+        <!-- Camada 2: Control Plane & Barramento Central -->
+        <div class="diagram-layer">
+          <div class="layer-title">Camada 2: Control Plane Central & Barramento de Mensagens</div>
+          <div class="layer-nodes">
+            <div class="node-box" style="border-color: rgba(16, 185, 129, 0.4);">
+              <div class="node-header">
+                <span class="node-badge" style="background:#10b981; color:#fff;">API v1</span>
+                <span class="node-name">casa.maurinsoft.com.br</span>
+              </div>
+              <div class="node-desc">Ponto único lógico de entrada: autenticação, escopos, rate limiting e endpoints RESTful.</div>
+            </div>
+            <div class="node-box">
+              <div class="node-header">
+                <span class="node-badge">Barramento</span>
+                <span class="node-name">Command & Event Bus</span>
+              </div>
+              <div class="node-desc">Tabelas <code>device_commands</code> e <code>device_events</code> para desacoplamento assíncrono total.</div>
+            </div>
+            <div class="node-box">
+              <div class="node-header">
+                <span class="node-badge">Registro</span>
+                <span class="node-name">Device Registry</span>
+              </div>
+              <div class="node-desc">Catálogo de capacidades dos nós (GPIO, MQTT, câmera, microfone, sensores, etc.).</div>
+            </div>
+            <div class="node-box">
+              <div class="node-header">
+                <span class="node-badge">Dados</span>
+                <span class="node-name">MySQL Control Plane</span>
+              </div>
+              <div class="node-desc">Persistência centralizada de estado, rotinas, cenas, auditoria e telemetria (schema 1.32).</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flow-connector">⬇ Roteamento de Intenções & Demandas Físicas ⬇</div>
+
+        <!-- Camada 3: Núcleo de IA e Agentes -->
+        <div class="diagram-layer">
+          <div class="layer-title">Camada 3: Inteligência Artificial, Voz & Planejador</div>
+          <div class="layer-nodes">
+            <div class="node-box">
+              <div class="node-header">
+                <span class="node-badge">Cérebro</span>
+                <span class="node-name">JARVIS IA</span>
+              </div>
+              <div class="node-desc">Interpreta linguagem natural e traduz intenções em ações seguras sem acessar hardware diretamente.</div>
+            </div>
+            <div class="node-box">
+              <div class="node-header">
+                <span class="node-badge">Orquestrador</span>
+                <span class="node-name">Planejador de Tarefas</span>
+              </div>
+              <div class="node-desc">Decompõe ordens complexas em subtarefas imediatas, agendadas ou com dependências lógicas.</div>
+            </div>
+            <div class="node-box">
+              <div class="node-header">
+                <span class="node-badge">Áudio</span>
+                <span class="node-name">Serviços TTS / STT</span>
+              </div>
+              <div class="node-desc">Serviço Python/FastAPI de síntese vocal natural e transcrição acústica em servidores dedicados.</div>
+            </div>
+            <div class="node-box">
+              <div class="node-header">
+                <span class="node-badge">Web</span>
+                <span class="node-name">Web Agent</span>
+              </div>
+              <div class="node-desc">Agente coletor de informações externas (clima, tráfego, cotações) com task_context.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flow-connector">⬇ Polling Seguro & Execução Distribuída na Borda ⬇</div>
+
+        <!-- Camada 4: Borda & Hardware Real -->
+        <div class="diagram-layer">
+          <div class="layer-title">Camada 4: Nós de Borda (Edge) & Dispositivos Físicos</div>
+          <div class="layer-nodes">
+            <div class="node-box">
+              <div class="node-header">
+                <span class="node-badge">Gateway</span>
+                <span class="node-name">Raspberry Pi (ARM)</span>
+              </div>
+              <div class="node-desc">Execução física de automação local, barramentos RS485, controle de GPIO e broker MQTT.</div>
+            </div>
+            <div class="node-box">
+              <div class="node-header">
+                <span class="node-badge">Câmera</span>
+                <span class="node-name">ESP32-CAM</span>
+              </div>
+              <div class="node-desc">Streaming local (/stream), snapshots de segurança e detecção facial em rede interna restrita.</div>
+            </div>
+            <div class="node-box">
+              <div class="node-header">
+                <span class="node-badge">Sensores</span>
+                <span class="node-name">ESP8266 / ESP-01</span>
+              </div>
+              <div class="node-desc">Nós compactos para leitura periódica de temperatura, umidade (DHT22) e luminosidade.</div>
+            </div>
+            <div class="node-box">
+              <div class="node-header">
+                <span class="node-badge">Atuadores</span>
+                <span class="node-name">Relés & Fechaduras</span>
+              </div>
+              <div class="node-desc">Módulos de acionamento de lâmpadas, motores, portões eletrônicos e travas solenoide.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Como Funciona / Fluxo Operacional -->
+  <section class="section" id="funcionamento" style="padding: 4.5rem 0;">
+    <div class="container">
+      <div class="section-header" style="max-width: 800px; margin-bottom: 3.5rem;">
+        <span class="section-tag" style="color: #34d399; border-color: rgba(16, 185, 129, 0.4);">Fluxo de Ponta a Ponta</span>
+        <h2 class="section-title">Como Funciona a Execução na Prática?</h2>
+        <p class="section-desc">
+          Entenda o ciclo de vida completo de uma ação no CASA, desde a fala do usuário até o acionamento mecânico:
+        </p>
+      </div>
+
+      <div style="max-width: 900px;">
+        <div class="step-item">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h4>Emissão do Comando ou Gatilho de Sensor</h4>
+            <p>O usuário fala no aplicativo Android <em>"JARVIS, prepare a sala para o modo cinema"</em>, ou um sensor de presença na garagem detecta movimento. O aplicativo tokeniza o comando e faz um POST seguro para a API v1.</p>
+          </div>
+        </div>
+
+        <div class="step-item">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h4>Processamento no Control Plane & IA</h4>
+            <p>A API valida o token do cliente e os escopos permitidos. O motor JARVIS interpreta a intenção da frase e o Planejador gera uma lista de comandos físicos atômicos (ex: desligar iluminação principal, fechar cortina, ligar projetor e ar-condicionado em 22°C).</p>
+          </div>
+        </div>
+
+        <div class="step-item">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h4>Publicação no Command Bus (Estado Desejado)</h4>
+            <p>Cada comando físico é inserido na tabela <code>device_commands</code> endereçado ao ID único do nó de borda correspondente (Raspberry Pi ou ESP32), garantindo que a IA nunca acione portas de hardware diretamente.</p>
+          </div>
+        </div>
+
+        <div class="step-item">
+          <div class="step-number">4</div>
+          <div class="step-content">
+            <h4>Execução na Borda (Edge Execution)</h4>
+            <p>O Raspberry Pi ou o módulo ESP32 consulta sua fila de trabalho via long-polling ou websocket autenticado, lê a ordem pendente, aciona os pinos GPIO/relés físicos e atualiza o estado reportado em milissegundos.</p>
+          </div>
+        </div>
+
+        <div class="step-item">
+          <div class="step-number">5</div>
+          <div class="step-content">
+            <h4>Retorno de Evento & Notificação por Voz</h4>
+            <p>O nó publica o evento de sucesso em <code>device_events</code>. O aplicativo móvel ou relógio LILYGO recebe o status instantaneamente e o JARVIS responde por voz: <em>"A sala foi preparada com sucesso"</em>.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Seção GitHub & Tecnologias -->
+  <section class="section" style="background: rgba(13, 20, 36, 0.4); padding: 4.5rem 0;">
+    <div class="container">
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center;">
+        <div>
+          <span class="section-tag" style="color: #34d399; border-color: rgba(16, 185, 129, 0.4);">Código Aberto & Transparência</span>
+          <h2 class="section-title">Estrutura do Repositório GitHub</h2>
+          <p style="color: var(--text-muted); line-height: 1.7; margin-bottom: 1.5rem;">
+            O projeto CASA é 100% aberto e versionado no GitHub. O repositório organiza firmware, código Android, APIs, banco de dados e documentação em uma estrutura limpa e rigorosamente documentada:
+          </p>
+          <ul style="color: var(--text-muted); line-height: 1.8; padding-left: 1.25rem;">
+            <li><strong><code>android/</code></strong>: Aplicativo Casa Mobile (Kotlin Jetpack Compose) e JARVIS TV.</li>
+            <li><strong><code>arduino/</code></strong>: Firmwares para ESP32, ESP32-CAM, ESP8266 e smartwatch LILYGO.</li>
+            <li><strong><code>clusters/</code></strong>: Daemons e microsserviços Linux especializados (ARM Agent, voz, automação).</li>
+            <li><strong><code>database/</code></strong>: Estrutura MySQL do Control Plane (schema 1.32) e migrações de segurança.</li>
+            <li><strong><code>site/</code></strong>: API v1 PHP e painel LCARS para gerenciamento e controle.</li>
+            <li><strong><code>docs/</code></strong>: Manuais completos de arquitetura, observabilidade, hardening e provisionamento.</li>
+          </ul>
+
+          <div style="margin-top: 2rem;">
+            <a href="https://github.com/marcelomaurin/casa" target="_blank" rel="noopener" class="btn btn-primary" style="background:#10b981; border-color:#10b981; display:inline-flex; align-items:center; gap:8px;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+              Acessar Repositório github.com/marcelomaurin/casa
+            </a>
+          </div>
+        </div>
+
+        <div style="background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 12px; padding: 2rem; text-align: center;">
+          <img src="../assets/img/casa/sitecasa.png" alt="CASA Logo" style="max-width: 140px; margin-bottom: 1.5rem; filter: drop-shadow(0 0 20px rgba(16,185,129,0.3));">
+          <h3 style="color: #fff; font-size: 1.3rem; margin-bottom: 0.5rem;">CASA • Plataforma Soberana</h3>
+          <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">
+            Desenvolvido para entusiastas de automação, engenheiros e integradores que buscam robustez industrial, controle de código-fonte e liberdade tecnológica.
+          </p>
+          <div style="margin-top: 1.5rem; display: flex; justify-content: center; gap: 8px; flex-wrap: wrap;">
+            <span style="background: rgba(255,255,255,0.06); padding: 4px 10px; border-radius: 4px; font-size: 0.78rem; color: #fff;">Linux</span>
+            <span style="background: rgba(255,255,255,0.06); padding: 4px 10px; border-radius: 4px; font-size: 0.78rem; color: #fff;">Android Kotlin</span>
+            <span style="background: rgba(255,255,255,0.06); padding: 4px 10px; border-radius: 4px; font-size: 0.78rem; color: #fff;">ESP32 / ESP8266</span>
+            <span style="background: rgba(255,255,255,0.06); padding: 4px 10px; border-radius: 4px; font-size: 0.78rem; color: #fff;">Raspberry Pi</span>
+            <span style="background: rgba(255,255,255,0.06); padding: 4px 10px; border-radius: 4px; font-size: 0.78rem; color: #fff;">MySQL / MariaDB</span>
+            <span style="background: rgba(255,255,255,0.06); padding: 4px 10px; border-radius: 4px; font-size: 0.78rem; color: #fff;">BLE & MQTT</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Final -->
+  <section class="section" style="background: radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.12) 0%, rgba(13, 20, 36, 0.98) 70%); border-top: 1px solid rgba(16, 185, 129, 0.2); padding: 4.5rem 0; text-align: center;">
+    <div class="container" style="max-width: 800px;">
+      <h2 style="font-size: 2.3rem; color: #fff; margin-bottom: 1.25rem;">Transforme sua Residência em um Ambiente Inteligente e Conectado</h2>
+      <p style="color: var(--text-muted); font-size: 1.1rem; line-height: 1.7; margin-bottom: 2rem;">
+        Conheça o código-fonte, instale os componentes em seus dispositivos ou converse com os engenheiros da Maurinsoft para projetos personalizados de automação predial e residencial.
+      </p>
+
+      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+        <a href="https://github.com/marcelomaurin/casa" target="_blank" rel="noopener" class="btn btn-primary btn-lg" style="background:#10b981; border-color:#10b981; display:inline-flex; align-items:center; gap:8px;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          Ver Código no GitHub
+        </a>
+        <a href="../contato.html" class="btn btn-secondary btn-lg">Solicitar Projeto Customizado</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer Padronizado -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <img src="../assets/img/logo-maurinsoft.svg" alt="Maurinsoft" class="footer-logo-img">
+        <p class="footer-tagline">Soluções tecnológicas sob medida, automação residencial, industrial e inteligência artificial nativa.</p>
+        <div class="footer-contact-item">
+          <strong>WhatsApp:</strong> (16) 99181-4202
+        </div>
+        <div class="footer-contact-item">
+          <strong>E-mail:</strong> marcelomaurinmartins@gmail.com
+        </div>
+      </div>
+
+      <div class="footer-nav">
+        <h4 class="footer-nav-title">Navegação</h4>
+        <ul class="footer-links">
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="casa.html">CASA • JARVIS Residencial</a></li>
+          <li><a href="chatgpt.html">TCHATGPT • Suíte IA</a></li>
+          <li><a href="gestao-filas.html">Gestão de Filas</a></li>
+          <li><a href="etiquetas-varejo.html">Etiquetas & Varejo</a></li>
+          <li><a href="gestao-a-vista.html">Gestão à Vista</a></li>
+          <li><a href="contagem-hemacias.html">Contador de Hemácias</a></li>
+          <li><a href="../multicnc/index.html">MultiCNC</a></li>
+          <li><a href="../mnote2/index.html">MNote2</a></li>
+          <li><a href="../doctor/index.html">Doctor</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-nav">
+        <h4 class="footer-nav-title">Institucional</h4>
+        <ul class="footer-links">
+          <li><a href="../servicos.html">Serviços & Prototipagem</a></li>
+          <li><a href="../sobre.html">Sobre a Maurinsoft</a></li>
+          <li><a href="../contato.html">Fale Conosco</a></li>
+          <li><a href="../restrita/login.html">Espaço Restrito</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <p>&copy; 2026 Maurinsoft. Todos os direitos reservados. Software Livre & Código Aberto.</p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/i18n.js"></script>
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>
